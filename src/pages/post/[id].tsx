@@ -1,3 +1,7 @@
+import AsyncBoundary from '@/components/AsyncBoundary';
+import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
+import PostDetailContent from '@/components/PostDetailContent/PostDetailContent';
+import { MESSAGE } from '@/constants/messages';
 import PostAPI from '@/libs/api/post';
 import useGetPost from '@/libs/hooks/queries/post/useGetPost';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
@@ -5,26 +9,25 @@ import {
   GetServerSideProps,
   GetServerSidePropsContext,
   GetServerSidePropsResult,
-  GetStaticPaths,
-  GetStaticPathsResult,
-  GetStaticProps,
-  GetStaticPropsContext,
-  GetStaticPropsResult,
+  NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
 
-const PostDetail = () => {
+const PostDetail: NextPage = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const { data, isLoading, error } = useGetPost(id);
-
-  if (isLoading) return <div>loading...</div>;
-  if (error) return <div>error</div>;
 
   return (
-    <div>
-      {data.title} {data.body}
-    </div>
+    <AsyncBoundary
+      rejectedFallback={
+        <ErrorFallback
+          message={MESSAGE.ERROR.LOAD_DATA}
+          queryKey={useGetPost.getKey(id)}
+        />
+      }
+    >
+      <PostDetailContent id={id} />
+    </AsyncBoundary>
   );
 };
 

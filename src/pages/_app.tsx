@@ -1,4 +1,7 @@
+import ErrorBoundary from '@/components/ErrorBoundary';
+import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
 import Header from '@/components/Header/Header';
+import { MESSAGE } from '@/constants/messages';
 import { NextUIProvider } from '@nextui-org/react';
 import {
   Hydrate,
@@ -17,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         defaultOptions: {
           queries: {
             staleTime: 1000 * 60 * 60, // 1h
+            suspense: true,
             retry: 0,
           },
         },
@@ -29,8 +33,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ReactQueryDevtools initialIsOpen />
         <Hydrate state={pageProps.dehydratedState}>
           <NextUIProvider>
-            <Header />
-            <Component {...pageProps} />
+            <ErrorBoundary
+              fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
+            >
+              <Header />
+              <Component {...pageProps} />
+            </ErrorBoundary>
           </NextUIProvider>
         </Hydrate>
       </QueryClientProvider>
