@@ -1,4 +1,5 @@
 import Header from '@/components/Header/Header';
+import { NextUIProvider } from '@nextui-org/react';
 import {
   Hydrate,
   QueryClient,
@@ -27,8 +28,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen />
         <Hydrate state={pageProps.dehydratedState}>
-          <Header />
-          <Component {...pageProps} />
+          <NextUIProvider>
+            <Header />
+            <Component {...pageProps} />
+          </NextUIProvider>
         </Hydrate>
       </QueryClientProvider>
     </RecoilRoot>
