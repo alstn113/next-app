@@ -19,9 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 60 * 60, // 1h
+            retry: false,
             suspense: true,
-            retry: 0,
+            staleTime: 1000 * 60 * 3,
           },
         },
       }),
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen />
+        <ReactQueryDevtools initialIsOpen={false} />
         <Hydrate state={pageProps.dehydratedState}>
           <NextUIProvider>
             <ErrorBoundary

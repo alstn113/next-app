@@ -1,7 +1,3 @@
-import AsyncBoundary from '@/components/AsyncBoundary';
-import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
-import PostList from '@/components/PostList/PostList';
-import { MESSAGE } from '@/constants/messages';
 import PostAPI from '@/libs/api/post';
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
@@ -10,19 +6,28 @@ import type {
   GetServerSidePropsResult,
   NextPage,
 } from 'next';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
+  const { data } = useGetPosts();
+
   return (
-    <AsyncBoundary
-      rejectedFallback={
-        <ErrorFallback
-          queryKey={useGetPosts.getKey()}
-          message={MESSAGE.ERROR.LOAD_DATA}
-        />
-      }
-    >
-      <PostList />
-    </AsyncBoundary>
+    <div>
+      {data?.map((post) => (
+        <div key={post.id}>
+          <Link
+            href={{
+              pathname: '/post/[id]',
+              query: { id: post.id },
+            }}
+          >
+            <div>
+              {post.title} {post.body}
+            </div>
+          </Link>
+        </div>
+      ))}
+    </div>
   );
 };
 

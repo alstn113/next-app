@@ -1,7 +1,3 @@
-import AsyncBoundary from '@/components/AsyncBoundary';
-import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
-import PostDetailContent from '@/components/PostDetailContent/PostDetailContent';
-import { MESSAGE } from '@/constants/messages';
 import PostAPI from '@/libs/api/post';
 import useGetPost from '@/libs/hooks/queries/post/useGetPost';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
@@ -17,17 +13,12 @@ const PostDetail: NextPage = () => {
   const router = useRouter();
   const id = router.query.id as string;
 
+  const { data } = useGetPost(id);
+
   return (
-    <AsyncBoundary
-      rejectedFallback={
-        <ErrorFallback
-          message={MESSAGE.ERROR.LOAD_DATA}
-          queryKey={useGetPost.getKey(id)}
-        />
-      }
-    >
-      <PostDetailContent id={id} />
-    </AsyncBoundary>
+    <div>
+      {data?.title} {data?.body}
+    </div>
   );
 };
 
@@ -49,10 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!data) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
   return { props: { dehydratedState: dehydrate(queryClient) } };
