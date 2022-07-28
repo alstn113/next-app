@@ -1,54 +1,52 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import apiClient from '@/libs/api/apiClient';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import runMiddleware from '@/libs/utils/runMiddleware';
-import Cors from 'cors';
-import { setCookie } from '@/libs/utils/cookies';
-
-const cors = Cors({
-  methods: ['POST'],
-});
+import { setCookie } from 'cookies-next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  await runMiddleware(req, res, cors);
+  if (req.method === 'POST') {
+    try {
+      const apiRes = await apiClient.post('/auth/login', req.body);
+      const { access_token, refresh_token } = apiRes.data;
 
-  try {
-    const apiRes = await apiClient.post('/auth/login', req.body);
-    const { access_token, refresh_token } = apiRes.data;
+      if (apiRes.status === 201) {
+        setCookie('access_token', access_token, {
+          req,
+          res,
+          httpOnly: true,
+          maxAge: 60 * 30, // 30m
+          path: '/',
+          secure: process.env.NODE_ENV !== 'development',
+        });
+        setCookie('refresh_token', refresh_token, {
+          req,
+          res,
+          httpOnly: true,
+          maxAge: 60 * 60 * 24, // 24h
+          path: '/',
+          secure: process.env.NODE_ENV !== 'development',
+        });
 
-    if (apiRes.status === 200) {
-      setCookie(res, 'access_token', access_token, {
-        httpOnly: true,
-        maxAge: 60 * 30, // 30m
-        // secure: process.env.NODE_ENV !== 'development',
-        // sameSite: 'strict',
-        // path: '/api/',
-      });
-      setCookie(res, 'refresh_token', refresh_token, {
-        httpOnly: true,
-        maxAge: 60 * 60 * 24, // 24h
-        // secure: process.env.NODE_ENV !== 'development',
-        // sameSite: 'strict',
-        // path: '/api/',
-      });
-
-      // Return the `set-cookie` header so we can display it in the browser and show that it works!
-      res.end(res.getHeader('Set-Cookie'));
-
-      return res.status(200).json({
-        success: 'Logged in successfully',
-      });
-    } else {
-      return res.status(apiRes.status).json({
-        error: 'Authentication failed',
+        res.status(200).json({
+          success: 'Logged in successfully',
+        });
+      } else {
+        return res.status(apiRes.status).json({
+          error: 'Authentication failed',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        error: 'Something went wrong when authenticating',
       });
     }
-  } catch (error) {
-    return res.status(500).json({
-      error: 'Something went wrong when authenticating',
+  } else {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).json({
+      error: `Method ${req.method} is not allowed`,
     });
   }
 }
