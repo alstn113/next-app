@@ -8,8 +8,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    const refresh_token = getCookie('refresh_token') ?? false;
-
+    const refresh_token = getCookie('refresh_token', { req, res }) ?? false;
     if (refresh_token === false) {
       return res.status(401).json({
         error: 'User unauthorized to make this request',

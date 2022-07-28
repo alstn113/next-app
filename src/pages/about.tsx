@@ -1,3 +1,4 @@
+import { Button, Spacer } from '@nextui-org/react';
 import axios from 'axios';
 import { NextPage } from 'next';
 
@@ -13,9 +14,17 @@ const About: NextPage = () => {
   };
   return (
     <div>
-      <button onClick={login}>LOGIN</button>
-      <button onClick={logout}>LOGOUT</button>
-      <button onClick={refresh}>REFRESH</button>
+      <Button auto shadow onClick={login}>
+        LOGIN
+      </Button>
+      <Spacer />
+      <Button auto shadow onClick={logout}>
+        LOGOUT
+      </Button>
+      <Spacer />
+      <Button auto shadow onClick={refresh}>
+        REFRESH
+      </Button>
     </div>
   );
 };
