@@ -1,15 +1,23 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import apiClient from '@/libs/api/apiClient';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { setCookie } from 'cookies-next';
+import { setCookie, getCookie } from 'cookies-next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
+    const refresh_token = getCookie('refresh_token') ?? false;
+
+    if (refresh_token === false) {
+      return res.status(401).json({
+        error: 'User unauthorized to make this request',
+      });
+    }
+
     try {
-      const apiRes = await apiClient.post('/auth/login', req.body);
+      const apiRes = await apiClient.post('/auth/refresh', refresh_token);
       const { data } = apiRes;
 
       if (apiRes.status === 201) {
@@ -31,11 +39,11 @@ export default async function handler(
         });
 
         res.status(200).json({
-          success: 'Logged in successfully',
+          success: 'refresh success',
         });
       } else {
         return res.status(apiRes.status).json({
-          error: 'Authentication failed',
+          error: 'refresh failed',
         });
       }
     } catch (error) {
