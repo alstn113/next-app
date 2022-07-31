@@ -2,6 +2,8 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
 import configuration from './config/configuration';
+import { AuthModule } from './module/auth/auth.module';
+import { UserModule } from './module/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -11,8 +13,9 @@ import { PrismaModule } from './prisma/prisma.module';
       load: [configuration],
     }),
     PrismaModule,
+    AuthModule,
+    UserModule,
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_PIPE,
