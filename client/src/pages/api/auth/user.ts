@@ -24,9 +24,7 @@ export default async function handler(
       const { data } = apiRes;
 
       if (apiRes.status === 200) {
-        return res.status(apiRes.status).json({
-          user: data.user,
-        });
+        return res.status(apiRes.status).json(data);
       } else {
         return res.status(apiRes.status).json({
           error: 'failed to get user data',

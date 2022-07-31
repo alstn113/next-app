@@ -4,7 +4,10 @@ import { NextPage } from 'next';
 
 const About: NextPage = () => {
   const login = async () => {
-    await axios.post('/api/auth/login');
+    await axios.post('/api/auth/signin', {
+      username: 'alstn113',
+      password: 'alstn123',
+    });
   };
   const logout = async () => {
     await axios.delete('/api/auth/logout');
@@ -13,23 +16,24 @@ const About: NextPage = () => {
     await axios.post('/api/auth/refresh');
   };
   const user = async () => {
-    await axios.get('/api/auth/user');
+    const { data } = await axios.get('/api/auth/user');
+    console.log(data);
   };
   return (
     <div>
-      <Button auto shadow onClick={login}>
+      <Button auto shadow onPress={login}>
         LOGIN
       </Button>
       <Spacer />
-      <Button auto shadow onClick={logout}>
+      <Button auto shadow onPress={logout}>
         LOGOUT
       </Button>
       <Spacer />
-      <Button auto shadow onClick={refresh}>
+      <Button auto shadow onPress={refresh}>
         REFRESH
       </Button>
       <Spacer />
-      <Button auto shadow onClick={user}>
+      <Button auto shadow onPress={user}>
         USER
       </Button>
     </div>
