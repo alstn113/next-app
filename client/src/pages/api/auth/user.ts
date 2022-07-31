@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import apiClient from '@/libs/api/apiClient';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { setCookie, getCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
 export default async function handler(
   req: NextApiRequest,

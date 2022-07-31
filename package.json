@@ -1,0 +1,11 @@
+{
+  "name": "next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/neko113/next-cookie-auth.git",
+  "author": "neko113 <alstn113@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"cd server && yarn start:dev\" \"cd client && yarn dev\""
+  }
+}
