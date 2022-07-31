@@ -14,19 +14,22 @@ export class AuthController {
   @Public()
   @Post('/signin')
   async signinLocal(@Body() dto: SigninRequestDto): Promise<TokensType> {
-    return await this.authService.signinLocal(dto);
+    const tokens = await this.authService.signinLocal(dto);
+    return tokens;
   }
 
   @Public()
   @Post('/signup')
   async signupLocal(@Body() dto: SignupRequestDto): Promise<void> {
-    return await this.authService.signupLocal(dto);
+    await this.authService.signupLocal(dto);
+    return;
   }
 
   @Public()
   @Post('/refresh')
   async refreshTokens(@Body() dto: RefreshRequestDto): Promise<TokensType> {
-    return await this.authService.refreshTokens(dto);
+    const tokens = await this.authService.refreshTokens(dto);
+    return tokens;
   }
 
   @Public()
