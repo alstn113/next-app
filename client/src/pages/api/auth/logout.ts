@@ -21,7 +21,7 @@ export default async function handler(
           res,
         });
 
-        res.status(200).json({
+        res.status(apiRes.status).json({
           success: 'logout success',
         });
       } else {

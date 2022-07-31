@@ -12,6 +12,9 @@ const About: NextPage = () => {
   const refresh = async () => {
     await axios.post('/api/auth/refresh');
   };
+  const user = async () => {
+    await axios.get('/api/auth/user');
+  };
   return (
     <div>
       <Button auto shadow onClick={login}>
@@ -24,6 +27,10 @@ const About: NextPage = () => {
       <Spacer />
       <Button auto shadow onClick={refresh}>
         REFRESH
+      </Button>
+      <Spacer />
+      <Button auto shadow onClick={user}>
+        USER
       </Button>
     </div>
   );

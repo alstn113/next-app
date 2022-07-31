@@ -30,7 +30,7 @@ export default async function handler(
           secure: process.env.NODE_ENV !== 'development',
         });
 
-        res.status(200).json({
+        res.status(apiRes.status).json({
           success: 'Logged in successfully',
         });
       } else {
