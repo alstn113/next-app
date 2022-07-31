@@ -1,6 +1,7 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { JwtGuard } from './common/guards/jwt-guard.guard';
 import configuration from './config/configuration';
 import { AuthModule } from './module/auth/auth.module';
 import { UserModule } from './module/user/user.module';
@@ -20,6 +21,10 @@ import { PrismaModule } from './prisma/prisma.module';
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
     },
   ],
 })

@@ -16,7 +16,7 @@ export default async function handler(
     }
 
     try {
-      const apiRes = await apiClient.post('/auth/refresh', refresh_token);
+      const apiRes = await apiClient.post('/auth/refresh', { refresh_token });
       const { data } = apiRes;
 
       if (apiRes.status === 201) {

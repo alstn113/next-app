@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const apiRes = await apiClient.post('/auth/login', req.body);
+      const apiRes = await apiClient.post('/auth/signin', req.body);
       const { data } = apiRes;
 
       if (apiRes.status === 201) {

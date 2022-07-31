@@ -16,7 +16,7 @@ export default async function handler(
     }
 
     try {
-      const apiRes = await apiClient.get('/auth/user', {
+      const apiRes = await apiClient.get('/user', {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
