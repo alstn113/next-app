@@ -7,11 +7,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === 'DELETE') {
+  if (req.method === 'POST') {
     try {
-      const apiRes = await apiClient.delete('/auth/logout');
+      const apiRes = await apiClient.post('/auth/logout');
 
-      if (apiRes.status === 200) {
+      if (apiRes.status === 201) {
         deleteCookie('access_token', {
           req,
           res,
@@ -35,7 +35,7 @@ export default async function handler(
       });
     }
   } else {
-    res.setHeader('Allow', ['DELETE']);
+    res.setHeader('Allow', ['POST']);
     return res.status(405).json({
       error: `Method ${req.method} is not allowed`,
     });

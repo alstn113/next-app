@@ -16,6 +16,7 @@ const useGetPost = (
   );
 };
 
+useGetPost.fetcher = (id: string) => PostAPI.getPost(id);
 useGetPost.getKey = (id: string) => ['GetPost', id];
 
 export default useGetPost;

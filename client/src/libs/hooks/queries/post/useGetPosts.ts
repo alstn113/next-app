@@ -15,6 +15,7 @@ const useGetPosts = (
   );
 };
 
+useGetPosts.fetcher = () => PostAPI.getPosts;
 useGetPosts.getKey = () => ['GetPosts'];
 
 export default useGetPosts;

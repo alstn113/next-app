@@ -1,4 +1,3 @@
-import PostAPI from '@/libs/api/post';
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import type {
@@ -37,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(useGetPosts.getKey(), PostAPI.getPosts);
+  await queryClient.prefetchQuery(useGetPosts.getKey(), useGetPosts.fetcher());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

@@ -12,6 +12,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: configService.get<string>('client'),
+    credentials: true,
   });
 
   setupSwagger(app);

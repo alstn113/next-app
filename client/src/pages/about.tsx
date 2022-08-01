@@ -10,7 +10,7 @@ const About: NextPage = () => {
     });
   };
   const logout = async () => {
-    await axios.delete('/api/auth/logout');
+    await axios.post('/api/auth/logout');
   };
   const refresh = async () => {
     await axios.post('/api/auth/refresh');
@@ -19,6 +19,7 @@ const About: NextPage = () => {
     const { data } = await axios.get('/api/auth/user');
     console.log(data);
   };
+
   return (
     <div>
       <Button auto shadow onPress={login}>
