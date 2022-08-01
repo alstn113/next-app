@@ -1,6 +1,9 @@
+import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
+import useGetCurrentUser from '@/libs/hooks/queries/user/useGetCurrentUser';
 import { Button, Spacer } from '@nextui-org/react';
+import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import axios from 'axios';
-import { NextPage } from 'next';
+import { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
 
 const About: NextPage = () => {
   const login = async () => {
@@ -39,6 +42,19 @@ const About: NextPage = () => {
       </Button>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (): Promise<
+  GetServerSidePropsResult<{
+    dehydratedState: DehydratedState;
+  }>
+> => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(
+    useGetCurrentUser.getKey(),
+    useGetCurrentUser.fetcher(),
+  );
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
 export default About;
