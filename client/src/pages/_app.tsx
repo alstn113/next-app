@@ -51,9 +51,9 @@ MyApp.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context; // next에서 넣어주는 context
   let pageProps = {};
   const cookie = ctx.req ? ctx.req.headers.cookie : '';
-  apiClient.defaults.headers.Cookie = '';
+  apiClient.defaults.headers.common['Cookie'] = '';
   if (ctx.req && cookie) {
-    apiClient.defaults.headers.Cookie = cookie;
+    apiClient.defaults.headers.common['Cookie'] = cookie;
   }
 
   if (Component.getInitialProps) {
