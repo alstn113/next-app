@@ -16,7 +16,6 @@ export class UserService {
         username: true,
       },
     });
-
     return user;
   }
 }

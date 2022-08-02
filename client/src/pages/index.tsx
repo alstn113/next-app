@@ -1,4 +1,5 @@
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
+import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import type {
   GetServerSideProps,
@@ -37,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 > => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(useGetPosts.getKey(), useGetPosts.fetcher());
+  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

@@ -2,20 +2,16 @@ import UserAPI from '@/libs/api/user';
 import { ICustomAxiosError, IUser } from '@/libs/interfaces';
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
-const useGetCurrentUser = (
+const useGetME = (
   options?: Omit<
     UseQueryOptions<IUser, ICustomAxiosError>,
     'queryKey' | 'queryFn' | 'initialData'
   >,
 ) => {
-  return useQuery<IUser, ICustomAxiosError>(
-    ['GetCurrentUser'],
-    UserAPI.getCurrentUser,
-    options,
-  );
+  return useQuery<IUser, ICustomAxiosError>(['me'], UserAPI.me, options);
 };
 
-useGetCurrentUser.fetcher = () => UserAPI.getCurrentUser;
-useGetCurrentUser.getKey = () => ['GetCurrentUser'];
+useGetME.fetcher = () => UserAPI.me;
+useGetME.getKey = () => ['me'];
 
-export default useGetCurrentUser;
+export default useGetME;

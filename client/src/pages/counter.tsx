@@ -1,6 +1,8 @@
+import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import counterAtom from '@/libs/store/counter';
 import { Button, Text } from '@nextui-org/react';
-import { NextPage } from 'next';
+import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
+import { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
 import { useRecoilState } from 'recoil';
 
 const Counter: NextPage = () => {
@@ -18,6 +20,16 @@ const Counter: NextPage = () => {
       </Button>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (): Promise<
+  GetServerSidePropsResult<{
+    dehydratedState: DehydratedState;
+  }>
+> => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
 export default Counter;

@@ -1,34 +1,26 @@
-import useCreatePost from '@/libs/hooks/queries/post/useCreatePost';
-import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
-import {
-  dehydrate,
-  DehydratedState,
-  QueryClient,
-  useQueryClient,
-} from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
 import Router from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import useRegister from '@/libs/hooks/queries/auth/useRegister';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 
 interface IFormInput {
-  title: string;
-  body: string;
+  username: string;
+  password: string;
 }
 
 const schema = yup.object().shape({
-  title: yup.string().required('필수항목입니다'),
-  body: yup.string().required('필수 항목입니다'),
+  username: yup.string().required('필수항목입니다'),
+  password: yup.string().required('필수 항목입니다'),
 });
 
-const Write: NextPage = () => {
-  const queryClient = useQueryClient();
-  const { mutate } = useCreatePost({
+const Register: NextPage = () => {
+  const { mutate } = useRegister({
     onSuccess: async () => {
-      await queryClient.invalidateQueries(useGetPosts.getKey());
-      Router.push('/');
+      Router.push('/login');
     },
   });
   const onSubmit = (input: IFormInput) => {
@@ -46,11 +38,11 @@ const Write: NextPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('title')} type="text" placeholder="title" />
-        <p>{errors.title?.message}</p>
-        <input {...register('body')} type="text" placeholder="body" />
-        <p>{errors.body?.message}</p>
-        <button type="submit">POST</button>
+        <input {...register('username')} type="text" placeholder="username" />
+        <p>{errors.username?.message}</p>
+        <input {...register('password')} type="text" placeholder="password" />
+        <p>{errors.password?.message}</p>
+        <button type="submit">REGISTER</button>
       </form>
     </div>
   );
@@ -66,4 +58,4 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-export default Write;
+export default Register;

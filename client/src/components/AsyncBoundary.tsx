@@ -1,4 +1,4 @@
-import { Loading } from '@nextui-org/react';
+import LoadingSpinner from './common/LoadingSpinner/LoadingSpinner';
 import React, { Suspense } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 
@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 const AsyncBoundary = ({
-  pendingFallback = <Loading />,
+  pendingFallback = <LoadingSpinner />,
   rejectedFallback,
   children,
 }: Props) => {
