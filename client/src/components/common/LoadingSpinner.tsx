@@ -1,9 +1,7 @@
-import { Loading } from '@nextui-org/react';
-
 const LoadingSpinner = () => {
   return (
     <div>
-      <Loading />
+      <div>loading...</div>
     </div>
   );
 };

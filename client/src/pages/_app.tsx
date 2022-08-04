@@ -1,9 +1,11 @@
 import ErrorBoundary from '@/components/ErrorBoundary';
-import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
-import Header from '@/components/Header/Header';
+import ErrorFallback from '@/components/ErrorFallback';
+import Header from '@/components/Header';
 import { MESSAGE } from '@/constants/messages';
 import apiClient from '@/libs/api/apiClient';
-import { NextUIProvider } from '@nextui-org/react';
+import GlobalStyle from '@/styles/GlobalStyle';
+import theme from '@/styles/theme';
+import { ThemeProvider } from '@emotion/react';
 import {
   Hydrate,
   QueryClient,
@@ -33,14 +35,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Hydrate state={pageProps.dehydratedState}>
-          <NextUIProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
             <ErrorBoundary
               fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
             >
               <Header />
               <Component {...pageProps} />
             </ErrorBoundary>
-          </NextUIProvider>
+          </ThemeProvider>
         </Hydrate>
       </QueryClientProvider>
     </RecoilRoot>
