@@ -1,43 +1,30 @@
-import useLogout from '@/libs/hooks/queries/auth/useLogout';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import { flexCenter } from '@/styles/theme';
 import styled from '@emotion/styled';
-import Link from 'next/link';
 
-const Header = () => {
-  const { data } = useGetME();
-  const { mutate } = useLogout({
-    onSuccess: () => {
-      window.location.href = '/';
-    },
-  });
+interface Props {
+  title?: React.ReactNode;
+}
+
+const Header = ({ title = 'NEXT' }: Props) => {
   return (
-    <div>
-      <div>
-        <StyledButton>{data ? data.username : '로그인 상태 아님'}</StyledButton>
-        {data && <button onClick={() => mutate()}>로그아웃</button>}
-      </div>
-      <div>
-        <StyledLink href={'/'}>Home</StyledLink>
-        <Link href={'/counter'}>Counter</Link>
-        <Link href={'/write'}>Write</Link>
-        <Link href={'/login'}>Login</Link>
-        <Link href={'/register'}>Register</Link>
-      </div>
-    </div>
+    <Container>
+      <Title>{title}</Title>
+    </Container>
   );
 };
 
-const StyledLink = styled(Link)`
-  font-size: 5rem;
-  color: red;
-  &:hover {
-    color: blue;
-  }
+const Container = styled.header`
+  position: relative;
+  height: 56px;
+  border-bottom: 1px solid black;
+  padding-left: 16px;
+  padding-right: 16px;
+  ${flexCenter}
 `;
 
-const StyledButton = styled.button`
-  font-size: 5rem;
-  color: red;
+const Title = styled.div`
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 export default Header;

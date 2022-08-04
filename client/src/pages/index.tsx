@@ -1,3 +1,5 @@
+import SvgArrowLeft from '@/components/vectors/SvgArrowLeft';
+import PlusCircle from '@/components/vectors/SvgPlusCircle';
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
@@ -13,6 +15,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
+      <SvgArrowLeft />
       {data?.map((post) => (
         <div key={post.id}>
           <Link

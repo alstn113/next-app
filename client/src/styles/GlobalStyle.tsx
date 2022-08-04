@@ -1,14 +1,13 @@
 import { Global, css } from '@emotion/react';
 import reset from '@/styles/reset';
-function GlobalStyle() {
+
+const GlobalStyle = () => {
   return (
     <>
-      <Global styles={reset} />
       <Global
         styles={css`
-          *,
-          *::before,
-          *::after {
+          ${reset}
+          * {
             box-sizing: border-box;
           }
           input {
@@ -28,6 +27,6 @@ function GlobalStyle() {
       />
     </>
   );
-}
+};
 
 export default GlobalStyle;

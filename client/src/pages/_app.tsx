@@ -1,6 +1,6 @@
 import ErrorBoundary from '@/components/ErrorBoundary';
 import ErrorFallback from '@/components/ErrorFallback';
-import Header from '@/components/Header';
+import TabLayout from '@/components/Layouts/TabLayout';
 import { MESSAGE } from '@/constants/messages';
 import apiClient from '@/libs/api/apiClient';
 import GlobalStyle from '@/styles/GlobalStyle';
@@ -40,8 +40,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ErrorBoundary
               fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
             >
-              <Header />
-              <Component {...pageProps} />
+              <TabLayout>
+                <Component {...pageProps} />
+              </TabLayout>
             </ErrorBoundary>
           </ThemeProvider>
         </Hydrate>
