@@ -1,11 +1,5 @@
 import styled from '@emotion/styled';
 
-export interface Props {}
-
-const LoadingSpinner = ({}: Props) => {
-  return <Spinner />;
-};
-
 export const Spinner = styled.div`
   @keyframes spin {
     0% {
@@ -27,5 +21,3 @@ export const Spinner = styled.div`
   transform: translateZ(0);
   animation: spin 0.5s infinite linear;
 `;
-
-export default LoadingSpinner;
