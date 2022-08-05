@@ -1,6 +1,6 @@
-export { default as SvgArrowLeft } from './SvgArrowLeft';
-export { default as SvgBookmark } from './SvgBookmark';
-export { default as SvgHome } from './SvgHome';
-export { default as SvgSearch } from './SvgSearch';
-export { default as SvgSetting } from './SvgSetting';
-export { default as SvgPlusCircle } from './SvgPlusCircle';
+export { default as ArrowLeft } from './ArrowLeft';
+export { default as Bookmark } from './Bookmark';
+export { default as Home } from './Home';
+export { default as PlusCircle } from './PlusCircle';
+export { default as Search } from './Search';
+export { default as Setting } from './Setting';

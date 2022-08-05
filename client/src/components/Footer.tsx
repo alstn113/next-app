@@ -1,22 +1,16 @@
 import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import FooterTapItem from './FooterTapItem';
-import {
-  SvgHome,
-  SvgBookmark,
-  SvgPlusCircle,
-  SvgSearch,
-  SvgSetting,
-} from './vectors';
+import { Bookmark, Home, PlusCircle, Search, Setting } from './vectors';
 
 function Footer() {
   return (
     <Container>
-      <FooterTapItem icon={<SvgHome />} href="/" />
-      <FooterTapItem icon={<SvgSearch />} href="/search" />
-      <FooterTapItem icon={<SvgPlusCircle />} href="/write" />
-      <FooterTapItem icon={<SvgBookmark />} href="/bookmarks" />
-      <FooterTapItem icon={<SvgSetting />} href="/setting" />
+      <FooterTapItem icon={<Home />} href="/" />
+      <FooterTapItem icon={<Search />} href="/search" />
+      <FooterTapItem icon={<PlusCircle />} href="/write" />
+      <FooterTapItem icon={<Bookmark />} href="/bookmarks" />
+      <FooterTapItem icon={<Setting />} href="/setting" />
     </Container>
   );
 }

@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write --config ./.prettierrc './src/**/*.{ts, tsx}'",
     "prepare": "cd .. && husky install client/.husky",
+    "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -37,6 +38,8 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@svgr/cli": "^6.3.1",
+    "@types/axios": "^0.14.0",
     "@types/node": "18.6.1",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
