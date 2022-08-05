@@ -1,45 +1,39 @@
 import { css } from '@emotion/react';
 
-export const flexCenter = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const color = {
   white: '#ffffff',
+  gray: '#dfe6e9',
   black: '#000000',
-  gray0: '#e9ecef',
-  gray1: '#ced4da',
-  gray2: '#868e96',
-  orange0: '#ffd8a8',
-  orange1: '#ffa94d',
-  orange2: '#fd7e14',
+  primary: '#0072F5',
+  secondary: '#7828C8',
+  success: '#17C964',
+  warning: '#F5A524',
+  error: '#F31260',
 };
 
 const font = {
-  small: css`
+  sm: css`
     font-size: 1rem;
     font-weight: 500;
   `,
-  medium: css`
+  md: css`
     font-size: 1.5rem;
     font-weight: 600;
   `,
-  large: css`
+  lg: css`
     font-size: 2rem;
     font-weight: 700;
   `,
 };
 
 const borderRadius = {
-  small: css`
+  sm: css`
     border-radius: 0.5rem;
   `,
-  medium: css`
+  md: css`
     border-radius: 1rem;
   `,
-  large: css`
+  lg: css`
     border-radius: 2rem;
   `,
 };

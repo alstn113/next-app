@@ -4,23 +4,23 @@ declare module '@emotion/react' {
   export interface Theme {
     color: {
       white: string;
+      gray: string;
       black: string;
-      gray0: string;
-      gray1: string;
-      gray2: string;
-      orange0: string;
-      orange1: string;
-      orange2: string;
+      primary: string;
+      secondary: string;
+      success: string;
+      warning: string;
+      error: string;
     };
     font: {
-      small: css;
-      medium: css;
-      large: css;
+      sm: css;
+      md: css;
+      lg: css;
     };
     borderRadius: {
-      large: css;
-      medium: css;
-      small: css;
+      lg: css;
+      md: css;
+      sm: css;
     };
     media: {
       custom: (maxWidth: number) => string;
