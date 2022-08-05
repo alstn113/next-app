@@ -2,8 +2,8 @@ import useLogout from '@/libs/hooks/queries/auth/useLogout';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import styled from '@emotion/styled';
 import FullHeightPage from '../common/FullHeightPage';
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from '../base/Footer';
+import Header from '../base/Header';
 
 interface Props {
   children?: React.ReactNode;

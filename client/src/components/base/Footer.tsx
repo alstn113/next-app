@@ -1,7 +1,7 @@
 import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import FooterTapItem from './FooterTapItem';
-import { Bookmark, Home, PlusCircle, Search, Setting } from './vectors';
+import { Bookmark, Home, PlusCircle, Search, Setting } from '../vectors';
 
 function Footer() {
   return (
