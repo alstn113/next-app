@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/theme';
+import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import NavLink from './common/NavLink';
 
