@@ -1,5 +1,7 @@
 import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import NavLink from '../common/NavLink';
 
 interface Props {
@@ -8,9 +10,18 @@ interface Props {
 }
 
 const FooterTapItem = ({ icon, href }: Props) => {
+  const router = useRouter();
+  const { asPath } = router;
+
   return (
     <Item>
-      <NavLink href={href}>{icon}</NavLink>
+      <Link href={href} passHref>
+        <ActiveLink
+          active={encodeURIComponent(asPath) === encodeURIComponent(href)}
+        >
+          {icon}
+        </ActiveLink>
+      </Link>
     </Item>
   );
 };
@@ -18,11 +29,13 @@ const FooterTapItem = ({ icon, href }: Props) => {
 const Item = styled.div`
   ${flexCenter};
   flex: 1;
-  a {
-    svg {
-      width: 32px;
-      height: 32px;
-    }
+`;
+
+const ActiveLink = styled('a')<{ active: boolean }>`
+  svg {
+    width: 32px;
+    height: 32px;
+    color: ${({ active }) => (active ? 'black' : 'gray')};
   }
 `;
 
