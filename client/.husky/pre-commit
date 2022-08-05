@@ -2,4 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd client
-yarn lint --fix && git add .
+yarn lint --fix
+yarn format
+git add .
