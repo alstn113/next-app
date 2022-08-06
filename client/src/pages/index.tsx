@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     <div>
       {data?.map((post) => (
         <CardBox key={post.id}>
-          <Card variant="bordered">
+          <Card variant="bordered" isPressable>
             <Link
               href={{
                 pathname: '/post/[id]',

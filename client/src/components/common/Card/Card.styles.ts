@@ -2,7 +2,10 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { CardVariantType } from './Card';
 
-export const Root = styled.div<{ variant: CardVariantType }>`
+export const Root = styled.div<{
+  variant: CardVariantType;
+  isPressable: boolean;
+}>`
   padding: 20px 12px;
   border-radius: 14px;
   color: #000;
@@ -26,4 +29,9 @@ export const Root = styled.div<{ variant: CardVariantType }>`
     css`
       background-color: #dfe3e6;
     `};
+  ${({ isPressable }) =>
+    isPressable &&
+    css`
+      cursor: pointer;
+    `}
 `;
