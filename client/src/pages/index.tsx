@@ -1,5 +1,6 @@
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import formatDate from '@/libs/utils/formatDate';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import type {
   GetServerSideProps,
@@ -22,7 +23,10 @@ const Home: NextPage = () => {
             }}
           >
             <div>
-              {post.title} {post.body}
+              <div>
+                {post.title} {post.body}
+              </div>
+              <div>{formatDate(post.createdAt)}</div>
             </div>
           </Link>
         </div>
