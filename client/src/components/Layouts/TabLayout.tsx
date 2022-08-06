@@ -11,17 +11,25 @@ const TabLayout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <Content>{children}</Content>
+      <Container>
+        <Content>{children}</Content>
+      </Container>
       <Footer />
     </>
   );
 };
 
-const Content = styled.div`
-  ${flexCenter};
+const Container = styled.div`
   height: 80vh;
-  margin: 10vh 0;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   overflow-y: scroll;
+  ${flexCenter}
+`;
+
+const Content = styled.div`
+  ${flexCenter}
+  flex-direction: column;
 `;
 
 export default TabLayout;

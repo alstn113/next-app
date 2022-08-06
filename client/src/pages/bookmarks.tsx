@@ -1,20 +1,21 @@
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 
 const Bookmarks = () => {
   return (
-    <div>
-      <Container />
-      <Container />
-      <Container />
-      <Container />
-      <Container />
-      <Container />
-      <Container />
-      <Container />
-    </div>
+    <Container>
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+    </Container>
   );
 };
 
@@ -39,6 +40,11 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 };
 
 const Container = styled.div`
+  ${flexCenter}
+  flex-direction: column;
+`;
+
+const Box = styled.div`
   height: 200px;
   width: 200px;
   background-color: red;
