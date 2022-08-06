@@ -36,9 +36,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     PostAPI.getPost(id),
   );
 
-  const data = queryClient.getQueryData(useGetPost.getKey(id));
+  const post = queryClient.getQueryData(useGetPost.getKey(id));
 
-  if (!data) {
+  if (!post) {
     return {
       notFound: true,
     };

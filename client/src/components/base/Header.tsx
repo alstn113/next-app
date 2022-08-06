@@ -1,12 +1,21 @@
 import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
+import useLogout from '@/libs/hooks/queries/auth/useLogout';
+import useGetME from '@/libs/hooks/queries/user/useGetMe';
 
 interface Props {
   title?: React.ReactNode;
 }
 
 const Header = ({ title = 'NEXT' }: Props) => {
+  const { data } = useGetME();
+  const { mutate } = useLogout({
+    onSuccess: () => {
+      window.location.href = '/';
+    },
+  });
+
   const [isScroll, setIsScroll] = useState(false);
 
   const handleScroll = useCallback(() => {
@@ -27,19 +36,25 @@ const Header = ({ title = 'NEXT' }: Props) => {
   return (
     <Container isScroll={isScroll}>
       <Title>{title}</Title>
+      <button>{data ? data.username : '로그인 상태 아님'}</button>
+      {data && <button onClick={() => mutate()}>로그아웃</button>}
     </Container>
   );
 };
 
 const Container = styled.header<{ isScroll: boolean }>`
-  background-color: ${({ isScroll }) => isScroll && 'red'};
+  width: 100%;
   position: fixed;
   top: 0;
-  height: 56px;
-  border-bottom: 1px solid black;
-  padding-left: 16px;
-  padding-right: 16px;
-  ${flexCenter}
+  z-index: 100;
+  height: 60px;
+  ${flexCenter};
+  flex-direction: column;
+  background-color: #000;
+  color: white;
+  button {
+    color: white;
+  }
 `;
 
 const Title = styled.div`

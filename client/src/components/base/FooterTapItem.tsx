@@ -1,14 +1,16 @@
 import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 interface Props {
+  title: string;
   icon: React.ReactNode;
   href: string;
 }
 
-const FooterTapItem = ({ icon, href }: Props) => {
+const FooterTapItem = ({ title, icon, href }: Props) => {
   const router = useRouter();
   const { asPath } = router;
 
@@ -19,6 +21,7 @@ const FooterTapItem = ({ icon, href }: Props) => {
           active={encodeURIComponent(asPath) === encodeURIComponent(href)}
         >
           {icon}
+          <div>{title}</div>
         </ActiveLink>
       </Link>
     </Item>
@@ -34,8 +37,23 @@ const ActiveLink = styled('a')<{ active: boolean }>`
   svg {
     width: 32px;
     height: 32px;
-    color: ${({ active }) => (active ? '#000' : '#9a9a9a')};
   }
+  ${({ active }) =>
+    active
+      ? css`
+          svg,
+          div {
+            color: #fff;
+          }
+        `
+      : css`
+          svg,
+          div {
+            color: #6c6c6c;
+          }
+        `};
+  ${flexCenter};
+  flex-direction: column;
 `;
 
 export default FooterTapItem;
