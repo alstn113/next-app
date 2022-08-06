@@ -49,7 +49,6 @@ const Container = styled.header<{ isScroll: boolean }>`
   z-index: 100;
   height: 60px;
   ${flexCenter};
-  flex-direction: column;
   background-color: #000;
   color: white;
   button {
