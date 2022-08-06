@@ -1,4 +1,4 @@
-import LoadingSpinner from './common/LoadingSpinner';
+import LoadingSpinner from './common/LoadingSpinner/LoadingSpinner';
 import React, { Suspense } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 

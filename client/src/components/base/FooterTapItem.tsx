@@ -2,7 +2,6 @@ import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import NavLink from '../common/NavLink';
 
 interface Props {
   icon: React.ReactNode;
@@ -35,7 +34,7 @@ const ActiveLink = styled('a')<{ active: boolean }>`
   svg {
     width: 32px;
     height: 32px;
-    color: ${({ active }) => (active ? 'black' : 'gray')};
+    color: ${({ active }) => (active ? '#000' : '#9a9a9a')};
   }
 `;
 
