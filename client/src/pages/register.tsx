@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import useRegister from '@/libs/hooks/queries/auth/useRegister';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
+import TextInput from '@/components/common/TextInput/TextInput';
+import Button from '@/components/common/Button/Button';
 
 interface IFormInput {
   username: string;
@@ -38,11 +40,21 @@ const Register: NextPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('username')} type="text" placeholder="username" />
+        <TextInput
+          {...register('username')}
+          type="text"
+          placeholder="username"
+        />
         <p>{errors.username?.message}</p>
-        <input {...register('password')} type="text" placeholder="password" />
+        <TextInput
+          {...register('password')}
+          type="text"
+          placeholder="password"
+        />
         <p>{errors.password?.message}</p>
-        <button type="submit">REGISTER</button>
+        <Button shadow type="submit">
+          REGISTER
+        </Button>
       </form>
     </div>
   );
@@ -54,7 +66,17 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
+  const user = await queryClient.fetchQuery(
+    useGetME.getKey(),
+    useGetME.fetcher(),
+  );
+  if (user)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

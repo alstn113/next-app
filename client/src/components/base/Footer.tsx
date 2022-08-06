@@ -20,7 +20,7 @@ const Container = styled.footer`
   position: fixed;
   bottom: 0;
   z-index: 100;
-  height: 60px;
+  height: 10vh;
   ${flexCenter}
   background-color: black;
 `;

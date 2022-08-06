@@ -12,6 +12,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import TextInput from '@/components/common/TextInput/TextInput';
+import Button from '@/components/common/Button/Button';
+import styled from '@emotion/styled';
+import { flexCenter } from '@/styles/shared';
 
 interface IFormInput {
   title: string;
@@ -44,15 +48,17 @@ const Write: NextPage = () => {
     mode: 'onChange',
   });
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('title')} type="text" placeholder="title" />
+        <TextInput {...register('title')} type="text" placeholder="title" />
         <p>{errors.title?.message}</p>
-        <input {...register('body')} type="text" placeholder="body" />
+        <TextInput {...register('body')} type="text" placeholder="body" />
         <p>{errors.body?.message}</p>
-        <button type="submit">POST</button>
+        <Button size="lg" shadow type="submit">
+          POST
+        </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
@@ -75,5 +81,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
     };
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
+
+const Container = styled.div`
+  ${flexCenter}
+`;
 
 export default Write;

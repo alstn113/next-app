@@ -1,3 +1,4 @@
+import { flexCenter } from '@/styles/shared';
 import styled from '@emotion/styled';
 import Footer from '../base/Footer';
 import Header from '../base/Header';
@@ -17,8 +18,9 @@ const TabLayout = ({ children }: Props) => {
 };
 
 const Content = styled.div`
-  display: flex;
-  margin: 60px 0;
+  ${flexCenter};
+  height: 80vh;
+  margin: 10vh 0;
   overflow-y: scroll;
 `;
 
