@@ -1,6 +1,8 @@
+import Card from '@/components/common/Card/Card';
 import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import formatDate from '@/libs/utils/formatDate';
+import styled from '@emotion/styled';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import type {
   GetServerSideProps,
@@ -15,25 +17,31 @@ const Home: NextPage = () => {
   return (
     <div>
       {data?.map((post) => (
-        <div key={post.id}>
-          <Link
-            href={{
-              pathname: '/post/[id]',
-              query: { id: post.id },
-            }}
-          >
-            <div>
+        <CardBox key={post.id}>
+          <Card variant="bordered">
+            <Link
+              href={{
+                pathname: '/post/[id]',
+                query: { id: post.id },
+              }}
+            >
               <div>
-                {post.title} {post.body}
+                <div>
+                  {post.title} {post.body}
+                </div>
+                <div>{formatDate(post.createdAt)}</div>
               </div>
-              <div>{formatDate(post.createdAt)}</div>
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </Card>
+        </CardBox>
       ))}
     </div>
   );
 };
+
+const CardBox = styled.div`
+  margin: 1rem 0;
+`;
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<
   GetServerSidePropsResult<{

@@ -28,7 +28,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  ${flexCenter}
+  display: flex;
+  height: 100%;
   flex-direction: column;
 `;
 
