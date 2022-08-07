@@ -10,7 +10,7 @@ function Footer() {
       <FooterTapItem title="검색" icon={<Search />} href="/search" />
       <FooterTapItem title="작성" icon={<PlusCircle />} href="/write" />
       <FooterTapItem title="북마크" icon={<Bookmark />} href="/bookmarks" />
-      <FooterTapItem title="설정" icon={<Setting />} href="/setting" />
+      <FooterTapItem title="설정" icon={<Setting />} href="/setting" />d
     </Container>
   );
 }
