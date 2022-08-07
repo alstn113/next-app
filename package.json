@@ -6,6 +6,10 @@
   "author": "neko113 <alstn113@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"cd server && yarn start:dev\" \"cd client && yarn dev\""
+    "dev": "concurrently \"cd server && yarn start:dev\" \"cd client && yarn dev\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0"
   }
 }

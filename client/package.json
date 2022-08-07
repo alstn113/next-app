@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write --config ./.prettierrc './src/**/*.{ts, tsx}'",
-    "prepare": "cd .. && husky install client/.husky",
     "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -48,7 +47,6 @@
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "eslint-plugin-storybook": "^0.6.3",
-    "husky": "^8.0.0",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
   }
