@@ -38,6 +38,7 @@ export class PostService {
             username: true,
           },
         },
+        comments: true,
       },
     });
     if (!post) throw new NotFoundException();

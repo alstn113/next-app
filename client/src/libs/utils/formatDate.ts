@@ -2,7 +2,8 @@ import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import format from 'date-fns/format';
 import koLocale from 'date-fns/locale/ko';
 
-const formatDate = (date: string): string => {
+const formatDate = (date: string | undefined): string => {
+  if (date === undefined) return '';
   const d = new Date(date);
   const now = Date.now();
   const diff = now - new Date(date).getTime();

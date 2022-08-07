@@ -1,5 +1,9 @@
+import Card from '@/components/common/Card/Card';
 import PostAPI from '@/libs/api/post';
 import useGetPost from '@/libs/hooks/queries/post/useGetPost';
+import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import formatDate from '@/libs/utils/formatDate';
+import styled from '@emotion/styled';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import {
   GetServerSideProps,
@@ -16,11 +20,25 @@ const PostDetail: NextPage = () => {
   const { data } = useGetPost(id);
 
   return (
-    <div>
-      {data?.title} {data?.body}
-    </div>
+    <Container>
+      <Card variant="bordered">Title : {data?.title}</Card>
+      <Card variant="flat">Body : {data?.body}</Card>
+      <Card variant="shadow">CreatedAt : {formatDate(data?.createdAt)}</Card>
+      <Card variant="flat">
+        {data?.comments?.map((comment) => (
+          <div key={comment.id}>{comment.text}</div>
+        ))}
+      </Card>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin-top: 2rem;
+  div + div {
+    margin-top: 1rem;
+  }
+`;
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
@@ -37,6 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   const post = queryClient.getQueryData(useGetPost.getKey(id));
+  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
 
   if (!post) {
     return {

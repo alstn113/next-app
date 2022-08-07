@@ -11,6 +11,7 @@ import { AuthGuard } from './common/guards/auth-guard.guard';
 import configuration from './config/configuration';
 import { AuthMiddleware } from './middlewares/jwt-auth.middleware';
 import { AuthModule } from './module/auth/auth.module';
+import { CommentModule } from './module/comment/comment.module';
 import { PostModule } from './module/post/post.module';
 import { UserModule } from './module/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -26,6 +27,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     UserModule,
     PostModule,
+    CommentModule,
   ],
   providers: [
     {

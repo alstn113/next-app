@@ -18,6 +18,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
   posts Post[]
+  comments Comment[]
 }
 
 model Post {
@@ -25,7 +26,19 @@ model Post {
   title String
   body String
   userId String
+  comments Comment[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id String @id @default(uuid())
+  text String
+  userId String
+  postId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
