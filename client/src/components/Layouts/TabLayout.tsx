@@ -21,14 +21,14 @@ const TabLayout = ({ children }: Props) => {
 
 const Container = styled.div`
   height: 80vh;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
-  overflow-y: scroll;
-  ${flexCenter}
+  margin-top: 60px;
+  margin-bottom: 60px;
+  height: 100%;
+  ${flexCenter};
 `;
 
 const Content = styled.div`
-  display: flex;
+  ${flexCenter};
   height: 100%;
   flex-direction: column;
 `;
