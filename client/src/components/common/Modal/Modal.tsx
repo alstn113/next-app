@@ -47,10 +47,10 @@ const Modal = ({
         <h3>{title}</h3>
         <p>{message}</p>
         <S.ButtonArea>
-          <Button size="sm" color="error" onClick={onCancel}>
+          <Button shadow size="sm" color="error" onClick={onCancel}>
             {cancelText}
           </Button>
-          <Button size="sm" color="success" onClick={onConfirm}>
+          <Button shadow size="sm" color="success" onClick={onConfirm}>
             {confirmText}
           </Button>
         </S.ButtonArea>

@@ -4,12 +4,13 @@ import useLogout from '@/libs/hooks/queries/auth/useLogout';
 import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import Router from 'next/router';
 import { useRef, useState, useEffect, useCallback } from 'react';
+import Button from '../common/Button/Button';
 
 interface Props {
   title?: React.ReactNode;
 }
 
-const Header = ({ title = 'NEXT' }: Props) => {
+const Header = ({ title = 'ABYSS' }: Props) => {
   const { data } = useGetME();
   const { mutate } = useLogout({
     onSuccess: () => {
@@ -83,9 +84,20 @@ const Header = ({ title = 'NEXT' }: Props) => {
       {data ? (
         <div>{data.username}</div>
       ) : (
-        <button onClick={() => Router.push('/login')}>로그인</button>
+        <Button
+          size="sm"
+          color="warning"
+          shadow
+          onClick={() => Router.push('/login')}
+        >
+          로그인
+        </Button>
       )}
-      {data && <button onClick={() => mutate()}>로그아웃</button>}
+      {data && (
+        <Button size="sm" color="warning" shadow onClick={() => mutate()}>
+          로그아웃
+        </Button>
+      )}
     </Container>
   );
 };
@@ -97,6 +109,10 @@ const Container = styled.header`
   z-index: 100;
   height: 60px;
   ${flexCenter};
+  div + button,
+  div + div {
+    margin-left: 1rem;
+  }
   background-color: #000;
   color: white;
   button {
