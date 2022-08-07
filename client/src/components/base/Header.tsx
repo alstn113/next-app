@@ -38,7 +38,7 @@ const Header = ({ title = 'NEXT' }: Props) => {
   const direction = useRef<'UP' | 'DOWN'>('DOWN');
   const transitionPoint = useRef(height);
 
-  const onScroll = useCallback(() => {
+  const handleScroll = useCallback(() => {
     const scrollTop = getScrollTop();
     const nextDirection = prevScrollTop.current > scrollTop ? 'UP' : 'DOWN';
     if (
@@ -66,11 +66,11 @@ const Header = ({ title = 'NEXT' }: Props) => {
   }, [height]);
 
   useEffect(() => {
-    document.addEventListener('scroll', onScroll);
+    document.addEventListener('scroll', handleScroll);
     return () => {
-      document.removeEventListener('scroll', onScroll);
+      document.removeEventListener('scroll', handleScroll);
     };
-  }, [onScroll]);
+  }, [handleScroll]);
 
   return (
     <Container
