@@ -15,7 +15,7 @@ export const Fullscreen = styled('div')`
 `;
 
 export const ModalBlock = styled('div')<{ visible: boolean }>`
-  width: 25rem;
+  width: 15rem;
   background: white;
   padding: 2rem 1.5rem;
   border-radius: 4px;
