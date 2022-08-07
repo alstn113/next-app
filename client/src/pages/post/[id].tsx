@@ -1,3 +1,4 @@
+import CommentList from '@/components/CommentList';
 import Button from '@/components/common/Button/Button';
 import Card from '@/components/common/Card/Card';
 import Modal from '@/components/common/Modal/Modal';
@@ -21,7 +22,7 @@ import { useRouter } from 'next/router';
 const PostDetail: NextPage = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const { mutate } = useDeletePost(id, {
+  const { mutate } = useDeletePost({
     onSuccess: () => {
       router.push('/');
     },
@@ -32,16 +33,18 @@ const PostDetail: NextPage = () => {
   return (
     <>
       <Container>
-        <Card variant="bordered">Title : {data?.title}</Card>
-        <Card variant="flat">Body : {data?.body}</Card>
-        <Card variant="shadow">CreatedAt : {formatDate(data?.createdAt)}</Card>
-        <Button shadow size="lg" onClick={onOpen}>
-          삭제
-        </Button>
+        <Card variant="bordered">
+          <span>Title : {data?.title}</span>
+          <span>Body : {data?.body}</span>
+          <span>CreatedAt : {formatDate(data?.createdAt)}</span>
+          <ButtonBlock>
+            <Button shadow color="error" onClick={onOpen}>
+              삭제
+            </Button>
+          </ButtonBlock>
+        </Card>
         <Card variant="flat">
-          {data?.comments?.map((comment) => (
-            <div key={comment.id}>{comment.text}</div>
-          ))}
+          <CommentList comments={data?.comments || []} postId={id} />
         </Card>
       </Container>
       <Modal
@@ -49,7 +52,7 @@ const PostDetail: NextPage = () => {
         message="주의!!"
         visible={isOpen}
         onCancel={onClose}
-        onConfirm={mutate}
+        onConfirm={() => mutate(id)}
       />
     </>
   );
@@ -59,9 +62,14 @@ const Container = styled.div`
   ${flexCenter}
   flex-direction: column;
   margin-top: 2rem;
-  * + * {
+  div ~ div {
     margin-top: 1rem;
   }
+`;
+
+const ButtonBlock = styled.div`
+  ${flexCenter}
+  margin-top: 1rem;
 `;
 
 export const getServerSideProps: GetServerSideProps = async ({

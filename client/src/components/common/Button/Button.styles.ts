@@ -15,7 +15,6 @@ export const Container = styled.button<{
   border-radius: 4px;
   color: #fff;
   outline: none;
-  transition: 0.2s ease-in-out;
   ${({ shadow, theme, color }) =>
     shadow &&
     css`

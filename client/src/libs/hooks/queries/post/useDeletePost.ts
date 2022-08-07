@@ -3,11 +3,10 @@ import { IPost, ICustomAxiosError } from '@/libs/interfaces';
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useDeletePost = (
-  id: string,
-  options?: Omit<UseMutationOptions<IPost, ICustomAxiosError>, 'mutationFn'>,
+  options?: UseMutationOptions<IPost, ICustomAxiosError, string>,
 ) => {
-  return useMutation<IPost, ICustomAxiosError>(
-    () => PostAPI.deletePost(id),
+  return useMutation<IPost, ICustomAxiosError, string>(
+    PostAPI.deletePost,
     options,
   );
 };

@@ -123,6 +123,7 @@ const Container = styled.header`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 900;
+  text-shadow: 0 2px 4px white;
 `;
 
 export default Header;

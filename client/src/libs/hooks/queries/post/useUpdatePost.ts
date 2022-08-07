@@ -8,10 +8,7 @@ import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useUpdatePost = (
   id: string,
-  options?: Omit<
-    UseMutationOptions<IPost, ICustomAxiosError, IPostUpdateRequest>,
-    'mutationFn'
-  >,
+  options?: UseMutationOptions<IPost, ICustomAxiosError, IPostUpdateRequest>,
 ) => {
   return useMutation<IPost, ICustomAxiosError, IPostUpdateRequest>(
     PostAPI.updatePost(id),

@@ -10,15 +10,9 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createComment(userId: string, postId: string, dto: CreateCommentDto) {
-    const post = await this.prismaService.post.findUnique({
-      where: {
-        id: postId,
-      },
-    });
-    if (!post) throw new NotFoundException();
+  async createComment(userId: string, dto: CreateCommentDto) {
     return await this.prismaService.comment.create({
-      data: { ...dto, postId, userId },
+      data: { ...dto, userId },
     });
   }
 

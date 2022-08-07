@@ -3,10 +3,7 @@ import { ICustomAxiosError, ILoginRequest } from '@/libs/interfaces';
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useLogin = (
-  options?: Omit<
-    UseMutationOptions<undefined, ICustomAxiosError, ILoginRequest>,
-    'mutationFn'
-  >,
+  options?: UseMutationOptions<undefined, ICustomAxiosError, ILoginRequest>,
 ) => {
   return useMutation<undefined, ICustomAxiosError, ILoginRequest>(
     AuthAPI.login,

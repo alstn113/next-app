@@ -1,5 +1,5 @@
+import useDisclosure from '@/libs/hooks/common/useDisclosure';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useState } from 'react';
 import Button from '../Button/Button';
 import Modal, { Props } from './Modal';
 
@@ -9,16 +9,16 @@ export default {
 } as ComponentMeta<typeof Modal>;
 
 const Template: ComponentStory<typeof Modal> = (args: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div>
-      <Button onClick={() => setIsOpen(true)}>Modal Open</Button>
+      <Button onClick={onOpen}>Modal Open</Button>
       <Modal
         {...args}
         visible={isOpen}
-        onCancel={() => setIsOpen(false)}
-        onConfirm={() => setIsOpen(false)}
+        onCancel={onClose}
+        onConfirm={onClose}
       />
     </div>
   );

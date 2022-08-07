@@ -9,16 +9,15 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Post('/:postId')
+  @Post('/')
   async createComment(
     @GetCurrentUserId() userId: string,
     @Body() dto: CreateCommentDto,
-    @Param('postId') postId: string,
   ) {
-    return await this.commentService.createComment(userId, postId, dto);
+    return await this.commentService.createComment(userId, dto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   async deleteComment(
     @GetCurrentUserId() userId: string,
     @Param('id') id: string,

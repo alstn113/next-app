@@ -20,7 +20,6 @@ const TabLayout = ({ children }: Props) => {
 };
 
 const Container = styled.div`
-  height: 80vh;
   margin-top: 60px;
   margin-bottom: 60px;
   height: 100%;

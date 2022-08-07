@@ -7,10 +7,7 @@ import {
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useCreatePost = (
-  options?: Omit<
-    UseMutationOptions<IPost, ICustomAxiosError, IPostCreateRequest>,
-    'mutationFn'
-  >,
+  options?: UseMutationOptions<IPost, ICustomAxiosError, IPostCreateRequest>,
 ) => {
   return useMutation<IPost, ICustomAxiosError, IPostCreateRequest>(
     PostAPI.createPost,

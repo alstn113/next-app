@@ -4,10 +4,7 @@ import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const useGetPost = (
   id: string,
-  options?: Omit<
-    UseQueryOptions<IPost, ICustomAxiosError>,
-    'queryKey' | 'queryFn' | 'initialData'
-  >,
+  options?: UseQueryOptions<IPost, ICustomAxiosError>,
 ) => {
   return useQuery<IPost, ICustomAxiosError>(
     ['GetPost', id],
