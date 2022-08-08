@@ -29,7 +29,7 @@ const PostDetail: NextPage = () => {
   });
 
   const { data } = useGetPost(id);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false });
   return (
     <>
       <Container>
