@@ -50,13 +50,13 @@ const Header = ({ title = 'ABYSS' }: Props) => {
       transitionPoint.current = scrollTop + height;
     }
 
-    if (direction.current === 'UP' && nextDirection === 'UP') {
-      setMarginTop(
-        Math.min(0, -1 * height + transitionPoint.current - scrollTop),
-      );
-    } else if (direction.current === 'DOWN' && nextDirection === 'DOWN') {
+    if (direction.current === 'DOWN' && nextDirection === 'DOWN') {
       setMarginTop(
         Math.max(-60, -1 * height + transitionPoint.current - scrollTop),
+      );
+    } else {
+      setMarginTop(
+        Math.min(0, -1 * height + transitionPoint.current - scrollTop),
       );
     }
 
