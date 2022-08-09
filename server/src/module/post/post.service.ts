@@ -38,7 +38,11 @@ export class PostService {
             username: true,
           },
         },
-        comments: true,
+        comments: {
+          orderBy: {
+            createdAt: 'asc',
+          },
+        },
       },
     });
     if (!post) throw new NotFoundException();
