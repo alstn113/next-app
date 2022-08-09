@@ -5,7 +5,7 @@ export const Input = styled.input`
   border: none;
   border-bottom: 1px solid black;
   padding: 0 8px 4px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 
   &:focus {
     border-bottom: 2px solid black;

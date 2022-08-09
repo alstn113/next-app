@@ -8,6 +8,7 @@ import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import TextInput from '@/components/common/TextInput/TextInput';
 import Button from '@/components/common/Button/Button';
+import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 
 interface IFormInput {
   username: string;
@@ -45,13 +46,13 @@ const Login: NextPage = () => {
           type="text"
           placeholder="username"
         />
-        <p>{errors.username?.message}</p>
+        <ErrorMessage>{errors.username?.message}</ErrorMessage>
         <TextInput
           {...register('password')}
-          type="text"
+          type="password"
           placeholder="password"
         />
-        <p>{errors.password?.message}</p>
+        <ErrorMessage>{errors.password?.message}</ErrorMessage>
         <Button shadow type="submit">
           LOGIN
         </Button>

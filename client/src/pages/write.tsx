@@ -16,6 +16,7 @@ import TextInput from '@/components/common/TextInput/TextInput';
 import Button from '@/components/common/Button/Button';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/styles/shared';
+import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 
 interface IFormInput {
   title: string;
@@ -51,9 +52,9 @@ const Write: NextPage = () => {
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput {...register('title')} type="text" placeholder="title" />
-        <p>{errors.title?.message}</p>
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <TextInput {...register('body')} type="text" placeholder="body" />
-        <p>{errors.body?.message}</p>
+        <ErrorMessage>{errors.body?.message}</ErrorMessage>
         <Button size="lg" shadow type="submit">
           POST
         </Button>

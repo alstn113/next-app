@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Button from './common/Button/Button';
 import Card from './common/Card/Card';
+import ErrorMessage from './common/ErrorMessage/ErrorMessage';
 import TextInput from './common/TextInput/TextInput';
 
 interface Props {
@@ -50,7 +51,7 @@ const CommentList = ({ comments, postId }: Props) => {
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput {...register('text')} type="text" placeholder="text" />
-        <p>{errors.text?.message}</p>
+        <ErrorMessage>{errors.text?.message}</ErrorMessage>
         <Button size="lg" type="submit">
           POST
         </Button>
