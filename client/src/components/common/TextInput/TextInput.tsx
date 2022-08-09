@@ -11,7 +11,13 @@ const TextInput = forwardRef<HTMLInputElement, Props>(
   ({ placeholder, color = 'primary', ...props }, ref) => {
     return (
       <S.Root>
-        <S.Input placeholder=" " color={color} ref={ref} {...props} />
+        <S.Input
+          autoComplete="off"
+          placeholder=" "
+          color={color}
+          ref={ref}
+          {...props}
+        />
         <S.Label color={color}>{placeholder}</S.Label>
       </S.Root>
     );

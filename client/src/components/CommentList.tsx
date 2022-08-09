@@ -51,13 +51,6 @@ const CommentList = ({ comments, postId }: Props) => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput {...register('text')} type="text" placeholder="text" />
-        <ErrorMessage>{errors.text?.message}</ErrorMessage>
-        <Button size="lg" type="submit">
-          POST
-        </Button>
-      </Form>
       <CommentsBlock>
         <Card variant="bordered">
           {comments.map((comment) => (
@@ -67,6 +60,13 @@ const CommentList = ({ comments, postId }: Props) => {
           ))}
         </Card>
       </CommentsBlock>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <TextInput {...register('text')} type="text" placeholder="Comment" />
+        <ErrorMessage>{errors.text?.message}</ErrorMessage>
+        <Button size="lg" type="submit">
+          Submit
+        </Button>
+      </Form>
     </Container>
   );
 };
@@ -77,7 +77,7 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-  width: 80%;
+  width: 100%;
   ${flexCenter}
   flex-direction: column;
   button {
@@ -86,7 +86,7 @@ const Form = styled.form`
 `;
 
 const CommentsBlock = styled.div`
-  width: 80%;
+  width: 100%;
   margin-top: 0.5rem;
   div {
     width: 100%;
