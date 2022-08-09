@@ -49,7 +49,7 @@ const PostDetail: NextPage = () => {
       </Container>
       <Modal
         title="지우시겠습니까?"
-        message="주의!!"
+        message="되돌릴 수 없습니다!!"
         visible={isOpen}
         onCancel={onClose}
         onConfirm={() => mutate(id)}
