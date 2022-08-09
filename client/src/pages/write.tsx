@@ -50,19 +50,42 @@ const Write: NextPage = () => {
   });
   return (
     <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput {...register('title')} type="text" placeholder="title" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <TextInput
+          {...register('title')}
+          type="text"
+          color="secondary"
+          placeholder="TITLE"
+        />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <TextInput {...register('body')} type="text" placeholder="body" />
+        <TextInput
+          {...register('body')}
+          type="text"
+          color="secondary"
+          placeholder="BODY"
+        />
         <ErrorMessage>{errors.body?.message}</ErrorMessage>
         <Button size="lg" shadow type="submit">
           POST
         </Button>
-      </form>
+      </Form>
     </Container>
   );
 };
 
+const Container = styled.div`
+  ${flexCenter}
+`;
+
+const Form = styled.form`
+  margin-top: 8rem;
+  width: 250px;
+  ${flexCenter}
+  flex-direction: column;
+  button {
+    margin-top: 1rem;
+  }
+`;
 export const getServerSideProps: GetServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
     dehydratedState: DehydratedState;
@@ -82,9 +105,5 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
     };
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
-
-const Container = styled.div`
-  ${flexCenter}
-`;
 
 export default Write;

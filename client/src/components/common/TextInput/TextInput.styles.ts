@@ -1,13 +1,58 @@
+import { NormalColorType } from '@/styles/shared';
 import styled from '@emotion/styled';
 
-export const Input = styled.input`
-  font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid black;
-  padding: 0 8px 4px;
-  margin: 0.5rem 0;
+export const Root = styled.div`
+  position: relative;
+  height: 48px;
+  width: 100%;
+  margin-top: 1rem;
+`;
 
+export const Label = styled.label<{ color: NormalColorType }>`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0 0.25rem;
+  background-color: #fff;
+  color: #80868b;
+  font-size: 1rem;
+  transition: 0.2s;
+`;
+
+export const Input = styled.input<{ color: NormalColorType }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+  transition: 0.2s;
+  &:hover {
+    border: 2px solid ${({ color, theme }) => theme.color[color]};
+  }
   &:focus {
-    border-bottom: 2px solid black;
+    border: 2px solid ${({ color, theme }) => theme.color[color]};
+    & + ${Label} {
+      top: -0.5rem;
+      left: 0.8rem;
+      color: ${({ color, theme }) => theme.color[color]};
+      font-size: 1rem;
+      font-weight: 500;
+      z-index: 10;
+    }
+  }
+
+  &:not(:placeholder-shown):not(:focus) + ${Label} {
+    top: -0.5rem;
+    left: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    z-index: 10;
   }
 `;

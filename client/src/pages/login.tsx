@@ -9,6 +9,8 @@ import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import TextInput from '@/components/common/TextInput/TextInput';
 import Button from '@/components/common/Button/Button';
 import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
+import styled from '@emotion/styled';
+import { flexCenter } from '@/styles/shared';
 
 interface IFormInput {
   username: string;
@@ -39,8 +41,8 @@ const Login: NextPage = () => {
     mode: 'onChange',
   });
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Container>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <TextInput
           {...register('username')}
           type="text"
@@ -53,16 +55,36 @@ const Login: NextPage = () => {
           placeholder="password"
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button shadow type="submit">
+        <Button shadow size="lg" type="submit">
           LOGIN
         </Button>
-        <Button shadow type="button" onClick={() => Router.push('/register')}>
+        <Button
+          shadow
+          size="lg"
+          type="button"
+          color="success"
+          onClick={() => Router.push('/register')}
+        >
           REGISTER
         </Button>
-      </form>
-    </div>
+      </Form>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  ${flexCenter}
+`;
+
+const Form = styled.form`
+  margin-top: 8rem;
+  width: 250px;
+  ${flexCenter}
+  flex-direction: column;
+  button {
+    margin-top: 1rem;
+  }
+`;
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<
   GetServerSidePropsResult<{
