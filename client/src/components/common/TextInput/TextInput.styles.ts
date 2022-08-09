@@ -47,6 +47,10 @@ export const Input = styled.input<{ color: NormalColorType }>`
       z-index: 10;
     }
   }
+  // tap으로 넘어갈 때 테두리가 그대로라서 적어줬음.
+  &:not(:focus) {
+    border: 1px solid #dadce0;
+  }
 
   &:not(:placeholder-shown):not(:focus) + ${Label} {
     top: -0.5rem;
