@@ -33,9 +33,7 @@ export const Input = styled.input<{ color: NormalColorType }>`
   background: none;
   z-index: 1;
   transition: 0.2s;
-  &:hover {
-    border: 2px solid ${({ color, theme }) => theme.color[color]};
-  }
+
   &:focus {
     border: 2px solid ${({ color, theme }) => theme.color[color]};
     & + ${Label} {
@@ -46,10 +44,6 @@ export const Input = styled.input<{ color: NormalColorType }>`
       font-weight: 500;
       z-index: 10;
     }
-  }
-  // tap으로 넘어갈 때 테두리가 그대로라서 적어줬음.
-  &:not(:focus) {
-    border: 1px solid #dadce0;
   }
 
   &:not(:placeholder-shown):not(:focus) + ${Label} {
