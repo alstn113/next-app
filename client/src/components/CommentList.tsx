@@ -49,20 +49,22 @@ const CommentList = ({ comments, postId }: Props) => {
 
   return (
     <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <TextInput {...register('text')} type="text" placeholder="text" />
         <ErrorMessage>{errors.text?.message}</ErrorMessage>
         <Button size="lg" type="submit">
           POST
         </Button>
-      </form>
-      <Card variant="bordered">
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            {comment.text} {formatDate(comment.createdAt)}
-          </div>
-        ))}
-      </Card>
+      </Form>
+      <CommentsBlock>
+        <Card variant="bordered">
+          {comments.map((comment) => (
+            <div key={comment.id}>
+              {comment.text} {formatDate(comment.createdAt)}
+            </div>
+          ))}
+        </Card>
+      </CommentsBlock>
     </Container>
   );
 };
@@ -71,4 +73,22 @@ const Container = styled.div`
   ${flexCenter};
   flex-direction: column;
 `;
+
+const Form = styled.form`
+  width: 80%;
+  ${flexCenter}
+  flex-direction: column;
+  button {
+    margin-top: 0.5rem;
+  }
+`;
+
+const CommentsBlock = styled.div`
+  width: 80%;
+  margin-top: 0.5rem;
+  div {
+    width: 100%;
+  }
+`;
+
 export default CommentList;

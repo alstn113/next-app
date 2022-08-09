@@ -43,7 +43,7 @@ const PostDetail: NextPage = () => {
             </Button>
           </ButtonBlock>
         </Card>
-        <Card variant="flat">
+        <Card variant="bordered">
           <CommentList comments={data?.comments || []} postId={id} />
         </Card>
       </Container>
