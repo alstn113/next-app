@@ -31,12 +31,14 @@ const CommentList = ({ comments, postId }: Props) => {
   const { mutate } = useCreateComment({
     onSuccess: async () => {
       await queryClient.refetchQueries(useGetPost.getKey(postId));
+      reset({ text: '' });
     },
   });
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<IFormInput>({
     resolver: yupResolver(schema),
