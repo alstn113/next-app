@@ -42,15 +42,14 @@ const Header = ({ title = 'ABYSS' }: Props) => {
   const handleScroll = useCallback(() => {
     const scrollTop = getScrollTop();
     const nextDirection = prevScrollTop.current > scrollTop ? 'UP' : 'DOWN';
+
     if (
       direction.current === 'DOWN' &&
       nextDirection === 'UP' &&
       transitionPoint.current - scrollTop < 0
     ) {
       transitionPoint.current = scrollTop;
-    }
-
-    if (
+    } else if (
       direction.current === 'UP' &&
       nextDirection === 'DOWN' &&
       scrollTop - transitionPoint.current < -1 * height
@@ -58,9 +57,15 @@ const Header = ({ title = 'ABYSS' }: Props) => {
       transitionPoint.current = scrollTop + height;
     }
 
-    setMarginTop(
-      Math.min(0, -1 * height + transitionPoint.current - scrollTop),
-    );
+    if (direction.current === 'UP' && nextDirection === 'UP') {
+      setMarginTop(
+        Math.min(0, -1 * height + transitionPoint.current - scrollTop),
+      );
+    } else if (direction.current === 'DOWN' && nextDirection === 'DOWN') {
+      setMarginTop(
+        Math.max(-60, -1 * height + transitionPoint.current - scrollTop),
+      );
+    }
 
     direction.current = nextDirection;
     prevScrollTop.current = scrollTop;
