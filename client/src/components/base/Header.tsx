@@ -5,6 +5,7 @@ import useGetME from '@/libs/hooks/queries/user/useGetMe';
 import Router from 'next/router';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Button from '../common/Button/Button';
+import getScrollTop from '@/libs/utils/getScrollTop';
 
 interface Props {
   title?: React.ReactNode;
@@ -20,14 +21,6 @@ const Header = ({ title = 'ABYSS' }: Props) => {
 
   const blockRef = useRef<HTMLDivElement>(null);
   const [marginTop, setMarginTop] = useState(0);
-
-  const getScrollTop = () => {
-    if (!document.body) return 0;
-    const scrollTop = document.documentElement
-      ? document.documentElement.scrollTop || document.body.scrollTop
-      : document.body.scrollTop;
-    return scrollTop;
-  };
 
   useEffect(() => {
     if (!blockRef.current) return;
