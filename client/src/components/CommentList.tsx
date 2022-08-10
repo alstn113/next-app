@@ -1,8 +1,8 @@
-import useCreateComment from '@/libs/hooks/queries/comment/useCreateComment';
-import useGetPost from '@/libs/hooks/queries/post/useGetPost';
-import { IComment } from '@/libs/interfaces';
-import formatDate from '@/libs/utils/formatDate';
-import { flexCenter } from '@/styles/shared';
+import useCreateComment from '@/hooks/queries/comment/useCreateComment';
+import useGetPost from '@/hooks/queries/post/useGetPost';
+import { IComment } from '@/lib/interfaces';
+import formatDate from '@/lib/utils/formatDate';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';

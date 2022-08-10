@@ -1,7 +1,7 @@
 import Card from '@/components/common/Card/Card';
-import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
-import formatDate from '@/libs/utils/formatDate';
+import useGetPosts from '@/hooks/queries/post/useGetPosts';
+import useGetME from '@/hooks/queries/user/useGetMe';
+import formatDate from '@/lib/utils/formatDate';
 import styled from '@emotion/styled';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
 import type {

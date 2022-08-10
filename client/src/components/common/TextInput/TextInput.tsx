@@ -1,4 +1,4 @@
-import { NormalColorType } from '@/styles/shared';
+import { NormalColorType } from '@/lib/styles/palette';
 import { forwardRef, InputHTMLAttributes } from 'react';
 import * as S from './TextInput.styles';
 

@@ -1,23 +1,32 @@
-import { NormalColorType, NormalSizeType } from '@/styles/shared';
+import palette, { NormalColorType } from '@/lib/styles/palette';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const Container = styled.button<{
-  size: NormalSizeType;
+  size: 'sm' | 'md' | 'lg';
   color: NormalColorType;
   shadow: boolean;
 }>`
-  ${({ size, theme }) =>
-    size === 'sm' ? theme.borderRadius.sm : theme.borderRadius.md};
-  padding: ${({ size }) => (size === 'sm' ? '0.5rem 1rem' : ' 0.7rem 2rem')};
-  width: ${({ size }) => size === 'lg' && '100%'};
-  background: ${({ color, theme }) => theme.color[color]};
-  border-radius: 4px;
+  background: ${({ color }) => palette[color]};
   color: #fff;
-  outline: none;
-  ${({ shadow, theme, color }) =>
+  ${({ size }) =>
+    size === 'sm'
+      ? css`
+          border-radius: 0.5rem;
+          padding: 0.5rem 1rem;
+        `
+      : css`
+          border-radius: 0.7rem;
+          padding: 0.7rem 2rem;
+        `}
+  ${({ size }) =>
+    size === 'lg' &&
+    css`
+      width: 100%;
+    `}
+  ${({ shadow, color }) =>
     shadow &&
     css`
-      box-shadow: 0 4px 14px 0 ${theme.color[color]};
+      box-shadow: 0 4px 14px 0 ${palette[color]};
     `}
 `;

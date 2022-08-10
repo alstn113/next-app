@@ -1,5 +1,5 @@
-import UserAPI from '@/libs/api/user';
-import { ICustomAxiosError, IUser } from '@/libs/interfaces';
+import UserAPI from '@/lib/api/user';
+import { ICustomAxiosError, IUser } from '@/lib/interfaces';
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const useGetME = (options?: UseQueryOptions<IUser, ICustomAxiosError>) => {

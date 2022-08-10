@@ -1,4 +1,4 @@
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import useGetME from '@/hooks/queries/user/useGetMe';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 

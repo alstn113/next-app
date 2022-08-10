@@ -1,9 +1,9 @@
-import { NormalColorType, NormalSizeType } from '@/styles/shared';
+import { NormalColorType } from '@/lib/styles/palette';
 import { ButtonHTMLAttributes } from 'react';
 import * as S from './Button.styles';
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: NormalSizeType;
+  size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   color?: NormalColorType;
   shadow?: boolean;

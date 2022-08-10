@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import animations from '@/lib/styles/animations';
+import zIndexes from '@/lib/styles/zIndexes';
 
 export const Fullscreen = styled('div')`
   position: fixed;
-  z-index: 30;
+  z-index: ${zIndexes.Modal};
   top: 0;
   left: 0;
   width: 100%;
@@ -29,38 +31,14 @@ export const ModalBlock = styled('div')<{ visible: boolean }>`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  @keyframes appear {
-    0% {
-      opacity: 0;
-      transform: translateY(400px) scale(0.75);
-    }
-    75% {
-      opacity: 1;
-      transform: translateY(-16px) scale(1);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-  @keyframes disappear {
-    0% {
-      opacity: 1;
-      transform: translateY(0px) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(400px) scale(0.75);
-    }
-  }
 
   ${(props) =>
     props.visible
       ? css`
-          animation: appear 0.4s forwards ease-in-out;
+          animation: ${animations.appear} 0.4s forwards ease-in-out;
         `
       : css`
-          animation: disappear 0.2s forwards ease-in-out;
+          animation: ${animations.disappear} 0.2s forwards ease-in-out;
         `}
 `;
 

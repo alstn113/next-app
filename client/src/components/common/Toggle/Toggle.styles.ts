@@ -1,4 +1,4 @@
-import { NormalColorType } from '@/styles/shared';
+import palette, { NormalColorType } from '@/lib/styles/palette';
 import styled from '@emotion/styled';
 
 export const ToggleLabel = styled.label`
@@ -14,14 +14,14 @@ export const ToggleSwitch = styled.span`
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.color.gray};
+  background-color: ${palette.gray};
   cursor: pointer;
   transition: background-color 0.2s ease;
   &::after {
     content: '';
     position: absolute;
     display: inline-block;
-    background-color: ${({ theme }) => theme.color.white};
+    background-color: ${palette.white};
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -50,7 +50,7 @@ export const ToggleCheckbox = styled.input<{
   // Switch On
   &:checked {
     & ~ ${ToggleSwitch} {
-      background-color: ${({ theme, color }) => theme.color[color]};
+      background-color: ${({ color }) => palette[color]};
       &::after {
         transform: translateX(1.2rem);
       }

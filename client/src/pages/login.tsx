@@ -3,14 +3,14 @@ import Router from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import useLogin from '@/libs/hooks/queries/auth/useLogin';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import useLogin from '@/hooks/queries/auth/useLogin';
+import useGetME from '@/hooks/queries/user/useGetMe';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import TextInput from '@/components/common/TextInput/TextInput';
 import Button from '@/components/common/Button/Button';
 import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 import styled from '@emotion/styled';
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 
 interface IFormInput {
   username: string;

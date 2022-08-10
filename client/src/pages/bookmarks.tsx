@@ -1,5 +1,5 @@
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
-import { flexCenter } from '@/styles/shared';
+import useGetME from '@/hooks/queries/user/useGetMe';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';

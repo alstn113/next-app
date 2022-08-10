@@ -1,7 +1,7 @@
 import Button from '@/components/common/Button/Button';
 import Modal from '@/components/common/Modal/Modal';
-import useDisclosure from '@/libs/hooks/common/useDisclosure';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import useDisclosure from '@/hooks/useDisclosure';
+import useGetME from '@/hooks/queries/user/useGetMe';
 import styled from '@emotion/styled';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';

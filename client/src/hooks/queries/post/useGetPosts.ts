@@ -1,5 +1,5 @@
-import PostAPI from '@/libs/api/post';
-import { IPost, ICustomAxiosError } from '@/libs/interfaces';
+import PostAPI from '@/lib/api/post';
+import { IPost, ICustomAxiosError } from '@/lib/interfaces';
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const useGetPosts = (options?: UseQueryOptions<IPost[], ICustomAxiosError>) => {

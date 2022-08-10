@@ -1,11 +1,12 @@
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
-import useLogout from '@/libs/hooks/queries/auth/useLogout';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import useLogout from '@/hooks/queries/auth/useLogout';
+import useGetME from '@/hooks/queries/user/useGetMe';
 import Router from 'next/router';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Button from '../common/Button/Button';
-import getScrollTop from '@/libs/utils/getScrollTop';
+import getScrollTop from '@/lib/utils/getScrollTop';
+import zIndexes from '@/lib/styles/zIndexes';
 
 interface Props {
   title?: React.ReactNode;
@@ -104,7 +105,7 @@ const Container = styled.header`
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: ${zIndexes.Header};
   height: 60px;
   ${flexCenter};
   div + button,

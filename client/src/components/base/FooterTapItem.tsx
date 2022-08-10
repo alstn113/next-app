@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import Link from 'next/link';

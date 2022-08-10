@@ -2,9 +2,9 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import ErrorFallback from '@/components/ErrorFallback';
 import TabLayout from '@/components/Layouts/TabLayout';
 import { MESSAGE } from '@/constants/messages';
-import apiClient from '@/libs/api/apiClient';
+import apiClient from '@/lib/api/apiClient';
 import GlobalStyle from '@/styles/GlobalStyle';
-import theme from '@/styles/theme';
+import { theme } from '@/styles/theme';
 import { ThemeProvider } from '@emotion/react';
 import {
   Hydrate,

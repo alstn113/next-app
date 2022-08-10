@@ -1,5 +1,5 @@
-import { ICommentCreateRequest } from '@/libs/interfaces';
-import apiClient from '@/libs/api/apiClient';
+import { ICommentCreateRequest } from '@/lib/interfaces';
+import apiClient from '@/lib/api/apiClient';
 
 const CommentAPI = {
   createComment: async (input: ICommentCreateRequest) => {

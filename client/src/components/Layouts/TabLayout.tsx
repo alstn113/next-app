@@ -1,4 +1,4 @@
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import Footer from '../base/Footer';
 import Header from '../base/Header';

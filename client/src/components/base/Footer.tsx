@@ -1,7 +1,8 @@
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import FooterTapItem from './FooterTapItem';
 import { Bookmark, Home, PlusCircle, Search, Setting } from '../vectors';
+import zIndexes from '@/lib/styles/zIndexes';
 
 function Footer() {
   return (
@@ -19,7 +20,7 @@ const Container = styled.footer`
   width: 100%;
   position: fixed;
   bottom: 0;
-  z-index: 100;
+  z-index: ${zIndexes.Footer};
   height: 60px;
   ${flexCenter}
   background-color: black;

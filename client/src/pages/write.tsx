@@ -1,5 +1,5 @@
-import useCreatePost from '@/libs/hooks/queries/post/useCreatePost';
-import useGetPosts from '@/libs/hooks/queries/post/useGetPosts';
+import useCreatePost from '@/hooks/queries/post/useCreatePost';
+import useGetPosts from '@/hooks/queries/post/useGetPosts';
 import {
   dehydrate,
   DehydratedState,
@@ -11,11 +11,11 @@ import Router from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import useGetME from '@/libs/hooks/queries/user/useGetMe';
+import useGetME from '@/hooks/queries/user/useGetMe';
 import TextInput from '@/components/common/TextInput/TextInput';
 import Button from '@/components/common/Button/Button';
 import styled from '@emotion/styled';
-import { flexCenter } from '@/styles/shared';
+import { flexCenter } from '@/lib/styles/shared';
 import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 
 interface IFormInput {

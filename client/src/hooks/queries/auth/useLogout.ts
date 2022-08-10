@@ -1,5 +1,5 @@
-import AuthAPI from '@/libs/api/auth';
-import { ICustomAxiosError } from '@/libs/interfaces';
+import AuthAPI from '@/lib/api/auth';
+import { ICustomAxiosError } from '@/lib/interfaces';
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useLogout = (

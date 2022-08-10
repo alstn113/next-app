@@ -1,4 +1,4 @@
-import useDisclosure from '@/libs/hooks/common/useDisclosure';
+import useDisclosure from '@/hooks/useDisclosure';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Button from '../Button/Button';
 import Modal, { Props } from './Modal';

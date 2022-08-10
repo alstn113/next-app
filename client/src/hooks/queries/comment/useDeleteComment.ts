@@ -1,6 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import CommentAPI from '@/libs/api/comment';
-import { IComment, ICustomAxiosError } from '@/libs/interfaces';
+import CommentAPI from '@/lib/api/comment';
+import { IComment, ICustomAxiosError } from '@/lib/interfaces';
 
 const useDeleteComment = (
   options?: UseMutationOptions<IComment, ICustomAxiosError, string>,
