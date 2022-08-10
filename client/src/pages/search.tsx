@@ -14,6 +14,7 @@ const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedText = useDebounce<string>({ value: searchText, delay: 300 });
   const { data } = useGetSearchPosts(debouncedText, {
+    retry: true,
     suspense: false,
     enabled: !!debouncedText,
   });
