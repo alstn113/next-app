@@ -5,8 +5,8 @@ interface Props<T> {
   delay?: number;
 }
 
-// 특정 시간이 지난 후 한 번만 이벤트가 실행되도록 함.
-// ex) 입력이 완전히 종료되고 나서 delay 후 값 리턴
+// useDebounce hook은 delay 안에 값 변경 시 값을 유지하고,
+// useThrottle hook은 delay마다 값의 변경이 이루어 진다.
 const useDebounce = <T>({ value, delay = 500 }: Props<T>): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
