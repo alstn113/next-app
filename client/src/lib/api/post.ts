@@ -10,7 +10,7 @@ const PostAPI = {
     return data;
   },
   getSearchPosts: async (keyword: string) => {
-    const { data } = await apiClient.get(`/search?keyword=${keyword}`);
+    const { data } = await apiClient.get(`/post/search?keyword=${keyword}`);
     return data;
   },
   getPost: async (id: string) => {

@@ -26,7 +26,7 @@ export class PostController {
 
   @Public()
   @Get('/search')
-  async searchPosts(@Query('keyword') keyword: string) {
+  async searchPosts(@Query('keyword') keyword?: string) {
     return await this.postService.searchPosts(keyword);
   }
 

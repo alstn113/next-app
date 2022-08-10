@@ -7,13 +7,13 @@ const useGetSearchPosts = (
   options?: UseQueryOptions<IPost[], ICustomAxiosError>,
 ) => {
   return useQuery<IPost[], ICustomAxiosError>(
-    ['GetSearchPosts'],
+    ['GetSearchPosts', keyword],
     () => PostAPI.getSearchPosts(keyword),
     options,
   );
 };
 
-useGetSearchPosts.fetcher = (keyword: string) =>
+useGetSearchPosts.fetcher = (keyword: string) => () =>
   PostAPI.getSearchPosts(keyword);
 useGetSearchPosts.getKey = (keyword: string) => ['GetSearchPosts', keyword];
 

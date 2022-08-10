@@ -82,8 +82,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const id = params?.id as string;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(useGetPost.getKey(id), () =>
-    PostAPI.getPost(id),
+  await queryClient.prefetchQuery(
+    useGetPost.getKey(id),
+    useGetPost.fetcher(id),
   );
 
   const post = queryClient.getQueryData(useGetPost.getKey(id));
