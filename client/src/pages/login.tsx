@@ -27,6 +27,9 @@ const Login: NextPage = () => {
     onSuccess: async () => {
       Router.push('/');
     },
+    onError: (e) => {
+      alert(e.response?.data.message);
+    },
   });
   const onSubmit = (input: IFormInput) => {
     mutate(input);

@@ -5,16 +5,24 @@ import useGetME from '@/hooks/queries/user/useGetMe';
 import styled from '@emotion/styled';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';
+import { useState } from 'react';
+import useDebounce from '@/hooks/useDebounce';
 
 const Search = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  //TODO: 여기 useTrottle 적용해보면 좋을 듯
+  const [text, setText] = useState<string>('text');
+  const debouncedText = useDebounce<string>({ value: text, delay: 300 });
   return (
     <Container>
       <Button shadow onClick={onOpen}>
         Modal Open
       </Button>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <div>{debouncedText}</div>
       <Modal
         title="This is Modal"
         message="This is Message"
