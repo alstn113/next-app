@@ -26,8 +26,34 @@ export class PostService {
     });
   }
 
-  async searchPosts() {
-    return await this.prismaService.post.findMany({});
+  async searchPosts(keyword: string) {
+    return await this.prismaService.post.findMany({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: keyword,
+            },
+          },
+          {
+            body: {
+              contains: keyword,
+            },
+          },
+        ],
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
+        },
+      },
+    });
   }
 
   async findPostById(id: string) {

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -18,8 +26,8 @@ export class PostController {
 
   @Public()
   @Get('/search')
-  async searchPosts() {
-    return await this.postService.searchPosts();
+  async searchPosts(@Query('keyword') keyword: string) {
+    return await this.postService.searchPosts(keyword);
   }
 
   @Public()
