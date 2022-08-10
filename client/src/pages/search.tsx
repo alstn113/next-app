@@ -46,6 +46,11 @@ const Search = () => {
             </Card>
           </CardBox>
         ))}
+        {debouncedText !== '' && !data?.length && (
+          <CardBox>
+            <Card variant="bordered">결과가 존재하지 않습니다.</Card>
+          </CardBox>
+        )}
       </div>
     </Container>
   );
