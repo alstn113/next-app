@@ -17,6 +17,12 @@ export class PostController {
   }
 
   @Public()
+  @Get('/search')
+  async searchPosts() {
+    return await this.postService.searchPosts();
+  }
+
+  @Public()
   @Get('/:id')
   async getPost(@Param('id') id: string) {
     return await this.postService.findPostById(id);
