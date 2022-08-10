@@ -9,6 +9,7 @@ import useGetSearchPosts from '@/hooks/queries/post/useGetSearchPosts';
 import formatDate from '@/lib/utils/formatDate';
 import Link from 'next/link';
 import Card from '@/components/common/Card/Card';
+import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 
 const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
@@ -48,7 +49,7 @@ const Search = () => {
         ))}
         {debouncedText !== '' && !data?.length && (
           <CardBox>
-            <Card variant="bordered">결과가 존재하지 않습니다.</Card>
+            <Card variant="flat">결과가 존재하지 않습니다.</Card>
           </CardBox>
         )}
       </div>
