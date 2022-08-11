@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Props<T> {
   value: T;
-  delay: number;
+  delay?: number;
 }
 
 // useThrottle hook은 delay마다 값의 변경이 이루어 진다.
