@@ -35,11 +35,11 @@ export const Input = styled.input<{ color: NormalColorType }>`
   transition: 0.2s;
 
   &:focus {
-    border: 2px solid ${({ color, theme }) => palette[color]};
+    border: 2px solid ${({ color }) => palette[color]};
     & + ${Label} {
       top: -0.5rem;
       left: 0.8rem;
-      color: ${({ color, theme }) => palette[color]};
+      color: ${({ color }) => palette[color]};
       font-size: 1rem;
       font-weight: 500;
       z-index: 10;
