@@ -7,7 +7,7 @@ const shine = keyframes`
       opacity: 0.2;    
     }
     50% {
-      opacity: 0.4;
+      opacity: 0.5;
     }
     100% {
       opacity: 0.2;
@@ -19,8 +19,8 @@ export const Root = styled.div<{ circle: boolean }>`
   width: 250px;
   height: 100px;
   display: flex;
-  background-color: rgba(165, 165, 165);
-  animation: ${shine} 1.8s infinite ease-in-out;
+  background-color: #dee2e6;
+  animation: ${shine} 1.2s infinite ease-in-out;
   ${({ circle }) =>
     circle &&
     css`

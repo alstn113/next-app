@@ -1,5 +1,4 @@
 import useCreatePost from '@/hooks/queries/post/useCreatePost';
-import useGetPosts from '@/hooks/queries/post/useGetPosts';
 import {
   dehydrate,
   DehydratedState,
@@ -17,6 +16,7 @@ import Button from '@/components/common/Button/Button';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
+import useGetPostsByQueries from '@/hooks/queries/post/useGetPostsByQueries';
 
 interface IFormInput {
   title: string;
@@ -32,7 +32,7 @@ const Write: NextPage = () => {
   const queryClient = useQueryClient();
   const { mutate } = useCreatePost({
     onSuccess: async () => {
-      await queryClient.invalidateQueries(useGetPosts.getKey());
+      await queryClient.invalidateQueries(useGetPostsByQueries.getKey());
       Router.push('/');
     },
   });

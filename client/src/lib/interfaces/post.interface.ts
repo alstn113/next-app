@@ -18,3 +18,7 @@ export interface IPostCreateRequest {
 }
 
 export interface IPostUpdateRequest extends IPostCreateRequest {}
+
+export interface IFindPostQuery {
+  cursor?: string;
+}

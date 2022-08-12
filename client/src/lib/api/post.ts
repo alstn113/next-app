@@ -1,12 +1,15 @@
 import {
+  IFindPostQuery,
   IPostCreateRequest,
   IPostUpdateRequest,
 } from '../interfaces/post.interface';
 import apiClient from './apiClient';
 
 const PostAPI = {
-  getPosts: async () => {
-    const { data } = await apiClient.get('/post');
+  getPostsByQueries: async ({ cursor }: IFindPostQuery) => {
+    const { data } = await apiClient.get('/post', {
+      params: { cursor },
+    });
     return data;
   },
   getSearchPosts: async (keyword: string) => {

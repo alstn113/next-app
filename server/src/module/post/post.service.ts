@@ -12,7 +12,7 @@ export class PostService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async findPostsByQuries(query: FindPostQueryDto) {
-    const size = +query.size;
+    const size = 20;
     if (!query.cursor) {
       const posts = await this.prismaService.post.findMany({
         take: size,
@@ -48,7 +48,7 @@ export class PostService {
         },
       },
     });
-    const nextCursor = posts[size - 1].id;
+    const nextCursor = posts[size - 1]?.id;
 
     return { posts, nextCursor };
   }
