@@ -82,12 +82,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   const id = params?.id as string;
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(
+  const post = await queryClient.fetchQuery(
     useGetPost.getKey(id),
     useGetPost.fetcher(id),
   );
 
-  const post = queryClient.getQueryData(useGetPost.getKey(id));
   await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
 
   if (!post) {
