@@ -13,6 +13,7 @@ import Card from '@/components/common/Card/Card';
 const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debouncedText = useDebounce<string>({ value: searchText });
+
   const { data } = useGetSearchPosts(debouncedText, {
     retry: true,
     suspense: false,

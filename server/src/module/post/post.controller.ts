@@ -12,6 +12,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
 import { GetCurrentUserId } from 'src/common/decorators/get-current-user-id.decorator';
+import { FindPostQueryDto } from './dto/find-post-query.dto';
 
 @Controller('/post')
 @ApiTags('/post')
@@ -20,8 +21,8 @@ export class PostController {
 
   @Public()
   @Get('/')
-  async getPosts() {
-    return await this.postService.findPosts();
+  async getPostsByQueries(@Query() query: FindPostQueryDto) {
+    return await this.postService.findPostsByQuries(query);
   }
 
   @Public()
