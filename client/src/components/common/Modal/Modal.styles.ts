@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import animations from '@/lib/styles/animations';
 import zIndexes from '@/lib/styles/zIndexes';
+import mediaQuery from '@/lib/styles/mediaQuery';
 
 export const Fullscreen = styled('div')`
   position: fixed;
@@ -17,7 +18,7 @@ export const Fullscreen = styled('div')`
 `;
 
 export const ModalBlock = styled('div')<{ visible: boolean }>`
-  width: 15rem;
+  width: 25rem;
   background: white;
   padding: 2rem 1.5rem;
   border-radius: 4px;
@@ -31,7 +32,9 @@ export const ModalBlock = styled('div')<{ visible: boolean }>`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
+  ${mediaQuery.small} {
+    width: 15rem;
+  }
   ${(props) =>
     props.visible
       ? css`
