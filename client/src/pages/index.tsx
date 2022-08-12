@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   const targetElement = useIntersectionObserver({ onIntersect: loadMore });
 
   return (
-    <div>
+    <Container>
       {data?.pages?.map((page) =>
         page.posts.map((post) => (
           <CardBox key={post.id}>
@@ -56,9 +56,13 @@ const Home: NextPage = () => {
       )}
       {isFetching && <Skeleton />}
       <InfiniteScrollTarget ref={targetElement} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin-top: 1rem;
+`;
 
 const CardBox = styled.div`
   margin: 1rem 0;
@@ -88,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   )?.pages;
   queryClient.setQueryData(useGetPostsByQueries.getKey(), {
     pages,
-    pageParams: [0],
+    pageParams: [null],
   });
   await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
   return { props: { dehydratedState: dehydrate(queryClient) } };

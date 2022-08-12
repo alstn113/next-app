@@ -28,11 +28,12 @@ export class PostService {
           },
         },
       });
-      const nextCursor = posts[size - 1].id;
+      const nextCursor = posts[size - 1]?.id;
       return { posts, nextCursor };
     }
     const posts = await this.prismaService.post.findMany({
       take: size,
+      skip: 1,
       cursor: {
         id: query.cursor,
       },
