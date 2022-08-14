@@ -1,13 +1,6 @@
 import palette, { NormalColorType } from '@/lib/styles/palette';
 import styled from '@emotion/styled';
 
-export const RadioLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-`;
-
 export const RadioPoint = styled.span`
   position: relative;
   width: 24px;
@@ -23,10 +16,19 @@ export const RadioPoint = styled.span`
     position: absolute;
     display: inline-block;
     background-color: ${palette.white};
-    width: 8px;
-    height: 8px;
+    width: 16px;
+    height: 16px;
+    transform: scale(1);
     border-radius: 50%;
+    transition: 0.1s ease-in-out;
   }
+`;
+
+export const RadioLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 `;
 
 export const RadioText = styled.span`
@@ -46,6 +48,9 @@ export const RadioInput = styled.input<{ color: NormalColorType }>`
   &:checked {
     & ~ ${RadioPoint} {
       background-color: ${({ color }) => palette[color]};
+      &::after {
+        transform: scale(0.5);
+      }
     }
   }
 `;
