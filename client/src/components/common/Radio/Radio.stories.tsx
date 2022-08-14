@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
+import Card from '../Card/Card';
 import Radio, { Props } from './Radio';
 
 export default {
@@ -7,21 +9,72 @@ export default {
   component: Radio,
 } as ComponentMeta<typeof Radio>;
 
+type RadioValues =
+  | 'default'
+  | 'primary'
+  | 'success'
+  | 'secondary'
+  | 'warning'
+  | 'error';
+
 const Template: ComponentStory<typeof Radio> = (args: Props) => {
+  const [value, setValue] = useState<RadioValues>('error');
+
+  const handleChange = (value: RadioValues) => {
+    setValue(value);
+  };
   return (
-    <>
-      <Radio {...args} />
+    <div>
+      <Radio
+        value="default"
+        labelText="default"
+        checked={value === 'default'}
+        onChange={() => handleChange('default')}
+        {...args}
+      />
       <Spacer />
-      <Radio labelText="primary" color="primary" defaultChecked />
+      <Radio
+        value="primary"
+        labelText="primary"
+        color="primary"
+        checked={value === 'primary'}
+        onChange={() => handleChange('primary')}
+      />
       <Spacer />
-      <Radio labelText="error" color="error" defaultChecked />
+      <Radio
+        value="success"
+        labelText="success"
+        color="success"
+        checked={value === 'success'}
+        onChange={() => handleChange('success')}
+      />
       <Spacer />
-      <Radio labelText="secondary" color="secondary" defaultChecked />
+      <Radio
+        value="secondary"
+        labelText="secondary"
+        color="secondary"
+        checked={value === 'secondary'}
+        onChange={() => handleChange('secondary')}
+      />
       <Spacer />
-      <Radio labelText="success" color="success" defaultChecked />
+      <Radio
+        value="warning"
+        labelText="warning"
+        color="warning"
+        checked={value === 'warning'}
+        onChange={() => handleChange('warning')}
+      />
       <Spacer />
-      <Radio labelText="warning" color="warning" defaultChecked />
-    </>
+      <Radio
+        value="error"
+        labelText="error"
+        color="error"
+        checked={value === 'error'}
+        onChange={() => handleChange('error')}
+      />
+      <Spacer />
+      <Card variant="bordered">value : {value}</Card>
+    </div>
   );
 };
 

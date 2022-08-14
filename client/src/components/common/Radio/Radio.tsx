@@ -14,8 +14,8 @@ const Radio = forwardRef<HTMLInputElement, Props>(function Radio(
   return (
     <S.RadioLabel>
       <S.RadioText>{labelText}</S.RadioText>
-      <S.Radio type="radio" ref={ref} color={color} {...options} />
-      <S.RadioSwitch />
+      <S.RadioInput type="radio" ref={ref} color={color} {...options} />
+      <S.RadioPoint color={color} />
     </S.RadioLabel>
   );
 });
