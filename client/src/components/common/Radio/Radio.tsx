@@ -5,17 +5,20 @@ import * as S from './Radio.styles';
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   labelText?: string;
   color?: NormalColorType;
+  labelColor?: boolean;
 }
 
 const Radio = forwardRef<HTMLInputElement, Props>(function Radio(
-  { labelText = '', color = 'primary', ...options },
+  { labelText = '', labelColor = false, color = 'primary', ...options },
   ref,
 ) {
   return (
     <S.RadioLabel>
-      <S.RadioText>{labelText}</S.RadioText>
       <S.RadioInput type="radio" ref={ref} color={color} {...options} />
       <S.RadioPoint color={color} />
+      <S.RadioText labelColor={labelColor} color={color}>
+        {labelText}
+      </S.RadioText>
     </S.RadioLabel>
   );
 });

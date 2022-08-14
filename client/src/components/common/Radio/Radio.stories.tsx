@@ -28,6 +28,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="default"
         labelText="default"
+        labelColor
         checked={value === 'default'}
         onChange={() => handleChange('default')}
         {...args}
@@ -36,6 +37,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="primary"
         labelText="primary"
+        labelColor
         color="primary"
         checked={value === 'primary'}
         onChange={() => handleChange('primary')}
@@ -44,6 +46,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="success"
         labelText="success"
+        labelColor
         color="success"
         checked={value === 'success'}
         onChange={() => handleChange('success')}
@@ -52,6 +55,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="secondary"
         labelText="secondary"
+        labelColor
         color="secondary"
         checked={value === 'secondary'}
         onChange={() => handleChange('secondary')}
@@ -60,6 +64,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="warning"
         labelText="warning"
+        labelColor
         color="warning"
         checked={value === 'warning'}
         onChange={() => handleChange('warning')}
@@ -68,6 +73,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       <Radio
         value="error"
         labelText="error"
+        labelColor
         color="error"
         checked={value === 'error'}
         onChange={() => handleChange('error')}

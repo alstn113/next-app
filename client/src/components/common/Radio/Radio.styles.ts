@@ -31,9 +31,14 @@ export const RadioLabel = styled.label`
   cursor: pointer;
 `;
 
-export const RadioText = styled.span`
-  font-size: 1rem;
+export const RadioText = styled.span<{
+  labelColor: boolean;
+  color: NormalColorType;
+}>`
+  font-size: 1.2rem;
+  font-weight: 900;
   user-select: none;
+  color: ${({ labelColor, color }) => labelColor && palette[color]};
 `;
 
 export const RadioInput = styled.input<{ color: NormalColorType }>`
