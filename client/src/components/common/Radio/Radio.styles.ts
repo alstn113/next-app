@@ -20,8 +20,9 @@ export const RadioPoint = styled.span`
     height: 16px;
     transform: scale(1);
     border-radius: 50%;
-    transition: 0.1s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
+  transition: 0.2s ease-in-out;
 `;
 
 export const RadioLabel = styled.label`
