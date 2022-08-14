@@ -27,7 +27,7 @@ export const Input = styled.input<{ color: NormalColorType }>`
   height: 100%;
   font-size: 1rem;
   border: 2px solid #dadce0;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   outline: none;
   padding: 1rem;
   background: none;

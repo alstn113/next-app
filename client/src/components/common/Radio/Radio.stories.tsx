@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Spacer from '../Spacer/Spacer';
 import Radio, { Props } from './Radio';
 
 export default {
@@ -7,20 +7,30 @@ export default {
   component: Radio,
 } as ComponentMeta<typeof Radio>;
 
-const Template: ComponentStory<typeof Radio> = (args: Props) => (
-  <>
-    <Radio {...args} />
-    <Spacer />
-    <Radio color="error" />
-    <Spacer />
-    <Radio color="secondary" />
-    <Spacer />
-    <Radio color="success" />
-    <Spacer />
-    <Radio color="warning" />
-  </>
-);
+const Template: ComponentStory<typeof Radio> = (args: Props) => {
+  return (
+    <>
+      <Radio {...args} />
+      <Spacer />
+      <Radio labelText="primary" color="primary" defaultChecked />
+      <Spacer />
+      <Radio labelText="error" color="error" defaultChecked />
+      <Spacer />
+      <Radio labelText="secondary" color="secondary" defaultChecked />
+      <Spacer />
+      <Radio labelText="success" color="success" defaultChecked />
+      <Spacer />
+      <Radio labelText="warning" color="warning" defaultChecked />
+    </>
+  );
+};
+
+const Spacer = styled.div`
+  margin-top: 1rem;
+`;
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  labelText: '필수',
+};
