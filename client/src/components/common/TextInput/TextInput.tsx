@@ -7,23 +7,22 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   color?: NormalColorType;
 }
 
-const TextInput = forwardRef<HTMLInputElement, Props>(
-  ({ placeholder, color = 'primary', ...props }, ref) => {
-    return (
-      <S.Root>
-        <S.Input
-          autoComplete="off"
-          placeholder=" "
-          color={color}
-          ref={ref}
-          {...props}
-        />
-        <S.Label color={color}>{placeholder}</S.Label>
-      </S.Root>
-    );
-  },
-);
-
-TextInput.displayName = 'TextInput';
+const TextInput = forwardRef<HTMLInputElement, Props>(function TextInput(
+  { placeholder, color = 'primary', ...props },
+  ref,
+) {
+  return (
+    <S.Root>
+      <S.Input
+        autoComplete="off"
+        placeholder=" "
+        color={color}
+        ref={ref}
+        {...props}
+      />
+      <S.Label color={color}>{placeholder}</S.Label>
+    </S.Root>
+  );
+});
 
 export default TextInput;

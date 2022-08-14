@@ -33,9 +33,6 @@ export const Input = styled.input<{ color: NormalColorType }>`
   background: none;
   z-index: 1;
   transition: 0.25s;
-  &:hover {
-    border: 2px solid ${({ color }) => palette[color]};
-  }
   &:focus {
     border: 2px solid ${({ color }) => palette[color]};
     & + ${Label} {
