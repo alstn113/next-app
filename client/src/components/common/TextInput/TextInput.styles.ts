@@ -26,13 +26,13 @@ export const Input = styled.input<{ color: NormalColorType }>`
   width: 100%;
   height: 100%;
   font-size: 1rem;
-  border: 1px solid #dadce0;
+  border: 2px solid #dadce0;
   border-radius: 0.5rem;
   outline: none;
   padding: 1rem;
   background: none;
   z-index: 1;
-  transition: 0.2s;
+  transition: 0.25s;
   &:hover {
     border: 2px solid ${({ color }) => palette[color]};
   }
