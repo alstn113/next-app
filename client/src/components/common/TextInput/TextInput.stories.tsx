@@ -1,6 +1,7 @@
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Spacer from '../Spacer/Spacer';
 import TextInput, { Props } from './TextInput';
 
 export default {
@@ -10,21 +11,25 @@ export default {
 
 const Template: ComponentStory<typeof TextInput> = (args: Props) => {
   return (
-    <Container>
+    <FlexColumn>
       <TextInput {...args} />
+      <Spacer y={2} />
       <TextInput placeholder="password" color="primary" />
       <TextInput placeholder="password" color="error" />
       <TextInput placeholder="password" color="secondary" />
       <TextInput placeholder="password" color="success" />
       <TextInput placeholder="password" color="warning" />
-    </Container>
+    </FlexColumn>
   );
 };
 
-const Container = styled.div`
-  margin: 2rem;
+const FlexColumn = styled.div`
+  display: flex;
   width: 250px;
+  flex-direction: column;
+  align-items: flex-start;
 `;
+
 export const Default = Template.bind({});
 
 Default.args = {

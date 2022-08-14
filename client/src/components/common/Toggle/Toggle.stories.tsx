@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Spacer from '../Spacer/Spacer';
 import Toggle, { Props } from './Toggle';
 
 export default {
@@ -9,9 +10,9 @@ export default {
 
 const Template: ComponentStory<typeof Toggle> = (args: Props) => {
   return (
-    <>
+    <FlexColumn>
       <Toggle {...args} />
-      <Spacer />
+      <Spacer y={2} />
       <Toggle labelText="primary" color="primary" defaultChecked />
       <Spacer />
       <Toggle labelText="error" color="error" defaultChecked />
@@ -21,12 +22,14 @@ const Template: ComponentStory<typeof Toggle> = (args: Props) => {
       <Toggle labelText="success" color="success" defaultChecked />
       <Spacer />
       <Toggle labelText="warning" color="warning" defaultChecked />
-    </>
+    </FlexColumn>
   );
 };
 
-const Spacer = styled.div`
-  margin-top: 1rem;
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const Default = Template.bind({});

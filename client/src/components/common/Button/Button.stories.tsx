@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Spacer from '../Spacer/Spacer';
 import Button, { Props } from './Button';
 
 export default {
@@ -8,8 +9,12 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args: Props) => (
-  <>
+  <FlexColumn>
     <Button {...args} />
+    <Spacer y={2} />
+    <Button shadow color="primary">
+      버튼
+    </Button>
     <Spacer />
     <Button shadow color="error">
       버튼
@@ -26,11 +31,13 @@ const Template: ComponentStory<typeof Button> = (args: Props) => (
     <Button shadow color="warning">
       버튼
     </Button>
-  </>
+  </FlexColumn>
 );
 
-const Spacer = styled.div`
-  margin-top: 1rem;
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const Default = Template.bind({});

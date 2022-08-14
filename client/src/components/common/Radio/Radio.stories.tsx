@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 import Card from '../Card/Card';
+import Spacer from '../Spacer/Spacer';
 import Radio, { Props } from './Radio';
 
 export default {
@@ -18,13 +19,13 @@ type RadioValues =
   | 'error';
 
 const Template: ComponentStory<typeof Radio> = (args: Props) => {
-  const [value, setValue] = useState<RadioValues>('error');
+  const [value, setValue] = useState<RadioValues>('default');
 
   const handleChange = (value: RadioValues) => {
     setValue(value);
   };
   return (
-    <div>
+    <FlexColumn>
       <Radio
         value="default"
         labelText="default"
@@ -33,7 +34,7 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
         onChange={() => handleChange('default')}
         {...args}
       />
-      <Spacer />
+      <Spacer y={2} />
       <Radio
         value="primary"
         labelText="primary"
@@ -80,12 +81,14 @@ const Template: ComponentStory<typeof Radio> = (args: Props) => {
       />
       <Spacer />
       <Card variant="bordered">value : {value}</Card>
-    </div>
+    </FlexColumn>
   );
 };
 
-const Spacer = styled.div`
-  margin-top: 1rem;
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const Default = Template.bind({});
