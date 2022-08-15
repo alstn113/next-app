@@ -30,6 +30,9 @@ export const RadioLabel = styled.label`
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  &:hover ${RadioPoint}::after {
+    background-color: ${palette.gray};
+  }
 `;
 
 export const RadioText = styled.span<{
