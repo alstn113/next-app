@@ -12,7 +12,7 @@ export const CheckboxPoint = styled.span`
   width: 24px;
   height: 24px;
   border-radius: 8px;
-  border: 2px solid ${palette.gray};
+  border: 3px solid ${palette.gray};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,6 +27,17 @@ export const CheckboxPoint = styled.span`
     transform: scale(0.3);
     opacity: 0;
     border-radius: 8px;
+    transition: inherit;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    transform: scale(2);
+    opacity: 0;
+    background-color: ${palette.white};
     transition: inherit;
   }
 `;
@@ -53,6 +64,10 @@ export const CheckboxInput = styled.input<{ color: NormalColorType }>`
     & ~ ${CheckboxPoint} {
       &::before {
         background-color: ${({ color }) => palette[color]};
+        transform: scale(1);
+        opacity: 1;
+      }
+      &::after {
         transform: scale(1);
         opacity: 1;
       }
