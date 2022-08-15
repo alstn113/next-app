@@ -10,7 +10,6 @@ export const RadioPoint = styled.span`
   align-items: center;
   justify-content: center;
   background-color: ${palette.gray};
-  cursor: pointer;
   &::after {
     content: '';
     position: absolute;
