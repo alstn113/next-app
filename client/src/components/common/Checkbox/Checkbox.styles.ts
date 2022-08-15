@@ -12,14 +12,19 @@ export const CheckboxText = styled.span`
   user-select: none;
 `;
 
-export const CheckboxPoint = styled.span``;
+export const CheckboxPoint = styled.span`
+  &::after {
+  }
+`;
 
 export const CheckboxInput = styled.input`
   display: none;
 
+  // Switch Off
   & ~ ${CheckboxPoint} {
   }
 
+  // Switch On
   &:checked {
     & ~ ${CheckboxPoint} {
       &::after {

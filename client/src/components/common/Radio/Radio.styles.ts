@@ -5,7 +5,7 @@ export const RadioPoint = styled.span`
   position: relative;
   width: 24px;
   height: 24px;
-  border-radius: 1rem;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
