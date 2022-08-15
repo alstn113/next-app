@@ -13,7 +13,9 @@ const Checkbox = forwardRef<HTMLInputElement, Props>(function Checkbox(
   return (
     <S.CheckboxLabel>
       <S.CheckboxInput type="checkbox" ref={ref} color={color} {...options} />
-      <S.CheckboxPoint color={color} />
+      <S.CheckboxMask color={color}>
+        <S.CheckIcon />
+      </S.CheckboxMask>
       <S.CheckboxText>{labelText}</S.CheckboxText>
     </S.CheckboxLabel>
   );
