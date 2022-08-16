@@ -1,5 +1,6 @@
 import palette, { NormalColorType } from '@/lib/styles/palette';
 import styled from '@emotion/styled';
+import { InputVariantType } from './TextInput';
 
 export const Root = styled.div`
   position: relative;
@@ -8,7 +9,10 @@ export const Root = styled.div`
   margin-top: 1rem;
 `;
 
-export const Label = styled.label<{ color: NormalColorType }>`
+export const Label = styled.label<{
+  color: NormalColorType;
+  variant: InputVariantType;
+}>`
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -19,7 +23,10 @@ export const Label = styled.label<{ color: NormalColorType }>`
   transition: 0.2s;
 `;
 
-export const Input = styled.input<{ color: NormalColorType }>`
+export const Input = styled.input<{
+  color: NormalColorType;
+  variant: InputVariantType;
+}>`
   position: absolute;
   top: 0;
   left: 0;
