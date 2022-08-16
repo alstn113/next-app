@@ -1,5 +1,8 @@
+import { NormalColorType } from '@/lib/styles/palette';
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
+import Card from '../Card/Card';
 import Spacer from '../Spacer/Spacer';
 import Checkbox, { Props } from './Checkbox';
 
@@ -9,20 +12,44 @@ export default {
 } as ComponentMeta<typeof Checkbox>;
 
 const Template: ComponentStory<typeof Checkbox> = (args: Props) => {
+  const CHECKBOX_LIST: { id: number; data: NormalColorType }[] = [
+    { id: 1, data: 'primary' },
+    { id: 2, data: 'success' },
+    { id: 3, data: 'secondary' },
+    { id: 4, data: 'warning' },
+    { id: 5, data: 'error' },
+  ];
+  const [selected, setSelected] = useState<NormalColorType[]>([]);
+  const onCheckedElement = (checked: any, item: any) => {
+    if (checked) {
+      setSelected([...selected, item]);
+    } else if (!checked) {
+      setSelected(selected.filter((el) => el !== item));
+    }
+  };
+  // 2️⃣ x를 누르면 리스팅 목록에서 카테고리가 삭제되며 체크도 해제 된다
+  const onRemove = (item: NormalColorType) => {
+    setSelected(selected.filter((el) => el !== item));
+  };
   return (
     <FlexColumn>
-      <Checkbox {...args} />
-      <Spacer y={2} />
-      <Checkbox color="primary" labelText="primary" defaultChecked />
-      <Spacer />
-      <Checkbox color="success" labelText="success" defaultChecked />
-      <Spacer />
-      <Checkbox color="secondary" labelText="secondary" defaultChecked />
-      <Spacer />
-      <Checkbox color="warning" labelText="warning" defaultChecked />
-      <Spacer />
-      <Checkbox color="error" labelText="error" defaultChecked />
-      <Spacer />
+      {CHECKBOX_LIST.map((checkbox) => (
+        <>
+          <Checkbox
+            key={checkbox.id}
+            color={checkbox.data}
+            labelText={checkbox.data}
+            value={checkbox.data}
+            onChange={(e) => {
+              onCheckedElement(e.target.checked, e.target.value);
+            }}
+            // 3️⃣ 체크표시 & 해제를 시키는 로직. 배열에 data가 있으면 true, 없으면 false
+            checked={selected.includes(checkbox.data) ? true : false}
+          />
+          <Spacer />
+        </>
+      ))}
+      <Card variant="flat">Selected : {selected.join(', ')}</Card>
     </FlexColumn>
   );
 };
@@ -34,9 +61,3 @@ const FlexColumn = styled.div`
 `;
 
 export const Default = Template.bind({});
-
-Default.args = {
-  color: 'primary',
-  labelText: 'default',
-  defaultChecked: true,
-};
