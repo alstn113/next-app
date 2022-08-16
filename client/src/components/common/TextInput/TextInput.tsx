@@ -24,9 +24,8 @@ const TextInput = forwardRef<HTMLInputElement, Props>(function TextInput(
         ref={ref}
         {...props}
       />
-      <S.Label color={color} variant={variant}>
-        {placeholder}
-      </S.Label>
+      {variant === 'underlined' && <S.Underline color={color} />}
+      <S.Label color={color}>{placeholder}</S.Label>
     </S.Root>
   );
 });

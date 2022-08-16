@@ -13,12 +13,6 @@ const Template: ComponentStory<typeof TextInput> = (args: Props) => {
   return (
     <FlexColumn>
       <TextInput {...args} />
-      <Spacer y={2} />
-      <TextInput placeholder="password" color="primary" />
-      <TextInput placeholder="password" color="error" />
-      <TextInput placeholder="password" color="secondary" />
-      <TextInput placeholder="password" color="success" />
-      <TextInput placeholder="password" color="warning" />
     </FlexColumn>
   );
 };
@@ -34,4 +28,32 @@ export const Default = Template.bind({});
 
 Default.args = {
   placeholder: 'USERNAME',
+};
+
+export const Bordered = () => {
+  return (
+    <FlexColumn>
+      <TextInput placeholder="TextInput" color="primary" variant="bordered" />
+      <TextInput placeholder="TextInput" color="error" variant="bordered" />
+      <TextInput placeholder="TextInput" color="secondary" variant="bordered" />
+      <TextInput placeholder="TextInput" color="success" variant="bordered" />
+      <TextInput placeholder="TextInput" color="warning" variant="bordered" />
+    </FlexColumn>
+  );
+};
+
+export const Underlined = () => {
+  return (
+    <FlexColumn>
+      <TextInput placeholder="TextInput" color="primary" variant="underlined" />
+      <TextInput placeholder="TextInput" color="error" variant="underlined" />
+      <TextInput
+        placeholder="TextInput"
+        color="secondary"
+        variant="underlined"
+      />
+      <TextInput placeholder="TextInput" color="success" variant="underlined" />
+      <TextInput placeholder="TextInput" color="warning" variant="underlined" />
+    </FlexColumn>
+  );
 };
