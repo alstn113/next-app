@@ -27,7 +27,7 @@ const FlexColumn = styled.div`
 export const Default = Template.bind({});
 
 Default.args = {
-  placeholder: 'USERNAME',
+  placeholder: 'Default',
 };
 
 export const Bordered = () => {

@@ -35,5 +35,5 @@ const FlexColumn = styled.div`
 export const Default = Template.bind({});
 
 Default.args = {
-  labelText: '필수',
+  labelText: 'default',
 };
