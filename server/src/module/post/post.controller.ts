@@ -45,6 +45,22 @@ export class PostController {
     return await this.postService.createPost(userId, dto);
   }
 
+  @Post('/:postId/like')
+  async likePost(
+    @GetCurrentUserId() userId: string,
+    @Param('postId') postId: string,
+  ) {
+    return await this.postService.likePost(userId, postId);
+  }
+
+  @Post('/:postId/unlike')
+  async unlikePost(
+    @GetCurrentUserId() userId: string,
+    @Param('postId') postId: string,
+  ) {
+    return await this.postService.unlikePost(userId, postId);
+  }
+
   @Delete('/:id')
   async deletePost(
     @GetCurrentUserId() userId: string,
