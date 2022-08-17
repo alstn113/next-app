@@ -50,12 +50,14 @@ const Register: NextPage = () => {
           {...register('username')}
           type="text"
           placeholder="username"
+          variant="underlined"
         />
         <ErrorMessage>{errors.username?.message}</ErrorMessage>
         <TextInput
           {...register('password')}
           type="password"
           placeholder="password"
+          variant="underlined"
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
         <Button shadow size="lg" color="success" type="submit">
