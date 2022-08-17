@@ -19,20 +19,38 @@ model User {
   username String @unique()
   password String
   hashedRt String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt()
   posts Post[]
   comments Comment[]
+  postLikes PostLike[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt()
 }
 
 model Post {
   id String @id @default(uuid())
   title String
   body String
+  likes Int @default(0)
   userId String
   comments Comment[]
+  postLikes PostLike[]
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PostLike {
+  id String @id @default(uuid())
+  postId String
+  userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -41,8 +59,10 @@ model Comment {
   text String
   userId String
   postId String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
