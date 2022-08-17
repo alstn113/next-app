@@ -47,6 +47,7 @@ const Home: NextPage = () => {
                   <div>
                     {post.title} {post.body}
                   </div>
+                  <div>좋아요 : {post.likes}</div>
                   <div>{formatDate(post.createdAt)}</div>
                 </div>
               </Link>

@@ -5,6 +5,7 @@ export interface IPost {
   id: string;
   title: string;
   body: string;
+  likes: number;
   userId: string;
   user: IUser;
   comments: IComment[];
