@@ -113,6 +113,60 @@ export class PostService {
     });
   }
 
+  async likePost(userId: string, postId: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) throw new UnauthorizedException();
+    const post = await this.prismaService.post.findUnique({
+      where: { id: postId },
+    });
+    if (!post) throw new NotFoundException();
+
+    const alreadyLiked = await this.prismaService.postLike.findUnique({
+      where: { postId_userId: { postId, userId } },
+    });
+    if (!alreadyLiked) {
+      await this.prismaService.postLike.create({ data: { postId, userId } });
+      const postLikes = await this.prismaService.postLike.count({
+        where: { postId },
+      });
+      await this.prismaService.post.update({
+        data: { likes: postLikes },
+        where: { id: postId },
+      });
+    }
+    return post;
+  }
+
+  async unlikePost(userId: string, postId: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) throw new UnauthorizedException();
+    const post = await this.prismaService.post.findUnique({
+      where: { id: postId },
+    });
+    if (!post) throw new NotFoundException();
+
+    const alreadyLiked = await this.prismaService.postLike.findUnique({
+      where: { postId_userId: { postId, userId } },
+    });
+    if (alreadyLiked) {
+      await this.prismaService.postLike.delete({
+        where: { postId_userId: { postId, userId } },
+      });
+      const postLikes = await this.prismaService.postLike.count({
+        where: { postId },
+      });
+      await this.prismaService.post.update({
+        data: { likes: postLikes },
+        where: { id: postId },
+      });
+    }
+    return post;
+  }
+
   async deletePost(userId: string, id: string) {
     const post = await this.prismaService.post.findUnique({ where: { id } });
     if (!post) throw new NotFoundException();

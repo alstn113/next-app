@@ -45,7 +45,7 @@ export class PostController {
     return await this.postService.createPost(userId, dto);
   }
 
-  @Post('/:postId/like')
+  @Post('/:postId/likes')
   async likePost(
     @GetCurrentUserId() userId: string,
     @Param('postId') postId: string,
@@ -53,7 +53,7 @@ export class PostController {
     return await this.postService.likePost(userId, postId);
   }
 
-  @Post('/:postId/unlike')
+  @Delete('/:postId/likes')
   async unlikePost(
     @GetCurrentUserId() userId: string,
     @Param('postId') postId: string,
