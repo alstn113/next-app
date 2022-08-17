@@ -128,15 +128,14 @@ export class PostService {
     });
     if (!alreadyLiked) {
       await this.prismaService.postLike.create({ data: { postId, userId } });
-      const postLikes = await this.prismaService.postLike.count({
-        where: { postId },
-      });
-      await this.prismaService.post.update({
-        data: { likes: postLikes },
-        where: { id: postId },
-      });
     }
-    return post;
+    const postLikes = await this.prismaService.postLike.count({
+      where: { postId },
+    });
+    return await this.prismaService.post.update({
+      data: { likes: postLikes },
+      where: { id: postId },
+    });
   }
 
   async unlikePost(userId: string, postId: string) {
@@ -156,15 +155,14 @@ export class PostService {
       await this.prismaService.postLike.delete({
         where: { postId_userId: { postId, userId } },
       });
-      const postLikes = await this.prismaService.postLike.count({
-        where: { postId },
-      });
-      await this.prismaService.post.update({
-        data: { likes: postLikes },
-        where: { id: postId },
-      });
     }
-    return post;
+    const postLikes = await this.prismaService.postLike.count({
+      where: { postId },
+    });
+    return await this.prismaService.post.update({
+      data: { likes: postLikes },
+      where: { id: postId },
+    });
   }
 
   async deletePost(userId: string, id: string) {
