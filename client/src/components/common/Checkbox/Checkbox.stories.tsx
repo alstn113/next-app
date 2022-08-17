@@ -27,10 +27,7 @@ const Template: ComponentStory<typeof Checkbox> = (args: Props) => {
       setSelected(selected.filter((el) => el !== item));
     }
   };
-  // 2️⃣ x를 누르면 리스팅 목록에서 카테고리가 삭제되며 체크도 해제 된다
-  const onRemove = (item: NormalColorType) => {
-    setSelected(selected.filter((el) => el !== item));
-  };
+
   return (
     <FlexColumn>
       {CHECKBOX_LIST.map((checkbox) => (

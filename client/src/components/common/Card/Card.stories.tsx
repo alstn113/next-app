@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Spacer from '../Spacer/Spacer';
 import Card, { Props } from './Card';
 
 export default {
@@ -9,7 +10,7 @@ export default {
 
 const Template: ComponentStory<typeof Card> = (args: Props) => {
   return (
-    <>
+    <FlexColumn>
       <Card {...args} />
       <Spacer />
       <Card variant="bordered">
@@ -32,12 +33,14 @@ const Template: ComponentStory<typeof Card> = (args: Props) => {
         voluptate perspiciatis ea corporis voluptatum, reprehenderit vero harum
         ratione animi hic cum.
       </Card>
-    </>
+    </FlexColumn>
   );
 };
 
-const Spacer = styled.div`
-  margin-top: 1rem;
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const Default = Template.bind({});
