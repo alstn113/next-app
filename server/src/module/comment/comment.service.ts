@@ -8,21 +8,21 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 
 @Injectable()
 export class CommentService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async createComment(userId: string, dto: CreateCommentDto) {
-    return await this.prismaService.comment.create({
+    return await this.prisma.comment.create({
       data: { ...dto, userId },
     });
   }
 
   async deleteComment(userId: string, id: string) {
-    const comment = await this.prismaService.comment.findUnique({
+    const comment = await this.prisma.comment.findUnique({
       where: { id },
     });
     if (!comment) throw new NotFoundException();
     if (comment.userId !== userId) throw new UnauthorizedException();
-    return await this.prismaService.comment.delete({
+    return await this.prisma.comment.delete({
       where: { id },
     });
   }
