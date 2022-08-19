@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Spacer from '../Spacer/Spacer';
+import Spacer from '../../@Layout/Spacer/Spacer';
 import Toggle, { Props } from './Toggle';
 
 export default {
-  title: 'components/common/Toggle',
+  title: 'Components/Toggle',
   component: Toggle,
 } as ComponentMeta<typeof Toggle>;
 

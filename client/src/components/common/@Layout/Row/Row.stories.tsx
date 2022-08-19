@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Row, { Props } from './Row';
 
 export default {
-  title: 'components/common/Row',
+  title: 'Layout/Row',
   component: Row,
 } as ComponentMeta<typeof Row>;
 

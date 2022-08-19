@@ -1,5 +1,5 @@
-import Card from '@/components/common/Card/Card';
-import Skeleton from '@/components/common/Skeleton/Skeleton';
+import Card from '@/components/common/@Components/Card/Card';
+import Skeleton from '@/components/common/@Components/Skeleton/Skeleton';
 import useGetPostsByQueries, {
   IPostsByQueries,
 } from '@/hooks/queries/post/useGetPostsByQueries';

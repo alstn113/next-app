@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Column, { Props } from './Column';
 
 export default {
-  title: 'components/common/Column',
+  title: 'Layout/Column',
   component: Column,
 } as ComponentMeta<typeof Column>;
 

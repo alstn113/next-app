@@ -8,10 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import Button from './common/Button/Button';
-import Card from './common/Card/Card';
-import ErrorMessage from './common/ErrorMessage/ErrorMessage';
-import TextInput from './common/TextInput/TextInput';
+import Button from './common/@Components/Button/Button';
+import Card from './common/@Components/Card/Card';
+import ErrorMessage from './common/@Components/ErrorMessage/ErrorMessage';
+import TextInput from './common/@Components/TextInput/TextInput';
 
 interface Props {
   comments: IComment[];

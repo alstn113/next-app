@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 import Card from '../Card/Card';
-import Spacer from '../Spacer/Spacer';
+import Spacer from '../../@Layout/Spacer/Spacer';
 import Radio, { Props } from './Radio';
 
 export default {
-  title: 'components/common/Radio',
+  title: 'Components/Radio',
   component: Radio,
 } as ComponentMeta<typeof Radio>;
 

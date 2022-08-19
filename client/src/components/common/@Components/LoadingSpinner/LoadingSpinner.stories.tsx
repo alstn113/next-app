@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LoadingSpinner, { Props } from './LoadingSpinner';
 
 export default {
-  title: 'components/common/Loading',
+  title: 'Components/Loading',
   component: LoadingSpinner,
 } as ComponentMeta<typeof LoadingSpinner>;
 

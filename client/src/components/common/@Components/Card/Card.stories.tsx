@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Spacer from '../Spacer/Spacer';
+import Spacer from '../../@Layout/Spacer/Spacer';
 import Card, { Props } from './Card';
 
 export default {
-  title: 'components/common/Card',
+  title: 'Components/Card',
   component: Card,
 } as ComponentMeta<typeof Card>;
 

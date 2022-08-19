@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 import Card from '../Card/Card';
-import Spacer from '../Spacer/Spacer';
+import Spacer from '../../@Layout/Spacer/Spacer';
 import Checkbox, { Props } from './Checkbox';
 
 export default {
-  title: 'components/common/Checkbox',
+  title: 'Components/common/Checkbox',
   component: Checkbox,
 } as ComponentMeta<typeof Checkbox>;
 

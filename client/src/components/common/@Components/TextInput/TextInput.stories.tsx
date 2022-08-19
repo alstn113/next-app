@@ -1,11 +1,9 @@
-import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Spacer from '../Spacer/Spacer';
 import TextInput, { Props } from './TextInput';
 
 export default {
-  title: 'components/common/TextInput',
+  title: 'Components/TextInput',
   component: TextInput,
 } as ComponentMeta<typeof TextInput>;
 

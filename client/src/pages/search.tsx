@@ -4,11 +4,11 @@ import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 import { useState } from 'react';
 import useDebounce from '@/hooks/useDebounce';
-import TextInput from '@/components/common/TextInput/TextInput';
+import TextInput from '@/components/common/@Components/TextInput/TextInput';
 import useGetSearchPosts from '@/hooks/queries/post/useGetSearchPosts';
 import formatDate from '@/lib/utils/formatDate';
 import Link from 'next/link';
-import Card from '@/components/common/Card/Card';
+import Card from '@/components/common/@Components/Card/Card';
 
 const Search = () => {
   const [searchText, setSearchText] = useState<string>('');

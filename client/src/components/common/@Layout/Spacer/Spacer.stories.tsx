@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Spacer, { Props } from './Spacer';
 
 export default {
-  title: 'components/common/Spacer',
+  title: 'Layout/Spacer',
   component: Spacer,
 } as ComponentMeta<typeof Spacer>;
 

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Spacer from '../Spacer/Spacer';
+import Spacer from '../../@Layout/Spacer/Spacer';
 import Button, { Props } from './Button';
 
 export default {
-  title: 'components/common/Button',
+  title: 'Components/Button',
   component: Button,
 } as ComponentMeta<typeof Button>;
 
