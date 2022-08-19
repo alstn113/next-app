@@ -27,7 +27,7 @@ const PostDetail: NextPage = () => {
       router.push('/');
     },
   });
-
+  const { data: user } = useGetME();
   const { data } = useGetPost(id);
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false });
   return (
@@ -38,9 +38,11 @@ const PostDetail: NextPage = () => {
           <span>Body : {data?.body}</span>
           <span>CreatedAt : {formatDate(data?.createdAt)}</span>
           <ButtonBlock>
-            <Button shadow color="error" onClick={onOpen}>
-              삭제
-            </Button>
+            {user?.username === data?.user.username && (
+              <Button shadow color="error" onClick={onOpen}>
+                삭제
+              </Button>
+            )}
           </ButtonBlock>
         </Card>
         <Card variant="bordered">
