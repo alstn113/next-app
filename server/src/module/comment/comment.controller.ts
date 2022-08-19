@@ -17,11 +17,27 @@ export class CommentController {
     return await this.commentService.createComment(userId, dto);
   }
 
-  @Delete('/:id')
+  @Delete('/:commentId')
   async deleteComment(
     @GetCurrentUserId() userId: string,
-    @Param('id') id: string,
+    @Param('commentId') commentId: string,
   ) {
-    return await this.commentService.deleteComment(userId, id);
+    return await this.commentService.deleteComment({ userId, commentId });
+  }
+
+  @Post('/:commentId/likes')
+  async likeComment(
+    @GetCurrentUserId() userId: string,
+    @Param('commentId') commentId: string,
+  ) {
+    return await this.commentService.likeComment({ userId, commentId });
+  }
+
+  @Delete('/:commentId/likes')
+  async unlikeComment(
+    @GetCurrentUserId() userId: string,
+    @Param('commentId') commentId: string,
+  ) {
+    return await this.commentService.unlikeComment({ userId, commentId });
   }
 }

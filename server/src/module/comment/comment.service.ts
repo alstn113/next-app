@@ -10,20 +10,81 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createComment(userId: string, dto: CreateCommentDto) {
+  async createComment(userId: string, { text, postId }: CreateCommentDto) {
     return await this.prisma.comment.create({
-      data: { ...dto, userId },
+      data: { text, postId, userId },
     });
   }
 
-  async deleteComment(userId: string, id: string) {
+  async deleteComment({ userId, commentId }: CommentActionParams) {
     const comment = await this.prisma.comment.findUnique({
-      where: { id },
+      where: { id: commentId },
     });
     if (!comment) throw new NotFoundException();
     if (comment.userId !== userId) throw new UnauthorizedException();
     return await this.prisma.comment.delete({
-      where: { id },
+      where: { id: commentId },
     });
   }
+
+  async likeComment({ userId, commentId }: CommentActionParams) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new UnauthorizedException();
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+    if (!comment) throw new NotFoundException();
+
+    const alreadyLiked = await this.prisma.commentLike.findUnique({
+      where: {
+        commentId_userId: { commentId, userId },
+      },
+    });
+    if (!alreadyLiked) {
+      await this.prisma.commentLike.create({ data: { commentId, userId } });
+    }
+    const commentLikes = await this.prisma.commentLike.count({
+      where: {
+        commentId,
+      },
+    });
+    return await this.prisma.comment.update({
+      data: { likes: commentLikes },
+      where: { id: commentId },
+    });
+  }
+
+  async unlikeComment({ userId, commentId }: CommentActionParams) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new UnauthorizedException();
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+    if (!comment) throw new NotFoundException();
+
+    const alreadyLiked = await this.prisma.commentLike.findUnique({
+      where: {
+        commentId_userId: { commentId, userId },
+      },
+    });
+    if (alreadyLiked) {
+      await this.prisma.commentLike.delete({
+        where: { commentId_userId: { commentId, userId } },
+      });
+    }
+    const commentLikes = await this.prisma.commentLike.count({
+      where: {
+        commentId,
+      },
+    });
+    return await this.prisma.comment.update({
+      data: { likes: commentLikes },
+      where: { id: commentId },
+    });
+  }
+}
+
+interface CommentActionParams {
+  userId: string;
+  commentId: string;
 }
