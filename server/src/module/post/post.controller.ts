@@ -32,9 +32,9 @@ export class PostController {
   }
 
   @Public()
-  @Get('/:id')
-  async getPost(@Param('id') id: string) {
-    return await this.postService.findPostById(id);
+  @Get('/:postId')
+  async getPost(@Param('postId') postId: string) {
+    return await this.postService.findPostById(postId);
   }
 
   @Post('/')
@@ -50,7 +50,7 @@ export class PostController {
     @GetCurrentUserId() userId: string,
     @Param('postId') postId: string,
   ) {
-    return await this.postService.likePost(userId, postId);
+    return await this.postService.likePost({ userId, postId });
   }
 
   @Delete('/:postId/likes')
@@ -58,14 +58,14 @@ export class PostController {
     @GetCurrentUserId() userId: string,
     @Param('postId') postId: string,
   ) {
-    return await this.postService.unlikePost(userId, postId);
+    return await this.postService.unlikePost({ userId, postId });
   }
 
-  @Delete('/:id')
+  @Delete('/:postId')
   async deletePost(
     @GetCurrentUserId() userId: string,
-    @Param('id') id: string,
+    @Param('postId') postId: string,
   ) {
-    return await this.postService.deletePost(userId, id);
+    return await this.postService.deletePost({ userId, postId });
   }
 }

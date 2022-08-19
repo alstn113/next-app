@@ -11,9 +11,9 @@ import { FindPostQueryDto } from './dto/find-post-query.dto';
 export class PostService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findPostsByQuries(query: FindPostQueryDto) {
+  async findPostsByQuries({ cursor }: FindPostQueryDto) {
     const size = 20;
-    if (!query.cursor) {
+    if (!cursor) {
       const posts = await this.prisma.post.findMany({
         take: size,
         orderBy: {
@@ -35,7 +35,7 @@ export class PostService {
       take: size,
       skip: 1,
       cursor: {
-        id: query.cursor,
+        id: cursor,
       },
       orderBy: {
         createdAt: 'desc',
@@ -84,10 +84,10 @@ export class PostService {
     });
   }
 
-  async findPostById(id: string) {
+  async findPostById(postId: string) {
     const post = await this.prisma.post.findUnique({
       where: {
-        id,
+        id: postId,
       },
       include: {
         user: {
@@ -107,13 +107,13 @@ export class PostService {
     return post;
   }
 
-  async createPost(userId: string, dto: CreatePostDto) {
+  async createPost(userId: string, { title, body }: CreatePostDto) {
     return await this.prisma.post.create({
-      data: { ...dto, userId },
+      data: { title, body, userId },
     });
   }
 
-  async likePost(userId: string, postId: string) {
+  async likePost({ userId, postId }: PostActionParams) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
@@ -138,7 +138,7 @@ export class PostService {
     });
   }
 
-  async unlikePost(userId: string, postId: string) {
+  async unlikePost({ userId, postId }: PostActionParams) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
@@ -165,14 +165,19 @@ export class PostService {
     });
   }
 
-  async deletePost(userId: string, id: string) {
-    const post = await this.prisma.post.findUnique({ where: { id } });
+  async deletePost({ userId, postId }) {
+    const post = await this.prisma.post.findUnique({ where: { id: postId } });
     if (!post) throw new NotFoundException();
     if (post.userId !== userId) throw new UnauthorizedException();
     return await this.prisma.post.delete({
       where: {
-        id,
+        id: postId,
       },
     });
   }
+}
+
+interface PostActionParams {
+  userId: string;
+  postId: string;
 }
