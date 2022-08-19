@@ -7,7 +7,7 @@ import Spacer from '../../@Layout/Spacer/Spacer';
 import Checkbox, { Props } from './Checkbox';
 
 export default {
-  title: 'Components/common/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
 } as ComponentMeta<typeof Checkbox>;
 
