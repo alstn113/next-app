@@ -1,7 +1,5 @@
 import CommentList from '@/components/CommentList';
-import Button from '@/components/common/@Components/Button/Button';
-import Card from '@/components/common/@Components/Card/Card';
-import Modal from '@/components/common/@Components/Modal/Modal';
+import { Button, Card, Modal } from '@/components/common';
 import useDisclosure from '@/hooks/useDisclosure';
 import useDeletePost from '@/hooks/queries/post/useDeletePost';
 import useGetPost from '@/hooks/queries/post/useGetPost';

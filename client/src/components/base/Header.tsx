@@ -4,7 +4,7 @@ import useLogout from '@/hooks/queries/auth/useLogout';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import Router from 'next/router';
 import { useRef, useState, useEffect, useCallback } from 'react';
-import Button from '../common/@Components/Button/Button';
+import { Button } from '@/components/common';
 import getScrollTop from '@/lib/utils/getScrollTop';
 import zIndexes from '@/lib/styles/zIndexes';
 

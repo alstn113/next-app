@@ -1,11 +1,9 @@
-import Card from '@/components/common/@Components/Card/Card';
-import Skeleton from '@/components/common/@Components/Skeleton/Skeleton';
+import { Card, Skeleton } from '@/components/common';
 import useGetPostsByQueries, {
   IPostsByQueries,
 } from '@/hooks/queries/post/useGetPostsByQueries';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import PostAPI from '@/lib/api/post';
 import formatDate from '@/lib/utils/formatDate';
 import styled from '@emotion/styled';
 import {

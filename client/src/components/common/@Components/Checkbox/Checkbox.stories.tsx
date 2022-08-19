@@ -2,8 +2,7 @@ import { NormalColorType } from '@/lib/styles/palette';
 import styled from '@emotion/styled';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
-import Card from '../Card/Card';
-import Spacer from '../../@Layout/Spacer/Spacer';
+import { Spacer, Card } from '@/components/common';
 import Checkbox, { Props } from './Checkbox';
 
 export default {

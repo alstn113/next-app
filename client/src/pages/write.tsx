@@ -11,11 +11,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useGetME from '@/hooks/queries/user/useGetMe';
-import TextInput from '@/components/common/@Components/TextInput/TextInput';
-import Button from '@/components/common/@Components/Button/Button';
+import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
-import ErrorMessage from '@/components/common/@Components/ErrorMessage/ErrorMessage';
 import useGetPostsByQueries from '@/hooks/queries/post/useGetPostsByQueries';
 
 interface IFormInput {

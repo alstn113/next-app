@@ -6,9 +6,7 @@ import * as yup from 'yup';
 import useRegister from '@/hooks/queries/auth/useRegister';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
-import TextInput from '@/components/common/@Components/TextInput/TextInput';
-import Button from '@/components/common/@Components/Button/Button';
-import ErrorMessage from '@/components/common/@Components/ErrorMessage/ErrorMessage';
+import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 

@@ -1,6 +1,6 @@
 import useDisclosure from '@/hooks/useDisclosure';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Button from '../Button/Button';
+import { Button } from '@/components/common';
 import Modal, { Props } from './Modal';
 
 export default {
