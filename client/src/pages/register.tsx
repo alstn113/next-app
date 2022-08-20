@@ -20,7 +20,7 @@ const schema = yup.object().shape({
   username: yup
     .string()
     .required('필수항목입니다')
-    .matches(isValidUsername.regexp, isValidPassword.message),
+    .matches(isValidUsername.regexp, isValidUsername.message),
   password: yup
     .string()
     .required('필수 항목입니다')
