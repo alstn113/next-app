@@ -9,6 +9,7 @@ import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
+import { isValidPassword, isValidUsername } from '@/lib/regex';
 
 interface IFormInput {
   username: string;
@@ -16,8 +17,14 @@ interface IFormInput {
 }
 
 const schema = yup.object().shape({
-  username: yup.string().required('필수항목입니다'),
-  password: yup.string().required('필수 항목입니다'),
+  username: yup
+    .string()
+    .required('필수항목입니다')
+    .matches(isValidUsername, '숫자나 영문으로 이루어진 5~20글자여야 합니다.'),
+  password: yup
+    .string()
+    .required('필수 항목입니다')
+    .matches(isValidPassword, '숫자나 영문으로 이루어진 8~20글자여야 합니다.'),
 });
 
 const Register: NextPage = () => {
