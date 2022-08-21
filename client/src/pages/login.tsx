@@ -95,10 +95,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  const user = await queryClient.fetchQuery(
-    useGetME.getKey(),
-    useGetME.fetcher(),
-  );
+  const user = await queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher());
   if (user)
     return {
       redirect: {

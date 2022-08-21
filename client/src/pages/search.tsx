@@ -36,12 +36,13 @@ const Search = () => {
                   query: { id: post.id },
                 }}
               >
-                <div>
+                <a>
                   <div>
-                    {post.title} {post.body}
+                    <div>{post.title}</div>
+                    <div>{post.body}</div>
+                    <div>{formatDate(post.createdAt)}</div>
                   </div>
-                  <div>{formatDate(post.createdAt)}</div>
-                </div>
+                </a>
               </Link>
             </Card>
           </CardBox>
