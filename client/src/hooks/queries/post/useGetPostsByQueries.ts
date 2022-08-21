@@ -1,9 +1,9 @@
 import PostAPI from '@/lib/api/post';
-import { IPost, ICustomAxiosError, IFindPostQuery } from '@/lib/interfaces';
+import { ICustomAxiosError, IPostList } from '@/lib/interfaces';
 import { useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query';
 
 export interface IPostsByQueries {
-  posts: IPost[];
+  posts: IPostList;
   nextCursor?: string;
 }
 

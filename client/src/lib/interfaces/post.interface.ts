@@ -1,6 +1,8 @@
 import { IComment } from './comment.interface';
 import { IUser } from './user.interface';
 
+export type IPostList = Omit<IPost, 'comments'>[];
+
 export interface IPost {
   id: string;
   title: string;
