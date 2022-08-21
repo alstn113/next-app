@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -38,34 +30,22 @@ export class PostController {
   }
 
   @Post('/')
-  async createPost(
-    @GetCurrentUserId() userId: string,
-    @Body() dto: CreatePostDto,
-  ) {
+  async createPost(@GetCurrentUserId() userId: string, @Body() dto: CreatePostDto) {
     return await this.postService.createPost(userId, dto);
   }
 
   @Post('/:postId/likes')
-  async likePost(
-    @GetCurrentUserId() userId: string,
-    @Param('postId') postId: string,
-  ) {
+  async likePost(@GetCurrentUserId() userId: string, @Param('postId') postId: string) {
     return await this.postService.likePost({ userId, postId });
   }
 
   @Delete('/:postId/likes')
-  async unlikePost(
-    @GetCurrentUserId() userId: string,
-    @Param('postId') postId: string,
-  ) {
+  async unlikePost(@GetCurrentUserId() userId: string, @Param('postId') postId: string) {
     return await this.postService.unlikePost({ userId, postId });
   }
 
   @Delete('/:postId')
-  async deletePost(
-    @GetCurrentUserId() userId: string,
-    @Param('postId') postId: string,
-  ) {
+  async deletePost(@GetCurrentUserId() userId: string, @Param('postId') postId: string) {
     return await this.postService.deletePost({ userId, postId });
   }
 }

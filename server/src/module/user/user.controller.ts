@@ -12,9 +12,7 @@ export class UserController {
 
   @Public()
   @Get('/me')
-  async getCurrentUser(
-    @GetCurrentUserId() userId: string,
-  ): Promise<UserResponseDto> {
+  async getCurrentUser(@GetCurrentUserId() userId: string): Promise<UserResponseDto> {
     if (userId === undefined) return null;
     return await this.userService.getCurrentUser(userId);
   }

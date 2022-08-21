@@ -10,34 +10,22 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Post('/')
-  async createComment(
-    @GetCurrentUserId() userId: string,
-    @Body() dto: CreateCommentDto,
-  ) {
+  async createComment(@GetCurrentUserId() userId: string, @Body() dto: CreateCommentDto) {
     return await this.commentService.createComment(userId, dto);
   }
 
   @Delete('/:commentId')
-  async deleteComment(
-    @GetCurrentUserId() userId: string,
-    @Param('commentId') commentId: string,
-  ) {
+  async deleteComment(@GetCurrentUserId() userId: string, @Param('commentId') commentId: string) {
     return await this.commentService.deleteComment({ userId, commentId });
   }
 
   @Post('/:commentId/likes')
-  async likeComment(
-    @GetCurrentUserId() userId: string,
-    @Param('commentId') commentId: string,
-  ) {
+  async likeComment(@GetCurrentUserId() userId: string, @Param('commentId') commentId: string) {
     return await this.commentService.likeComment({ userId, commentId });
   }
 
   @Delete('/:commentId/likes')
-  async unlikeComment(
-    @GetCurrentUserId() userId: string,
-    @Param('commentId') commentId: string,
-  ) {
+  async unlikeComment(@GetCurrentUserId() userId: string, @Param('commentId') commentId: string) {
     return await this.commentService.unlikeComment({ userId, commentId });
   }
 }
