@@ -32,7 +32,7 @@ export const ModalBlock = styled('div')<{ visible: boolean }>`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  ${mediaQuery.small} {
+  ${mediaQuery.sm} {
     width: 15rem;
   }
   ${(props) =>
