@@ -24,9 +24,9 @@ export class PostController {
   }
 
   @Public()
-  @Get('/:postId')
-  async getPost(@Param('postId') postId: string) {
-    return await this.postService.findPostById(postId);
+  @Get('/:slug')
+  async getPostBySlug(@Param('slug') slug: string) {
+    return await this.postService.findPostBySlug(slug);
   }
 
   @Post('/')

@@ -81,10 +81,10 @@ export class PostService {
     });
   }
 
-  async findPostById(postId: string) {
+  async findPostBySlug(slug: string) {
     const post = await this.prisma.post.findUnique({
       where: {
-        id: postId,
+        slug,
       },
       include: {
         user: {

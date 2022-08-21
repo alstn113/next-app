@@ -1,8 +1,8 @@
 {
-  "name": "next",
+  "name": "next-app",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/neko113/next-cookie-auth.git",
+  "repository": "https://github.com/neko113/next-app.git",
   "author": "neko113 <alstn113@gmail.com>",
   "license": "MIT",
   "scripts": {
