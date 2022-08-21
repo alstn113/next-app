@@ -1,10 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
 // migration command : npx prisma migrate dev --name init
 // npx prisma generate
-
 
 generator client {
   provider = "prisma-client-js"
@@ -16,11 +14,11 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  username String @unique()
+  id       String    @id @default(uuid())
+  username String    @unique()
   password String
   hashedRt String?
-  posts Post[]
+  posts    Post[]
   comments Comment[]
 
   createdAt DateTime @default(now())
@@ -28,14 +26,15 @@ model User {
 }
 
 model Post {
-  id String @id @default(uuid())
-  title String
-  body String
-  likes Int @default(0)
-  userId String
-  comments Comment[]
+  id        String     @id @default(uuid())
+  title     String
+  body      String
+  likes     Int        @default(0)
+  slug      String
+  userId    String
+  comments  Comment[]
   postLikes PostLike[]
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
 
@@ -43,7 +42,7 @@ model Post {
 }
 
 model PostLike {
-  id String @id @default(uuid())
+  id     String @id @default(uuid())
   postId String
   userId String
 
@@ -56,11 +55,11 @@ model PostLike {
 }
 
 model Comment {
-  id String @id @default(uuid())
-  text String
-  likes Int @default(0)
-  userId String
-  postId String
+  id           String        @id @default(uuid())
+  text         String
+  likes        Int           @default(0)
+  userId       String
+  postId       String
   commentLikes CommentLike[]
 
   createdAt DateTime @default(now())
@@ -71,9 +70,9 @@ model Comment {
 }
 
 model CommentLike {
-  id String @id @default(uuid())
+  id        String @id @default(uuid())
   commentId String
-  userId String
+  userId    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
