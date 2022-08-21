@@ -48,11 +48,7 @@ const PostDetail: NextPage = () => {
           </ButtonBlock>
         </Card>
         <Card variant="bordered">
-          <CommentList
-            comments={data?.comments || []}
-            slug={data?.slug as string}
-            postId={data?.id as string}
-          />
+          <CommentList comments={data?.comments || []} slug={slug} postId={data?.id as string} />
         </Card>
       </Container>
       <Modal
