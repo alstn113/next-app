@@ -38,8 +38,7 @@ const Search = () => {
               >
                 <a>
                   <div>
-                    <div>{post.title}</div>
-                    <div>{post.body}</div>
+                    <div>제목 : {post.title}</div>
                     <div>{formatDate(post.createdAt)}</div>
                   </div>
                 </a>

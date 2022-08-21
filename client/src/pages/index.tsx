@@ -32,7 +32,6 @@ const Home: NextPage = () => {
                 <a>
                   <div>
                     <div>제목 : {post.title}</div>
-                    <div>내용 : {post.body}</div>
                     <div>좋아요 : {post.likes}</div>
                     <div>{formatDate(post.createdAt)}</div>
                   </div>

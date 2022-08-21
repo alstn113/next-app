@@ -33,6 +33,8 @@ const PostDetail: NextPage = () => {
         <Card variant="bordered">
           <span>Title : {data?.title}</span>
           <span>Body : {data?.body}</span>
+          <span>Likes : {data?.likes}</span>
+          <span>Slug : {data?.slug}</span>
           <span>CreatedAt : {formatDate(data?.createdAt)}</span>
           <ButtonBlock>
             {user?.username === data?.user.username && (
@@ -81,10 +83,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const id = params?.id as string;
 
   const queryClient = new QueryClient();
-  const post = await queryClient.fetchQuery(
-    useGetPost.getKey(id),
-    useGetPost.fetcher(id),
-  );
+  const post = await queryClient.fetchQuery(useGetPost.getKey(id), useGetPost.fetcher(id));
 
   await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
 
