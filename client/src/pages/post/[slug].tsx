@@ -2,7 +2,7 @@ import CommentList from '@/components/CommentList';
 import { Button, Card, Modal } from '@/components/common';
 import useDisclosure from '@/hooks/useDisclosure';
 import useDeletePost from '@/hooks/queries/post/useDeletePost';
-import useGetPost from '@/hooks/queries/post/useGetPost';
+import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import formatDate from '@/lib/utils/formatDate';
 import { flexCenter } from '@/lib/styles/shared';
@@ -18,15 +18,18 @@ import { useRouter } from 'next/router';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
-  const id = router.query.id as string;
+  const slug = encodeURIComponent(router.query?.slug as string);
+  const { data: user } = useGetME();
+  const { data } = useGetPostBySlug(slug);
+
   const { mutate } = useDeletePost({
     onSuccess: () => {
       router.push('/');
     },
   });
-  const { data: user } = useGetME();
-  const { data } = useGetPost(id);
+
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false });
+
   return (
     <>
       <Container>
@@ -45,7 +48,11 @@ const PostDetail: NextPage = () => {
           </ButtonBlock>
         </Card>
         <Card variant="bordered">
-          <CommentList comments={data?.comments || []} postId={id} />
+          <CommentList
+            comments={data?.comments || []}
+            slug={data?.slug as string}
+            postId={data?.id as string}
+          />
         </Card>
       </Container>
       <Modal
@@ -53,7 +60,7 @@ const PostDetail: NextPage = () => {
         message="되돌릴 수 없습니다!!"
         visible={isOpen}
         onCancel={onClose}
-        onConfirm={() => mutate(id)}
+        onConfirm={() => mutate(data?.id as string)}
       />
     </>
   );
@@ -80,10 +87,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     dehydratedState: DehydratedState;
   }>
 > => {
-  const id = params?.id as string;
+  const slug = encodeURIComponent(params?.slug as string);
 
   const queryClient = new QueryClient();
-  const post = await queryClient.fetchQuery(useGetPost.getKey(id), useGetPost.fetcher(id));
+  const post = await queryClient.fetchQuery(
+    useGetPostBySlug.getKey(slug),
+    useGetPostBySlug.fetcher(slug),
+  );
 
   await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
 

@@ -1,5 +1,5 @@
 import useCreateComment from '@/hooks/queries/comment/useCreateComment';
-import useGetPost from '@/hooks/queries/post/useGetPost';
+import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
 import { IComment } from '@/lib/interfaces';
 import formatDate from '@/lib/utils/formatDate';
 import { flexCenter } from '@/lib/styles/shared';
@@ -16,6 +16,7 @@ import TextInput from './common/@Components/TextInput/TextInput';
 interface Props {
   comments: IComment[];
   postId: string;
+  slug: string;
 }
 
 interface IFormInput {
@@ -26,11 +27,11 @@ const schema = yup.object().shape({
   text: yup.string().required('필수항목입니다'),
 });
 
-const CommentList = ({ comments, postId }: Props) => {
+const CommentList = ({ comments, postId, slug }: Props) => {
   const queryClient = useQueryClient();
   const { mutate } = useCreateComment({
     onSuccess: async () => {
-      await queryClient.refetchQueries(useGetPost.getKey(postId));
+      await queryClient.refetchQueries(useGetPostBySlug.getKey(slug));
       reset({ text: '' });
     },
   });

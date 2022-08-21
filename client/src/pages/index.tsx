@@ -23,12 +23,7 @@ const Home: NextPage = () => {
         page.posts.map((post) => (
           <CardBox key={post.id}>
             <Card variant="bordered" isPressable>
-              <Link
-                href={{
-                  pathname: '/post/[id]',
-                  query: { id: post.id },
-                }}
-              >
+              <Link href={`/post/${encodeURIComponent(post.slug)}`}>
                 <a>
                   <div>
                     <div>제목 : {post.title}</div>
