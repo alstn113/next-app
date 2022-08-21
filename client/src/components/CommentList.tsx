@@ -1,6 +1,6 @@
 import useCreateComment from '@/hooks/queries/comment/useCreateComment';
 import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
-import { IComment } from '@/lib/interfaces';
+import { IComment } from '@/lib/types';
 import formatDate from '@/lib/utils/formatDate';
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';

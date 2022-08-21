@@ -1,6 +1,7 @@
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import CommentAPI from '@/lib/api/comment';
-import { IComment, ICommentCreateRequest, ICustomAxiosError } from '@/lib/interfaces';
+import type { IComment, ICommentCreateRequest } from '@/lib/types';
+import type { ICustomAxiosError } from '@/lib/error';
 
 const useCreateComment = (
   options?: UseMutationOptions<IComment, ICustomAxiosError, ICommentCreateRequest>,

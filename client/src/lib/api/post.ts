@@ -1,8 +1,4 @@
-import {
-  IFindPostQuery,
-  IPostCreateRequest,
-  IPostUpdateRequest,
-} from '../interfaces/post.interface';
+import type { IFindPostQuery, IPostCreateRequest, IPostUpdateRequest } from '@/lib/types';
 import apiClient from './apiClient';
 
 const PostAPI = {

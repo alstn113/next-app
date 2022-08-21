@@ -1,6 +1,7 @@
 import PostAPI from '@/lib/api/post';
-import { IPost, ICustomAxiosError, IPostUpdateRequest } from '@/lib/interfaces';
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
+import type { IPost, IPostUpdateRequest } from '@/lib/types';
+import type { ICustomAxiosError } from '@/lib/error';
+import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useUpdatePost = (
   id: string,

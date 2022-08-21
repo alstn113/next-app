@@ -1,4 +1,4 @@
-import { ILoginRequest, IRegisterRequest } from '../interfaces';
+import type { ILoginRequest, IRegisterRequest } from '@/lib/types';
 import apiClient from './apiClient';
 
 const AuthAPI = {

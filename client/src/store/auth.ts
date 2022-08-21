@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { IUser } from '../lib/interfaces';
+import type { IUser } from '@/lib/types';
 
 export interface IState {
   user: IUser | null;

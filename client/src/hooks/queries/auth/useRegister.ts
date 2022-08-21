@@ -1,6 +1,7 @@
 import AuthAPI from '@/lib/api/auth';
-import { ICustomAxiosError, IRegisterRequest } from '@/lib/interfaces';
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
+import type { IRegisterRequest } from '@/lib/types';
+import type { ICustomAxiosError } from '@/lib/error';
+import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
 
 const useRegister = (
   options?: UseMutationOptions<undefined, ICustomAxiosError, IRegisterRequest>,

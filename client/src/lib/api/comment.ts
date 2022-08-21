@@ -1,4 +1,4 @@
-import { ICommentCreateRequest } from '@/lib/interfaces';
+import type { ICommentCreateRequest } from '@/lib/types';
 import apiClient from '@/lib/api/apiClient';
 
 const CommentAPI = {
