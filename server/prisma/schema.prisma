@@ -30,7 +30,7 @@ model Post {
   title     String
   body      String
   likes     Int        @default(0)
-  slug      String
+  slug      String     @unique
   userId    String
   comments  Comment[]
   postLikes PostLike[]

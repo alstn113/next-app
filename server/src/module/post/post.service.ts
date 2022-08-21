@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { generateId, slugify } from 'src/utils/slugify';
 import { CreatePostDto } from './dto/create-post.dto';
 import { FindPostQueryDto } from './dto/find-post-query.dto';
 
@@ -104,8 +105,13 @@ export class PostService {
   }
 
   async createPost(userId: string, { title, body }: CreatePostDto) {
+    let slug = slugify(title);
+    const isSameSlugExists = await this.prisma.post.findUnique({ where: { slug } });
+    if (isSameSlugExists) {
+      slug += `-${generateId()}`;
+    }
     return await this.prisma.post.create({
-      data: { title, body, userId },
+      data: { title, body, userId, slug },
     });
   }
 

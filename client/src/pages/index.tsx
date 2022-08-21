@@ -1,27 +1,15 @@
 import { Card, Skeleton } from '@/components/common';
-import useGetPostsByQueries, {
-  IPostsByQueries,
-} from '@/hooks/queries/post/useGetPostsByQueries';
+import useGetPostsByQueries, { IPostsByQueries } from '@/hooks/queries/post/useGetPostsByQueries';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import formatDate from '@/lib/utils/formatDate';
 import styled from '@emotion/styled';
-import {
-  dehydrate,
-  DehydratedState,
-  InfiniteData,
-  QueryClient,
-} from '@tanstack/react-query';
-import type {
-  GetServerSideProps,
-  GetServerSidePropsResult,
-  NextPage,
-} from 'next';
+import { dehydrate, DehydratedState, InfiniteData, QueryClient } from '@tanstack/react-query';
+import type { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
 import Link from 'next/link';
 
 const Home: NextPage = () => {
-  const { data, hasNextPage, fetchNextPage, isFetching } =
-    useGetPostsByQueries();
+  const { data, hasNextPage, fetchNextPage, isFetching } = useGetPostsByQueries();
 
   const loadMore = () => {
     if (hasNextPage) fetchNextPage();
@@ -42,9 +30,8 @@ const Home: NextPage = () => {
                 }}
               >
                 <div>
-                  <div>
-                    {post.title} {post.body}
-                  </div>
+                  <div>제목 : {post.title}</div>
+                  <div>내용 : {post.body}</div>
                   <div>좋아요 : {post.likes}</div>
                   <div>{formatDate(post.createdAt)}</div>
                 </div>
