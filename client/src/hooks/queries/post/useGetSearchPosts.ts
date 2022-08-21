@@ -13,8 +13,7 @@ const useGetSearchPosts = (
   );
 };
 
-useGetSearchPosts.fetcher = (keyword: string) => () =>
-  PostAPI.getSearchPosts(keyword);
+useGetSearchPosts.fetcher = (keyword: string) => () => PostAPI.getSearchPosts(keyword);
 useGetSearchPosts.getKey = (keyword: string) => ['GetSearchPosts', keyword];
 
 export default useGetSearchPosts;

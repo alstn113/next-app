@@ -6,10 +6,7 @@ const useUpdatePost = (
   id: string,
   options?: UseMutationOptions<IPost, ICustomAxiosError, IPostUpdateRequest>,
 ) => {
-  return useMutation<IPost, ICustomAxiosError, IPostUpdateRequest>(
-    PostAPI.updatePost(id),
-    options,
-  );
+  return useMutation<IPost, ICustomAxiosError, IPostUpdateRequest>(PostAPI.updatePost(id), options);
 };
 
 export default useUpdatePost;
