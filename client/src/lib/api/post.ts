@@ -24,12 +24,20 @@ const PostAPI = {
     const { data } = await apiClient.post('/post', input);
     return data;
   },
-  deletePost: async (id: string) => {
-    const { data } = await apiClient.delete(`/post/${id}`);
+  deletePost: async (postId: string) => {
+    const { data } = await apiClient.delete(`/post/${postId}`);
     return data;
   },
-  updatePost: (id: string) => async (input: IPostUpdateRequest) => {
-    const { data } = await apiClient.patch(`/post/${id}`, input);
+  updatePost: (postId: string) => async (input: IPostUpdateRequest) => {
+    const { data } = await apiClient.patch(`/post/${postId}`, input);
+    return data;
+  },
+  likePost: async (postId: string) => {
+    const { data } = await apiClient.post(`/post/${postId}/likes`);
+    return data;
+  },
+  unlikePost: async (postId: string) => {
+    const { data } = await apiClient.delete(`/post/${postId}/likes`);
     return data;
   },
 };

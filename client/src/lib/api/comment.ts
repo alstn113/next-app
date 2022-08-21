@@ -6,8 +6,16 @@ const CommentAPI = {
     const { data } = await apiClient.post('/comment', input);
     return data;
   },
-  deleteComment: async (id: string) => {
-    const { data } = await apiClient.delete(`/comment/${id}`);
+  deleteComment: async (commentId: string) => {
+    const { data } = await apiClient.delete(`/comment/${commentId}`);
+    return data;
+  },
+  likeComment: async (commentId: string) => {
+    const { data } = await apiClient.post(`/comment/${commentId}/likes`);
+    return data;
+  },
+  unlikeComment: async (commentId: string) => {
+    const { data } = await apiClient.delete(`/comment/${commentId}/likes`);
     return data;
   },
 };
