@@ -1,13 +1,13 @@
 import PostAPI from '@/lib/api/post';
-import type { IPostList } from '@/lib/types';
-import type { ICustomAxiosError } from '@/lib/error';
+import type { PostList } from '@/lib/types';
+import type { CustomAxiosError } from '@/lib/error';
 import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const useGetSearchPosts = (
   keyword: string,
-  options?: UseQueryOptions<IPostList, ICustomAxiosError>,
+  options?: UseQueryOptions<PostList, CustomAxiosError>,
 ) => {
-  return useQuery<IPostList, ICustomAxiosError>(
+  return useQuery<PostList, CustomAxiosError>(
     ['GetSearchPosts', keyword],
     () => PostAPI.getSearchPosts(keyword),
     options,

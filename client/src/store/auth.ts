@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
-import type { IUser } from '@/lib/types';
+import type { User } from '@/lib/types';
 
 export interface IState {
-  user: IUser | null;
+  user: User | null;
 }
 
 const authAtom = atom<IState>({

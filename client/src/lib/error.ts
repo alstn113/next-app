@@ -1,3 +1,3 @@
 import { AxiosError } from 'axios';
 
-export interface ICustomAxiosError extends AxiosError<{ message: string; statusCode: number }> {}
+export interface CustomAxiosError extends AxiosError<{ message: string; statusCode: number }> {}

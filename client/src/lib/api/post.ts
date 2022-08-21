@@ -1,8 +1,8 @@
-import type { IFindPostQuery, IPostCreateRequest, IPostUpdateRequest } from '@/lib/types';
+import type { FindPostQuery, CreatePostParams, UpdatePostParams } from '@/lib/types';
 import apiClient from './apiClient';
 
 const PostAPI = {
-  getPostsByQueries: async ({ cursor }: IFindPostQuery) => {
+  getPostsByQueries: async ({ cursor }: FindPostQuery) => {
     const { data } = await apiClient.get('/post', {
       params: { cursor },
     });
@@ -12,20 +12,20 @@ const PostAPI = {
     const { data } = await apiClient.get(`/post/search?keyword=${keyword}`);
     return data;
   },
-  getPostBySlug: async (slug: string) => {
-    const { data } = await apiClient.get(`/post/${slug}`);
+  getPostBySlug: async (postSlug: string) => {
+    const { data } = await apiClient.get(`/post/${postSlug}`);
     return data;
   },
-  createPost: async (input: IPostCreateRequest) => {
-    const { data } = await apiClient.post('/post', input);
+  createPost: async (params: CreatePostParams) => {
+    const { data } = await apiClient.post('/post', params);
     return data;
   },
   deletePost: async (postId: string) => {
     const { data } = await apiClient.delete(`/post/${postId}`);
     return data;
   },
-  updatePost: (postId: string) => async (input: IPostUpdateRequest) => {
-    const { data } = await apiClient.patch(`/post/${postId}`, input);
+  updatePost: (postId: string) => async (params: UpdatePostParams) => {
+    const { data } = await apiClient.patch(`/post/${postId}`, params);
     return data;
   },
   likePost: async (postId: string) => {

@@ -1,9 +1,9 @@
-import type { ICommentCreateRequest } from '@/lib/types';
+import type { CreateCommentParams } from '@/lib/types';
 import apiClient from '@/lib/api/apiClient';
 
 const CommentAPI = {
-  createComment: async (input: ICommentCreateRequest) => {
-    const { data } = await apiClient.post('/comment', input);
+  createComment: async (params: CreateCommentParams) => {
+    const { data } = await apiClient.post('/comment', params);
     return data;
   },
   deleteComment: async (commentId: string) => {

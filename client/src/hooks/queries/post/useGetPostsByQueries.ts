@@ -1,17 +1,17 @@
 import PostAPI from '@/lib/api/post';
-import type { IPostList } from '@/lib/types';
-import type { ICustomAxiosError } from '@/lib/error';
+import type { PostList } from '@/lib/types';
+import type { CustomAxiosError } from '@/lib/error';
 import { useInfiniteQuery, type UseInfiniteQueryOptions } from '@tanstack/react-query';
 
-export interface IPostsByQueries {
-  posts: IPostList;
+export interface PostsByQueries {
+  posts: PostList;
   nextCursor?: string;
 }
 
 const useGetPostsByQueries = (
-  options?: UseInfiniteQueryOptions<IPostsByQueries, ICustomAxiosError>,
+  options?: UseInfiniteQueryOptions<PostsByQueries, CustomAxiosError>,
 ) => {
-  return useInfiniteQuery<IPostsByQueries, ICustomAxiosError>(
+  return useInfiniteQuery<PostsByQueries, CustomAxiosError>(
     ['GetPostsByQueries'],
     ({ pageParam }) => PostAPI.getPostsByQueries({ cursor: pageParam }),
     {

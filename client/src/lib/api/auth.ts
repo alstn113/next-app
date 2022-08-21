@@ -1,13 +1,13 @@
-import type { ILoginRequest, IRegisterRequest } from '@/lib/types';
+import type { AuthParams } from '@/lib/types';
 import apiClient from './apiClient';
 
 const AuthAPI = {
-  login: async (input: ILoginRequest) => {
-    const { data } = await apiClient.post('/auth/login', input);
+  login: async (params: AuthParams) => {
+    const { data } = await apiClient.post('/auth/login', params);
     return data;
   },
-  register: async (input: IRegisterRequest) => {
-    const { data } = await apiClient.post('/auth/register', input);
+  register: async (params: AuthParams) => {
+    const { data } = await apiClient.post('/auth/register', params);
     return data;
   },
   logout: async () => {

@@ -1,55 +1,50 @@
-export interface ILoginRequest {
+export interface AuthParams {
   username: string;
   password: string;
 }
 
-export interface IRegisterRequest {
-  username: string;
-  password: string;
-}
-
-export interface IComment {
+export interface Comment {
   id: string;
   text: string;
   postId: string;
   userId: string;
-  user: IUser;
+  user: User;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface ICommentCreateRequest {
+export interface CreateCommentParams {
   text: string;
   postId: string;
 }
 
-export type IPostList = Omit<IPost, 'comments'>[];
+export type PostList = Omit<Post, 'comments'>[];
 
-export interface IPost {
+export interface Post {
   id: string;
   title: string;
   body: string;
   slug: string;
   likes: number;
   userId: string;
-  user: IUser;
-  comments: IComment[];
+  user: User;
+  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 }
 
-export interface IPostCreateRequest {
+export interface CreatePostParams {
   title: string;
   body: string;
 }
 
-export interface IPostUpdateRequest extends IPostCreateRequest {}
+export type UpdatePostParams = CreatePostParams;
 
-export interface IFindPostQuery {
+export interface FindPostQuery {
   cursor?: string;
 }
 
-export interface IUser {
+export interface User {
   id: string;
   username: string;
 }

@@ -1,10 +1,10 @@
 import AuthAPI from '@/lib/api/auth';
-import type { ILoginRequest } from '@/lib/types';
-import type { ICustomAxiosError } from '@/lib/error';
+import type { AuthParams } from '@/lib/types';
+import type { CustomAxiosError } from '@/lib/error';
 import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
 
-const useLogin = (options?: UseMutationOptions<undefined, ICustomAxiosError, ILoginRequest>) => {
-  return useMutation<undefined, ICustomAxiosError, ILoginRequest>(AuthAPI.login, options);
+const useLogin = (options?: UseMutationOptions<undefined, CustomAxiosError, AuthParams>) => {
+  return useMutation<undefined, CustomAxiosError, AuthParams>(AuthAPI.login, options);
 };
 
 export default useLogin;
