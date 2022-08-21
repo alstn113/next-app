@@ -2,15 +2,15 @@ import PostAPI from '@/lib/api/post';
 import { IPost, ICustomAxiosError } from '@/lib/interfaces';
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
-const useGetPostBySlug = (id: string, options?: UseQueryOptions<IPost, ICustomAxiosError>) => {
+const useGetPostBySlug = (slug: string, options?: UseQueryOptions<IPost, ICustomAxiosError>) => {
   return useQuery<IPost, ICustomAxiosError>(
-    ['GetPostBySlug', id],
-    () => PostAPI.getPostBySlug(id),
+    ['GetPostBySlug', slug],
+    () => PostAPI.getPostBySlug(slug),
     options,
   );
 };
 
-useGetPostBySlug.fetcher = (id: string) => () => PostAPI.getPostBySlug(id);
-useGetPostBySlug.getKey = (id: string) => ['GetPostBySlug', id];
+useGetPostBySlug.fetcher = (slug: string) => () => PostAPI.getPostBySlug(slug);
+useGetPostBySlug.getKey = (slug: string) => ['GetPostBySlug', slug];
 
 export default useGetPostBySlug;
