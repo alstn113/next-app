@@ -29,7 +29,6 @@ model Post {
   id    String @id @default(uuid())
   title String
   body  String
-  likes Int    @default(0)
   slug  String @unique
 
   userId String

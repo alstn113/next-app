@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { PostStats } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId, slugify } from 'src/utils/slugify';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -77,6 +78,7 @@ export class PostService {
             username: true,
           },
         },
+        PostStats: true,
       },
     });
   }
@@ -98,6 +100,7 @@ export class PostService {
             createdAt: 'asc',
           },
         },
+        PostStats: true,
       },
     });
     if (!post) throw new NotFoundException();
@@ -110,12 +113,39 @@ export class PostService {
     if (isSameSlugExists) {
       slug += `-${generateId()}`;
     }
-    return await this.prisma.post.create({
+    const post = await this.prisma.post.create({
       data: { title, body, userId, slug },
     });
+
+    await this.prisma.postStats.create({
+      data: {
+        postId: post.id,
+      },
+    });
+
+    return post;
   }
 
-  async likePost({ userId, postId }: PostActionParams) {
+  async updatePostLikes(postId: string): Promise<PostStats> {
+    const likes = await this.prisma.postLike.count({
+      where: {
+        postId,
+      },
+    });
+
+    const postStats = await this.prisma.postStats.update({
+      data: {
+        likes,
+      },
+      where: {
+        postId,
+      },
+    });
+
+    return postStats;
+  }
+
+  async likePost({ userId, postId }: PostActionParams): Promise<PostStats> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
@@ -131,16 +161,11 @@ export class PostService {
     if (!alreadyLiked) {
       await this.prisma.postLike.create({ data: { postId, userId } });
     }
-    const postLikes = await this.prisma.postLike.count({
-      where: { postId },
-    });
-    return await this.prisma.post.update({
-      data: { likes: postLikes },
-      where: { id: postId },
-    });
+    const postStats = await this.updatePostLikes(postId);
+    return postStats;
   }
 
-  async unlikePost({ userId, postId }: PostActionParams) {
+  async unlikePost({ userId, postId }: PostActionParams): Promise<PostStats> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
@@ -158,16 +183,13 @@ export class PostService {
         where: { postId_userId: { postId, userId } },
       });
     }
-    const postLikes = await this.prisma.postLike.count({
-      where: { postId },
-    });
-    return await this.prisma.post.update({
-      data: { likes: postLikes },
-      where: { id: postId },
-    });
+
+    const postStats = await this.updatePostLikes(postId);
+
+    return postStats;
   }
 
-  async deletePost({ userId, postId }) {
+  async deletePost({ userId, postId }: PostActionParams) {
     const post = await this.prisma.post.findUnique({ where: { id: postId } });
     if (!post) throw new NotFoundException();
     if (post.userId !== userId) throw new UnauthorizedException();
