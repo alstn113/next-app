@@ -1,5 +1,7 @@
 import { Card, Skeleton } from '@/components/common';
-import useGetPostsByQueries, { IPostsByQueries } from '@/hooks/queries/post/useGetPostsByQueries';
+import useGetPostsByQueries, {
+  type PostsByQueries,
+} from '@/hooks/queries/post/useGetPostsByQueries';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import formatDate from '@/lib/utils/formatDate';
@@ -27,7 +29,7 @@ const Home: NextPage = () => {
                 <a>
                   <div>
                     <div>제목 : {post.title}</div>
-                    <div>좋아요 : {post.likes}</div>
+                    <div>좋아요 : {post.postStats.likes}</div>
                     <div>{formatDate(post.createdAt)}</div>
                   </div>
                 </a>
@@ -69,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
       getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
     },
   );
-  const pages = queryClient.getQueryData<InfiniteData<IPostsByQueries>>(
+  const pages = queryClient.getQueryData<InfiniteData<PostsByQueries>>(
     useGetPostsByQueries.getKey(),
   )?.pages;
   queryClient.setQueryData(useGetPostsByQueries.getKey(), {

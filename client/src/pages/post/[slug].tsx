@@ -21,7 +21,6 @@ const PostDetail: NextPage = () => {
   const slug = encodeURIComponent(router.query?.slug as string);
   const { data: user } = useGetME();
   const { data } = useGetPostBySlug(slug);
-
   const { mutate } = useDeletePost({
     onSuccess: () => {
       router.push('/');
@@ -36,7 +35,8 @@ const PostDetail: NextPage = () => {
         <Card variant="bordered">
           <span>Title : {data?.title}</span>
           <span>Body : {data?.body}</span>
-          <span>Likes : {data?.likes}</span>
+          <span>Likes : {data?.postStats.likes}</span>
+          <span>Comment Counts : {data?.postStats.commentCounts}</span>
           <span>Slug : {data?.slug}</span>
           <span>CreatedAt : {formatDate(data?.createdAt)}</span>
           <ButtonBlock>

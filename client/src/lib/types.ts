@@ -25,10 +25,19 @@ export interface Post {
   title: string;
   body: string;
   slug: string;
-  likes: number;
   userId: string;
   user: User;
+  postStats: PostStats;
   comments: Comment[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PostStats {
+  id: string;
+  likes: number;
+  commentCounts: number;
+  postId: number;
   createdAt: string;
   updatedAt: string;
 }

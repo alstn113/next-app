@@ -1,6 +1,6 @@
 import useCreateComment from '@/hooks/queries/comment/useCreateComment';
 import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
-import { IComment } from '@/lib/types';
+import type { Comment } from '@/lib/types';
 import formatDate from '@/lib/utils/formatDate';
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
@@ -14,7 +14,7 @@ import ErrorMessage from './common/@Components/ErrorMessage/ErrorMessage';
 import TextInput from './common/@Components/TextInput/TextInput';
 
 interface Props {
-  comments: IComment[];
+  comments: Comment[];
   postId: string;
   slug: string;
 }
