@@ -26,19 +26,33 @@ model User {
 }
 
 model Post {
-  id        String     @id @default(uuid())
+  id        String        @id @default(uuid())
   title     String
   body      String
-  likes     Int        @default(0)
-  slug      String     @unique
+  likes     Int           @default(0)
+  slug      String        @unique
   userId    String
   comments  Comment[]
   postLikes PostLike[]
+  tags      PostsOnTags[]
+  PostStats PostStats?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PostStats {
+  id            String @id @default(uuid())
+  postId        String @unique
+  likes         Int    @default(0)
+  commentCounts Int    @default(0)
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model PostLike {
@@ -80,4 +94,26 @@ model CommentLike {
   comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   @@unique([commentId, userId])
+}
+
+model Tag {
+  id   String @id @default(uuid())
+  name String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  posts PostsOnTags[]
+}
+
+model PostsOnTags {
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
+  tagId  String
+  tag    Tag    @relation(fields: [tagId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@id([postId, tagId])
 }
