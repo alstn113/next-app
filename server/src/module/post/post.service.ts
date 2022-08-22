@@ -24,6 +24,7 @@ export class PostService {
               username: true,
             },
           },
+          postStats: true,
         },
       });
       const nextCursor = posts[size - 1]?.id;
@@ -45,6 +46,7 @@ export class PostService {
             username: true,
           },
         },
+        postStats: true,
       },
     });
     const nextCursor = posts[size - 1]?.id;
@@ -78,7 +80,7 @@ export class PostService {
             username: true,
           },
         },
-        PostStats: true,
+        postStats: true,
       },
     });
   }
@@ -100,7 +102,7 @@ export class PostService {
             createdAt: 'asc',
           },
         },
-        PostStats: true,
+        postStats: true,
       },
     });
     if (!post) throw new NotFoundException();
