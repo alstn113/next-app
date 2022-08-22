@@ -129,7 +129,7 @@ export class PostService {
   }
 
   async updatePostLikes(postId: string): Promise<PostStats> {
-    const likes = await this.prisma.postLike.count({
+    const postLikes = await this.prisma.postLike.count({
       where: {
         postId,
       },
@@ -137,7 +137,7 @@ export class PostService {
 
     const postStats = await this.prisma.postStats.update({
       data: {
-        likes,
+        postLikes,
       },
       where: {
         postId,

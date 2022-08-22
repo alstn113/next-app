@@ -46,7 +46,7 @@ model Post {
 
 model PostStats {
   id            String @id @default(uuid())
-  likes         Int    @default(0)
+  postLikes     Int    @default(0)
   commentCounts Int    @default(0)
 
   postId String @unique

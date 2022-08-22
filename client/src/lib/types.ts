@@ -35,7 +35,7 @@ export interface Post {
 
 export interface PostStats {
   id: string;
-  likes: number;
+  postLikes: number;
   commentCounts: number;
   postId: number;
   createdAt: string;
