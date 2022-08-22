@@ -26,15 +26,15 @@ model User {
 }
 
 model Post {
-  id        String        @id @default(uuid())
+  id        String     @id @default(uuid())
   title     String
   body      String
-  likes     Int           @default(0)
-  slug      String        @unique
+  likes     Int        @default(0)
+  slug      String     @unique
   userId    String
   comments  Comment[]
   postLikes PostLike[]
-  tags      PostsOnTags[]
+  tags      PostTags[]
   PostStats PostStats?
 
   createdAt DateTime @default(now())
@@ -103,10 +103,10 @@ model Tag {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
-  posts PostsOnTags[]
+  posts PostTags[]
 }
 
-model PostsOnTags {
+model PostTags {
   postId String
   post   Post   @relation(fields: [postId], references: [id])
   tagId  String
