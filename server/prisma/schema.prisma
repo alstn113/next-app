@@ -26,28 +26,31 @@ model User {
 }
 
 model Post {
-  id        String     @id @default(uuid())
-  title     String
-  body      String
-  likes     Int        @default(0)
-  slug      String     @unique
-  userId    String
+  id    String @id @default(uuid())
+  title String
+  body  String
+  likes Int    @default(0)
+  slug  String @unique
+
+  userId String
+
+  PostStats PostStats?
   comments  Comment[]
   postLikes PostLike[]
   tags      PostTags[]
-  PostStats PostStats?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model PostStats {
   id            String @id @default(uuid())
-  postId        String @unique
   likes         Int    @default(0)
   commentCounts Int    @default(0)
+
+  postId String @unique
 
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
@@ -56,35 +59,39 @@ model PostStats {
 }
 
 model PostLike {
-  id     String @id @default(uuid())
+  id String @id @default(uuid())
+
   postId String
   userId String
 
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([postId, userId])
 }
 
 model Comment {
-  id           String        @id @default(uuid())
-  text         String
-  likes        Int           @default(0)
-  userId       String
-  postId       String
-  commentLikes CommentLike[]
+  id    String @id @default(uuid())
+  text  String
+  likes Int    @default(0)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt()
+  userId String
+  postId String
+
+  commentLikes CommentLike[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt()
 }
 
 model CommentLike {
-  id        String @id @default(uuid())
+  id String @id @default(uuid())
+
   commentId String
   userId    String
 
@@ -100,10 +107,10 @@ model Tag {
   id   String @id @default(uuid())
   name String @unique
 
+  posts PostTags[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-
-  posts PostTags[]
 }
 
 model PostTags {
