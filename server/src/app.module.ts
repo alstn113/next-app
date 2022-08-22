@@ -8,6 +8,7 @@ import { AuthMiddleware } from './middlewares/jwt-auth.middleware';
 import { AuthModule } from './module/auth/auth.module';
 import { CommentModule } from './module/comment/comment.module';
 import { PostModule } from './module/post/post.module';
+import { TagModule } from './module/tag/tag.module';
 import { UserModule } from './module/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 
@@ -23,6 +24,7 @@ import { PrismaModule } from './prisma/prisma.module';
     UserModule,
     PostModule,
     CommentModule,
+    TagModule,
   ],
   providers: [
     {
