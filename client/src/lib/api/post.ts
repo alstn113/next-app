@@ -12,8 +12,8 @@ const PostAPI = {
     const { data } = await apiClient.get(`/post/search?keyword=${keyword}`);
     return data;
   },
-  getPostBySlug: async (postSlug: string) => {
-    const { data } = await apiClient.get(`/post/${postSlug}`);
+  getPostBySlug: async (slug: string) => {
+    const { data } = await apiClient.get(`/post/${slug}`);
     return data;
   },
   createPost: async (params: CreatePostParams) => {
