@@ -46,7 +46,7 @@ model Post {
 
 model PostStats {
   id            String @id @default(uuid())
-  postLikes     Int    @default(0)
+  likes         Int    @default(0)
   commentCounts Int    @default(0)
 
   postId String @unique
@@ -72,17 +72,21 @@ model PostLike {
 }
 
 model Comment {
-  id    String @id @default(uuid())
-  text  String
-  likes Int    @default(0)
+  id               String @id @default(uuid())
+  text             String
+  likes            Int    @default(0)
+  subCommentsCount Int    @default(0)
 
-  userId String
-  postId String
+  userId          String
+  postId          String
+  parentCommentId String?
 
   commentLikes CommentLike[]
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post          Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parentComment Comment?  @relation("ParentCommentSubComments", fields: [parentCommentId], references: [id])
+  subComment    Comment[] @relation("ParentCommentSubComments")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt()
