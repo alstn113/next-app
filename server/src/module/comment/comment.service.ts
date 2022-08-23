@@ -114,8 +114,14 @@ export class CommentService {
   async deleteComment({ userId, commentId }: CommentActionParams) {
     const comment = await this.findComment(commentId);
     if (comment.userId !== userId) throw new UnauthorizedException();
-    return await this.prisma.comment.delete({
-      where: { id: commentId },
+
+    await this.prisma.comment.update({
+      data: {
+        deletedAt: new Date(),
+      },
+      where: {
+        id: commentId,
+      },
     });
   }
 
