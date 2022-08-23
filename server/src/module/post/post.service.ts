@@ -9,6 +9,16 @@ import { FindPostQueryDto } from './dto/find-post-query.dto';
 export class PostService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findPostById(postId: string) {
+    const post = await this.prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+    if (!post) throw new NotFoundException();
+    return post;
+  }
+
   async findPostsByQuries({ cursor }: FindPostQueryDto) {
     const size = 20;
     if (!cursor) {
@@ -148,10 +158,7 @@ export class PostService {
   }
 
   async likePost({ userId, postId }: PostActionParams): Promise<PostStats> {
-    const post = await this.prisma.post.findUnique({
-      where: { id: postId },
-    });
-    if (!post) throw new NotFoundException();
+    await this.findPostById(postId);
 
     const alreadyLiked = await this.prisma.postLike.findUnique({
       where: { postId_userId: { postId, userId } },
@@ -164,10 +171,7 @@ export class PostService {
   }
 
   async unlikePost({ userId, postId }: PostActionParams): Promise<PostStats> {
-    const post = await this.prisma.post.findUnique({
-      where: { id: postId },
-    });
-    if (!post) throw new NotFoundException();
+    await this.findPostById(postId);
 
     const alreadyLiked = await this.prisma.postLike.findUnique({
       where: { postId_userId: { postId, userId } },
@@ -184,8 +188,7 @@ export class PostService {
   }
 
   async deletePost({ userId, postId }: PostActionParams) {
-    const post = await this.prisma.post.findUnique({ where: { id: postId } });
-    if (!post) throw new NotFoundException();
+    const post = await this.findPostById(postId);
     if (post.userId !== userId) throw new UnauthorizedException();
     return await this.prisma.post.delete({
       where: {

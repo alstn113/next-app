@@ -91,10 +91,7 @@ export class CommentService {
   }
 
   async deleteComment({ userId, commentId }: CommentActionParams) {
-    const comment = await this.prisma.comment.findUnique({
-      where: { id: commentId },
-    });
-    if (!comment) throw new NotFoundException();
+    const comment = await this.getComment(commentId);
     if (comment.userId !== userId) throw new UnauthorizedException();
     return await this.prisma.comment.delete({
       where: { id: commentId },
@@ -116,10 +113,7 @@ export class CommentService {
   }
 
   async likeComment({ userId, commentId }: CommentActionParams) {
-    const comment = await this.prisma.comment.findUnique({
-      where: { id: commentId },
-    });
-    if (!comment) throw new NotFoundException();
+    await this.getComment(commentId);
 
     const alreadyLiked = await this.prisma.commentLike.findUnique({
       where: {
@@ -135,10 +129,7 @@ export class CommentService {
   }
 
   async unlikeComment({ userId, commentId }: CommentActionParams) {
-    const comment = await this.prisma.comment.findUnique({
-      where: { id: commentId },
-    });
-    if (!comment) throw new NotFoundException();
+    await this.getComment(commentId);
 
     const alreadyLiked = await this.prisma.commentLike.findUnique({
       where: {
