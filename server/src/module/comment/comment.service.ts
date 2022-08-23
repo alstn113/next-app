@@ -42,18 +42,29 @@ export class CommentService {
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
     const parentComment = parentCommentId ? await this.findComment(parentCommentId) : null;
 
-    let comment: Prisma.CommentCreateManyInput;
-    comment.text = text;
-    comment.postId = postId;
-    comment.userId = userId;
-    comment.parentCommentId = parentComment?.id;
+    const comment: Prisma.XOR<Prisma.CommentCreateInput, Prisma.CommentUncheckedCreateInput> = {
+      text,
+      userId,
+      postId,
+      parentCommentId: parentComment?.id,
+    };
 
     if (parentComment) {
-      comment.level = parentComment.level += 1;
+      comment.level = parentComment.level + 1;
       if (comment.level >= 3) {
-        throw new HttpException('댓글은 3층까지만 가능합니다.', 400);
+        throw new HttpException('댓글은 3계층까지만 가능합니다.', 400);
       }
+    }
 
+    const createComment = await this.prisma.comment.create({
+      data: {
+        text,
+        userId,
+        postId,
+      },
+    });
+
+    if (parentComment) {
       const subCommentsCount = await this.prisma.comment.count({
         where: {
           parentCommentId: parentComment.id,
@@ -69,7 +80,7 @@ export class CommentService {
         },
       });
     }
-    const createComment = await this.prisma.comment.create({ data: comment });
+
     await this.updatePostCommentsCount(postId);
     return createComment;
   }
