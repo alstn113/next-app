@@ -40,9 +40,6 @@ export class CommentService {
   }
 
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new UnauthorizedException();
-
     const parentComment = parentCommentId ? await this.getComment(parentCommentId) : null;
 
     let comment: Prisma.CommentCreateManyInput;
@@ -119,8 +116,6 @@ export class CommentService {
   }
 
   async likeComment({ userId, commentId }: CommentActionParams) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new UnauthorizedException();
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
     });
@@ -140,8 +135,6 @@ export class CommentService {
   }
 
   async unlikeComment({ userId, commentId }: CommentActionParams) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new UnauthorizedException();
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
     });

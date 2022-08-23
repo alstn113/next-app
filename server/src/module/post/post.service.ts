@@ -148,10 +148,6 @@ export class PostService {
   }
 
   async likePost({ userId, postId }: PostActionParams): Promise<PostStats> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-    });
-    if (!user) throw new UnauthorizedException();
     const post = await this.prisma.post.findUnique({
       where: { id: postId },
     });
@@ -168,10 +164,6 @@ export class PostService {
   }
 
   async unlikePost({ userId, postId }: PostActionParams): Promise<PostStats> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-    });
-    if (!user) throw new UnauthorizedException();
     const post = await this.prisma.post.findUnique({
       where: { id: postId },
     });
