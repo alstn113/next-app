@@ -57,11 +57,7 @@ export class CommentService {
     }
 
     const createComment = await this.prisma.comment.create({
-      data: {
-        text,
-        userId,
-        postId,
-      },
+      data: comment,
     });
 
     if (parentComment) {
@@ -86,9 +82,9 @@ export class CommentService {
   }
 
   async updatePostCommentsCount(postId: string) {
-    const commentsCount = await this.prisma.post.count({
+    const commentsCount = await this.prisma.comment.count({
       where: {
-        id: postId,
+        postId,
       },
     });
     await this.prisma.postStats.update({
@@ -99,14 +95,6 @@ export class CommentService {
     });
 
     return commentsCount;
-  }
-
-  async deleteComment({ userId, commentId }: CommentActionParams) {
-    const comment = await this.findComment(commentId);
-    if (comment.userId !== userId) throw new UnauthorizedException();
-    return await this.prisma.comment.delete({
-      where: { id: commentId },
-    });
   }
 
   async updateCommentLikes(commentId: string) {
@@ -121,6 +109,14 @@ export class CommentService {
     });
 
     return commentLikes;
+  }
+
+  async deleteComment({ userId, commentId }: CommentActionParams) {
+    const comment = await this.findComment(commentId);
+    if (comment.userId !== userId) throw new UnauthorizedException();
+    return await this.prisma.comment.delete({
+      where: { id: commentId },
+    });
   }
 
   async likeComment({ userId, commentId }: CommentActionParams) {
