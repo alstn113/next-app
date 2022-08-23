@@ -107,11 +107,6 @@ export class PostService {
             username: true,
           },
         },
-        comments: {
-          orderBy: {
-            createdAt: 'asc',
-          },
-        },
         postStats: true,
       },
     });

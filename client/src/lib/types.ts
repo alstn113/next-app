@@ -10,19 +10,23 @@ export interface Comment {
   level: number;
   parentCommentId?: string;
   subCommentsCount: number;
+  subComments: Comment[];
   postId: string;
   userId: string;
   user: User;
   createdAt: string;
   updatedAt: string;
+  deletedAt: string;
 }
+
+export type CommentList = Comment[];
 
 export interface CreateCommentParams {
   text: string;
   postId: string;
 }
 
-export type PostList = Omit<Post, 'comments'>[];
+export type PostList = Post[];
 
 export interface Post {
   id: string;
@@ -32,7 +36,6 @@ export interface Post {
   userId: string;
   user: User;
   postStats: PostStats;
-  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 }
