@@ -29,7 +29,7 @@ const Home: NextPage = () => {
                 <a>
                   <div>
                     <div>제목 : {post.title}</div>
-                    <div>좋아요 : {post.postStats.postLikes}</div>
+                    <div>좋아요 : {post.postStats.likes}</div>
                     <div>{formatDate(post.createdAt)}</div>
                   </div>
                 </a>

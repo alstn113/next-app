@@ -6,6 +6,10 @@ export interface AuthParams {
 export interface Comment {
   id: string;
   text: string;
+  likes: number;
+  level: number;
+  parentCommentId?: string;
+  subCommentsCount: number;
   postId: string;
   userId: string;
   user: User;
@@ -35,8 +39,8 @@ export interface Post {
 
 export interface PostStats {
   id: string;
-  postLikes: number;
-  commentCounts: number;
+  likes: number;
+  commentsCount: number;
   postId: number;
   createdAt: string;
   updatedAt: string;

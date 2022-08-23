@@ -35,8 +35,8 @@ const PostDetail: NextPage = () => {
         <Card variant="bordered">
           <span>Title : {data?.title}</span>
           <span>Body : {data?.body}</span>
-          <span>PostLikes : {data?.postStats.postLikes}</span>
-          <span>Comment Counts : {data?.postStats.commentCounts}</span>
+          <span>PostLikes : {data?.postStats.likes}</span>
+          <span>Comment Counts : {data?.postStats.commentsCount}</span>
           <span>Slug : {data?.slug}</span>
           <span>CreatedAt : {formatDate(data?.createdAt)}</span>
           <ButtonBlock>
