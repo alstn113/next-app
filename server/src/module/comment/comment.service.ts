@@ -4,7 +4,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Comment, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
@@ -17,26 +17,83 @@ export class CommentService {
       where: {
         postId,
       },
-      orderBy: {
-        createdAt: 'desc',
-      },
+      orderBy: [{ createdAt: 'asc' }, { level: 'asc' }],
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
+        },
       },
     });
-    //TODO: deleted comments 처리하기
-    return comments;
+
+    const filteredComments = this.hideDeletedComments(comments);
+    const groupedComments = this.groupSubComments(filteredComments);
+
+    return groupedComments;
   }
 
   async findComment(commentId: string) {
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
-      include: { user: true },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
+        },
+      },
     });
     if (!comment || comment.deletedAt) {
       throw new NotFoundException();
     }
     return comment;
+  }
+
+  hideDeletedComments(comments: Comment[]) {
+    return comments.map((comment) => {
+      if (!comment.deletedAt) return comment;
+      return {
+        ...comment,
+        text: '',
+        likes: 0,
+        userId: null,
+        user: { id: null, username: null },
+        createdAt: new Date(0),
+        updatedAt: new Date(0),
+      };
+    });
+  }
+
+  groupSubComments(comments: Comment[]) {
+    const rootComments = comments.filter((comment) => comment.parentCommentId === null);
+    const subCommentsMap = new Map<string, Comment[]>();
+
+    comments.forEach((comment) => {
+      if (!comment.parentCommentId) return;
+      const subComments = subCommentsMap.get(comment.parentCommentId) ?? [];
+      subComments.push(comment);
+      subCommentsMap.set(comment.parentCommentId, subComments);
+    });
+
+    const groupedComments = rootComments.map((rootComment) => {
+      let subComments = subCommentsMap.get(rootComment.id) ?? [];
+      subComments = subComments.map((subComment) => {
+        const subsubComments = subCommentsMap.get(subComment.id) ?? [];
+        return {
+          ...subComment,
+          subComments: subsubComments,
+        };
+      });
+      return {
+        ...rootComment,
+        subComments,
+      };
+    });
+
+    return groupedComments;
   }
 
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
@@ -115,7 +172,7 @@ export class CommentService {
     const comment = await this.findComment(commentId);
     if (comment.userId !== userId) throw new UnauthorizedException();
 
-    await this.prisma.comment.update({
+    const deletedComment = await this.prisma.comment.update({
       data: {
         deletedAt: new Date(),
       },
@@ -123,6 +180,8 @@ export class CommentService {
         id: commentId,
       },
     });
+
+    return deletedComment;
   }
 
   async likeComment({ userId, commentId }: CommentActionParams) {
