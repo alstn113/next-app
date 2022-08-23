@@ -1,4 +1,10 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsRequestDto } from './dto/get-comments-request.dto';
@@ -35,10 +41,41 @@ export class CommentService {
   }
 
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
-    const parentComment = await this.prisma.comment.findUnique({ where: { id: parentCommentId } });
-    return await this.prisma.comment.create({
-      data: { text, postId, userId, parentCommentId },
-    });
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new UnauthorizedException();
+
+    const parentComment = parentCommentId ? await this.getComment(parentCommentId) : null;
+
+    let comment: Prisma.CommentCreateManyInput;
+    comment.text = text;
+    comment.postId = postId;
+    comment.userId = userId;
+    comment.parentCommentId = parentComment?.id;
+
+    if (parentComment) {
+      comment.level = parentComment.level += 1;
+      if (comment.level >= 3) {
+        throw new HttpException('댓글은 3층까지만 가능합니다.', 400);
+      }
+
+      const subCommentsCount = await this.prisma.comment.count({
+        where: {
+          parentCommentId: parentComment.id,
+        },
+      });
+
+      await this.prisma.comment.update({
+        data: {
+          subCommentsCount,
+        },
+        where: {
+          id: parentComment.id,
+        },
+      });
+    }
+    const createComment = await this.prisma.comment.create({ data: comment });
+
+    return createComment;
   }
 
   async deleteComment({ userId, commentId }: CommentActionParams) {
