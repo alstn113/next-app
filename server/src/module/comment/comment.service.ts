@@ -7,13 +7,12 @@ import {
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
-import { GetCommentsRequestDto } from './dto/get-comments-request.dto';
 
 @Injectable()
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getComments({ postId }: GetCommentsRequestDto) {
+  async getComments(postId: string) {
     const comments = await this.prisma.comment.findMany({
       where: {
         postId,
