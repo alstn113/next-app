@@ -6,4 +6,7 @@ export class CreateCommentDto {
 
   @ApiProperty()
   postId: string;
+
+  @ApiProperty({ nullable: true })
+  parentCommentId?: string;
 }

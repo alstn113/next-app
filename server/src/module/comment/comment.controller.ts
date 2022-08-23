@@ -1,13 +1,24 @@
-import { Controller, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Param, Delete, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { GetCurrentUserId } from 'src/common/decorators/get-current-user-id.decorator';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { GetCommentsRequestDto } from './dto/get-comments-request.dto';
 
 @Controller('comment')
 @ApiTags('comment')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
+
+  @Get('/')
+  async getComments(dto: GetCommentsRequestDto) {
+    return await this.commentService.getComment(dto);
+  }
+
+  @Get('/:commentId')
+  async getComment(@Param('commentId') commentId: string) {
+    return await this.commentService.getComments(commentId);
+  }
 
   @Post('/')
   async createComment(@GetCurrentUserId() userId: string, @Body() dto: CreateCommentDto) {

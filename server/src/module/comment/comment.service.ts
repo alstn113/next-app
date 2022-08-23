@@ -6,9 +6,10 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createComment(userId: string, { text, postId }: CreateCommentDto) {
+  async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
+    const parentComment = await this.prisma.comment.findUnique({ where: { id: parentCommentId } });
     return await this.prisma.comment.create({
-      data: { text, postId, userId },
+      data: { text, postId, userId, parentCommentId },
     });
   }
 
