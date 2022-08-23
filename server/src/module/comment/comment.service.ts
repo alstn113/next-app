@@ -89,6 +89,20 @@ export class CommentService {
     });
   }
 
+  async updateCommentLikes(commentId: string) {
+    const commentLikes = await this.prisma.commentLike.count({
+      where: {
+        commentId,
+      },
+    });
+    await this.prisma.comment.update({
+      data: { likes: commentLikes },
+      where: { id: commentId },
+    });
+
+    return commentLikes;
+  }
+
   async likeComment({ userId, commentId }: CommentActionParams) {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new UnauthorizedException();
@@ -105,15 +119,9 @@ export class CommentService {
     if (!alreadyLiked) {
       await this.prisma.commentLike.create({ data: { commentId, userId } });
     }
-    const commentLikes = await this.prisma.commentLike.count({
-      where: {
-        commentId,
-      },
-    });
-    return await this.prisma.comment.update({
-      data: { likes: commentLikes },
-      where: { id: commentId },
-    });
+
+    const commentLikes = await this.updateCommentLikes(commentId);
+    return commentLikes;
   }
 
   async unlikeComment({ userId, commentId }: CommentActionParams) {
@@ -134,15 +142,9 @@ export class CommentService {
         where: { commentId_userId: { commentId, userId } },
       });
     }
-    const commentLikes = await this.prisma.commentLike.count({
-      where: {
-        commentId,
-      },
-    });
-    return await this.prisma.comment.update({
-      data: { likes: commentLikes },
-      where: { id: commentId },
-    });
+
+    const commentLikes = await this.updateCommentLikes(commentId);
+    return commentLikes;
   }
 }
 
