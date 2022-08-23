@@ -12,7 +12,7 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getComments(postId: string) {
+  async findComments(postId: string) {
     const comments = await this.prisma.comment.findMany({
       where: {
         postId,
@@ -28,7 +28,7 @@ export class CommentService {
     return comments;
   }
 
-  async getComment(commentId: string) {
+  async findComment(commentId: string) {
     const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
       include: { user: true },
@@ -40,7 +40,7 @@ export class CommentService {
   }
 
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
-    const parentComment = parentCommentId ? await this.getComment(parentCommentId) : null;
+    const parentComment = parentCommentId ? await this.findComment(parentCommentId) : null;
 
     let comment: Prisma.CommentCreateManyInput;
     comment.text = text;
@@ -91,7 +91,7 @@ export class CommentService {
   }
 
   async deleteComment({ userId, commentId }: CommentActionParams) {
-    const comment = await this.getComment(commentId);
+    const comment = await this.findComment(commentId);
     if (comment.userId !== userId) throw new UnauthorizedException();
     return await this.prisma.comment.delete({
       where: { id: commentId },
@@ -113,7 +113,7 @@ export class CommentService {
   }
 
   async likeComment({ userId, commentId }: CommentActionParams) {
-    await this.getComment(commentId);
+    await this.findComment(commentId);
 
     const alreadyLiked = await this.prisma.commentLike.findUnique({
       where: {
@@ -129,7 +129,7 @@ export class CommentService {
   }
 
   async unlikeComment({ userId, commentId }: CommentActionParams) {
-    await this.getComment(commentId);
+    await this.findComment(commentId);
 
     const alreadyLiked = await this.prisma.commentLike.findUnique({
       where: {

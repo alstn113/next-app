@@ -13,13 +13,13 @@ export class CommentController {
   @Public()
   @Get('/post/:postId')
   async getComments(@Param('postId') postId: string) {
-    return await this.commentService.getComments(postId);
+    return await this.commentService.findComments(postId);
   }
 
   @Public()
   @Get('/:commentId')
   async getComment(@Param('commentId') commentId: string) {
-    return await this.commentService.getComment(commentId);
+    return await this.commentService.findComment(commentId);
   }
 
   @Post('/')

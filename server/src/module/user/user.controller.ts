@@ -14,6 +14,6 @@ export class UserController {
   @Get('/me')
   async getCurrentUser(@GetCurrentUserId() userId: string): Promise<UserResponseDto> {
     if (userId === undefined) return null;
-    return await this.userService.getUserById(userId);
+    return await this.userService.findUserById(userId);
   }
 }
