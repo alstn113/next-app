@@ -74,8 +74,24 @@ export class CommentService {
       });
     }
     const createComment = await this.prisma.comment.create({ data: comment });
-
+    await this.updatePostCommentsCount(postId);
     return createComment;
+  }
+
+  async updatePostCommentsCount(postId: string) {
+    const commentsCount = await this.prisma.post.count({
+      where: {
+        id: postId,
+      },
+    });
+    await this.prisma.postStats.update({
+      data: { commentsCount },
+      where: {
+        postId,
+      },
+    });
+
+    return commentsCount;
   }
 
   async deleteComment({ userId, commentId }: CommentActionParams) {
