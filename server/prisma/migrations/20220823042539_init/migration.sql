@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `Comment` ADD COLUMN `deletedAt` DATETIME(3) NULL,
+    ADD COLUMN `level` INTEGER NOT NULL DEFAULT 0;

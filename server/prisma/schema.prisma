@@ -76,6 +76,7 @@ model Comment {
   text             String
   likes            Int    @default(0)
   subCommentsCount Int    @default(0)
+  level            Int    @default(0)
 
   userId          String
   postId          String
@@ -88,8 +89,9 @@ model Comment {
   parentComment Comment?  @relation("ParentCommentSubComments", fields: [parentCommentId], references: [id])
   subComment    Comment[] @relation("ParentCommentSubComments")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt()
+  deletedAt DateTime?
 }
 
 model CommentLike {
