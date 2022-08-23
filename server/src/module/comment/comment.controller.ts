@@ -11,13 +11,13 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Get('/')
-  async getComments(dto: GetCommentsRequestDto) {
-    return await this.commentService.getComment(dto);
+  async getComments(@Body() dto: GetCommentsRequestDto) {
+    return await this.commentService.getComments(dto);
   }
 
   @Get('/:commentId')
   async getComment(@Param('commentId') commentId: string) {
-    return await this.commentService.getComments(commentId);
+    return await this.commentService.getComment(commentId);
   }
 
   @Post('/')

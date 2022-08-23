@@ -1,10 +1,38 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { GetCommentsRequestDto } from './dto/get-comments-request.dto';
 
 @Injectable()
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async getComments({ postId }: GetCommentsRequestDto) {
+    const comments = await this.prisma.comment.findMany({
+      where: {
+        postId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        user: true,
+      },
+    });
+    //TODO: deleted comments 처리하기
+    return comments;
+  }
+
+  async getComment(commentId: string) {
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+      include: { user: true },
+    });
+    if (!comment || comment.deletedAt) {
+      throw new NotFoundException();
+    }
+    return comment;
+  }
 
   async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
     const parentComment = await this.prisma.comment.findUnique({ where: { id: parentCommentId } });
