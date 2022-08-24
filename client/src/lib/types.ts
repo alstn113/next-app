@@ -63,7 +63,7 @@ export interface GetPostsByQueriesResult {
     postStats: PostStats;
     user: User;
   })[];
-  nextCursor: string;
+  nextCursor?: string;
 }
 
 export type GetSearchPostsResult = (Post & {

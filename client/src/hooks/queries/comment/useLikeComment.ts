@@ -1,9 +1,9 @@
-import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import CommentAPI from '@/lib/api/comment';
-import type { CustomAxiosError } from '@/lib/error';
+import type { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useLikeComment = (options?: UseMutationOptions<number, CustomAxiosError, string>) => {
-  return useMutation<number, CustomAxiosError, string>(CommentAPI.likeComment, options);
+const useLikeComment = (options: UseMutationOptionsOf<typeof CommentAPI.likeComment> = {}) => {
+  return useMutation(CommentAPI.likeComment, options);
 };
 
 export default useLikeComment;

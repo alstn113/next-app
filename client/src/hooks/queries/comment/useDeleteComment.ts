@@ -1,10 +1,9 @@
-import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import CommentAPI from '@/lib/api/comment';
-import type { Comment } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
+import type { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useDeleteComment = (options?: UseMutationOptions<Comment, CustomAxiosError, string>) => {
-  return useMutation<Comment, CustomAxiosError, string>(CommentAPI.deleteComment, options);
+const useDeleteComment = (options: UseMutationOptionsOf<typeof CommentAPI.deleteComment> = {}) => {
+  return useMutation(CommentAPI.deleteComment, options);
 };
 
 export default useDeleteComment;

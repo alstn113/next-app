@@ -1,10 +1,9 @@
 import PostAPI from '@/lib/api/post';
-import type { Post } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import type { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useDeletePost = (options?: UseMutationOptions<Post, CustomAxiosError, string>) => {
-  return useMutation<Post, CustomAxiosError, string>(PostAPI.deletePost, options);
+const useDeletePost = (options: UseMutationOptionsOf<typeof PostAPI.deletePost> = {}) => {
+  return useMutation(PostAPI.deletePost, options);
 };
 
 export default useDeletePost;

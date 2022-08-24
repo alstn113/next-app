@@ -1,13 +1,12 @@
 import PostAPI from '@/lib/api/post';
-import type { PostList } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { UseQueryOptionsOf } from '@/hooks/queries/types';
 
 const useGetSearchPosts = (
   keyword: string,
-  options?: UseQueryOptions<PostList, CustomAxiosError>,
+  options: UseQueryOptionsOf<typeof PostAPI.getSearchPosts> = {},
 ) => {
-  return useQuery<PostList, CustomAxiosError>(getKey(keyword), fetcher(keyword), options);
+  return useQuery(getKey(keyword), fetcher(keyword), options);
 };
 
 const getKey = (keyword: string) => ['GetSearchPosts', keyword];

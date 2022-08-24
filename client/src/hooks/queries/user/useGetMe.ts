@@ -1,10 +1,9 @@
 import UserAPI from '@/lib/api/user';
-import type { User } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { UseQueryOptionsOf } from '@/hooks/queries/types';
 
-const useGetME = (options?: UseQueryOptions<User, CustomAxiosError>) => {
-  return useQuery<User, CustomAxiosError>(getKey(), fetcher(), options);
+const useGetME = (options: UseQueryOptionsOf<typeof UserAPI.me> = {}) => {
+  return useQuery(getKey(), fetcher(), options);
 };
 
 const getKey = () => ['me'];

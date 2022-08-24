@@ -1,13 +1,9 @@
 import PostAPI from '@/lib/api/post';
-import type { UpdatePostParams } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import type { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useUpdatePost = (
-  id: string,
-  options?: UseMutationOptions<unknown, CustomAxiosError, UpdatePostParams>,
-) => {
-  return useMutation<unknown, CustomAxiosError, UpdatePostParams>(PostAPI.updatePost(id), options);
+const useUpdatePost = (options: UseMutationOptionsOf<typeof PostAPI.updatePost> = {}) => {
+  return useMutation(PostAPI.updatePost, options);
 };
 
 export default useUpdatePost;

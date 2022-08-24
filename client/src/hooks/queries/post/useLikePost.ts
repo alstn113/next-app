@@ -1,9 +1,10 @@
 import PostAPI from '@/lib/api/post';
 import type { PostStats } from '@/lib/types';
 import type { CustomAxiosError } from '@/lib/error';
-import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useLikePost = (options?: UseMutationOptions<PostStats, CustomAxiosError, string>) => {
+const useLikePost = (options: UseMutationOptionsOf<typeof PostAPI.likePost> = {}) => {
   return useMutation<PostStats, CustomAxiosError, string>(PostAPI.likePost, options);
 };
 

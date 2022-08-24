@@ -1,10 +1,12 @@
 import PostAPI from '@/lib/api/post';
-import type { Post } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { UseQueryOptionsOf } from '@/hooks/queries/types';
 
-const useGetPostBySlug = (slug: string, options?: UseQueryOptions<Post, CustomAxiosError>) => {
-  return useQuery<Post, CustomAxiosError>(getKey(slug), fetcher(slug), options);
+const useGetPostBySlug = (
+  slug: string,
+  options: UseQueryOptionsOf<typeof PostAPI.getPostBySlug> = {},
+) => {
+  return useQuery(getKey(slug), fetcher(slug), options);
 };
 
 const getKey = (slug: string) => ['GetPostBySlug', slug];

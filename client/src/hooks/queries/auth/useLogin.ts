@@ -1,10 +1,9 @@
 import AuthAPI from '@/lib/api/auth';
-import type { AuthParams } from '@/lib/types';
-import type { CustomAxiosError } from '@/lib/error';
-import { type UseMutationOptions, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import type { UseMutationOptionsOf } from '@/hooks/queries/types';
 
-const useLogin = (options?: UseMutationOptions<void, CustomAxiosError, AuthParams>) => {
-  return useMutation<void, CustomAxiosError, AuthParams>(AuthAPI.login, options);
+const useLogin = (options: UseMutationOptionsOf<typeof AuthAPI.login> = {}) => {
+  return useMutation(AuthAPI.login, options);
 };
 
 export default useLogin;
