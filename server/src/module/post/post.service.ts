@@ -2,12 +2,16 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { PostStats } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId, slugify } from 'src/utils/slugify';
+import { CommentService } from '../comment/comment.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { FindPostQueryDto } from './dto/find-post-query.dto';
 
 @Injectable()
 export class PostService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly commentService: CommentService,
+  ) {}
 
   async findPostById(postId: string) {
     const post = await this.prisma.post.findUnique({
@@ -111,7 +115,8 @@ export class PostService {
       },
     });
     if (!post) throw new NotFoundException();
-    return post;
+    const comments = await this.commentService.findComments(post.id);
+    return { ...post, comments };
   }
 
   async createPost(userId: string, { title, body }: CreatePostDto) {

@@ -79,17 +79,16 @@ export class CommentService {
     });
 
     const groupedComments = rootComments.map((rootComment) => {
-      let subComments = subCommentsMap.get(rootComment.id) ?? [];
-      subComments = subComments.map((subComment) => {
-        const subsubComments = subCommentsMap.get(subComment.id) ?? [];
-        return {
-          ...subComment,
-          subComments: subsubComments,
-        };
-      });
+      const subComments = subCommentsMap.get(rootComment.id) ?? [];
       return {
         ...rootComment,
-        subComments,
+        subComments: subComments.map((subComment) => {
+          const subSubComments = subCommentsMap.get(subComment.id) ?? [];
+          return {
+            ...subComment,
+            subComments: subSubComments,
+          };
+        }),
       };
     });
 

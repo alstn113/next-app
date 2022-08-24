@@ -26,7 +26,7 @@ export interface CreateCommentParams {
   postId: string;
 }
 
-export type PostList = Post[];
+export type PostList = Omit<Post, 'comments'>[];
 
 export interface Post {
   id: string;
@@ -36,6 +36,7 @@ export interface Post {
   userId: string;
   user: User;
   postStats: PostStats;
+  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 }
