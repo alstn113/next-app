@@ -1,39 +1,48 @@
-import type { FindPostQuery, CreatePostParams, UpdatePostParams } from '@/lib/types';
+import type {
+  FindPostQuery,
+  CreatePostParams,
+  UpdatePostParams,
+  PostStats,
+  Post,
+  GetPostResult,
+  GetSearchPostsResult,
+  GetPostsByQueriesResult,
+} from '@/lib/types';
 import apiClient from './apiClient';
 
 const PostAPI = {
   getPostsByQueries: async ({ cursor }: FindPostQuery) => {
-    const { data } = await apiClient.get('/post', {
+    const { data } = await apiClient.get<GetPostsByQueriesResult>('/post', {
       params: { cursor },
     });
     return data;
   },
   getSearchPosts: async (keyword: string) => {
-    const { data } = await apiClient.get(`/post/search?keyword=${keyword}`);
+    const { data } = await apiClient.get<GetSearchPostsResult>(`/post/search?keyword=${keyword}`);
     return data;
   },
   getPostBySlug: async (slug: string) => {
-    const { data } = await apiClient.get(`/post/${slug}`);
+    const { data } = await apiClient.get<GetPostResult>(`/post/${slug}`);
     return data;
   },
   createPost: async (params: CreatePostParams) => {
-    const { data } = await apiClient.post('/post', params);
+    const { data } = await apiClient.post<Post>('/post', params);
     return data;
   },
   deletePost: async (postId: string) => {
-    const { data } = await apiClient.delete(`/post/${postId}`);
+    const { data } = await apiClient.delete<Post>(`/post/${postId}`);
     return data;
   },
   updatePost: (postId: string) => async (params: UpdatePostParams) => {
-    const { data } = await apiClient.patch(`/post/${postId}`, params);
+    const { data } = await apiClient.patch<unknown>(`/post/${postId}`, params);
     return data;
   },
   likePost: async (postId: string) => {
-    const { data } = await apiClient.post(`/post/${postId}/likes`);
+    const { data } = await apiClient.post<PostStats>(`/post/${postId}/likes`);
     return data;
   },
   unlikePost: async (postId: string) => {
-    const { data } = await apiClient.delete(`/post/${postId}/likes`);
+    const { data } = await apiClient.delete<PostStats>(`/post/${postId}/likes`);
     return data;
   },
 };

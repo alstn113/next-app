@@ -1,3 +1,5 @@
+import { type } from 'os';
+
 export interface AuthParams {
   username: string;
   password: string;
@@ -49,6 +51,25 @@ export interface PostStats {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface GetPostResult extends Post {
+  postStats: PostStats;
+  user: User;
+  comments: Comment[];
+}
+
+export interface GetPostsByQueriesResult {
+  posts: (Post & {
+    postStats: PostStats;
+    user: User;
+  })[];
+  nextCursor: string;
+}
+
+export type GetSearchPostsResult = (Post & {
+  postStats: PostStats;
+  user: User;
+})[];
 
 export interface CreatePostParams {
   title: string;

@@ -3,15 +3,15 @@ import apiClient from './apiClient';
 
 const AuthAPI = {
   login: async (params: AuthParams) => {
-    const { data } = await apiClient.post('/auth/login', params);
+    const { data } = await apiClient.post<void>('/auth/login', params);
     return data;
   },
   register: async (params: AuthParams) => {
-    const { data } = await apiClient.post('/auth/register', params);
+    const { data } = await apiClient.post<void>('/auth/register', params);
     return data;
   },
   logout: async () => {
-    const { data } = await apiClient.delete('/auth/logout');
+    const { data } = await apiClient.delete<void>('/auth/logout');
     return data;
   },
 };
