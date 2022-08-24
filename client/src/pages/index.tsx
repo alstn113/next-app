@@ -1,7 +1,6 @@
 import { Card, Skeleton } from '@/components/common';
-import useGetPostsByQueries, {
-  type PostsByQueries,
-} from '@/hooks/queries/post/useGetPostsByQueries';
+import useGetPostsByQueries from '@/hooks/queries/post/useGetPostsByQueries';
+import type { GetPostsByQueriesResult } from '@/lib/types';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import formatDate from '@/lib/utils/formatDate';
@@ -71,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
       getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
     },
   );
-  const pages = queryClient.getQueryData<InfiniteData<PostsByQueries>>(
+  const pages = queryClient.getQueryData<InfiniteData<GetPostsByQueriesResult>>(
     useGetPostsByQueries.getKey(),
   )?.pages;
   queryClient.setQueryData(useGetPostsByQueries.getKey(), {
