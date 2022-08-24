@@ -4,14 +4,13 @@ import type { CustomAxiosError } from '@/lib/error';
 import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
 
 const useGetPostBySlug = (slug: string, options?: UseQueryOptions<Post, CustomAxiosError>) => {
-  return useQuery<Post, CustomAxiosError>(
-    ['GetPostBySlug', slug],
-    () => PostAPI.getPostBySlug(slug),
-    options,
-  );
+  return useQuery<Post, CustomAxiosError>(getKey(slug), fetcher(slug), options);
 };
 
-useGetPostBySlug.fetcher = (slug: string) => () => PostAPI.getPostBySlug(slug);
-useGetPostBySlug.getKey = (slug: string) => ['GetPostBySlug', slug];
+const getKey = (slug: string) => ['GetPostBySlug', slug];
+const fetcher = (slug: string) => () => PostAPI.getPostBySlug(slug);
+
+useGetPostBySlug.getKey = getKey;
+useGetPostBySlug.fetcher = fetcher;
 
 export default useGetPostBySlug;

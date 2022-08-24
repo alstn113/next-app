@@ -11,21 +11,20 @@ export interface PostsByQueries {
 const useGetPostsByQueries = (
   options?: UseInfiniteQueryOptions<PostsByQueries, CustomAxiosError>,
 ) => {
-  return useInfiniteQuery<PostsByQueries, CustomAxiosError>(
-    ['GetPostsByQueries'],
-    ({ pageParam }) => PostAPI.getPostsByQueries({ cursor: pageParam }),
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
-      suspense: false,
-      ...options,
-    },
-  );
+  return useInfiniteQuery<PostsByQueries, CustomAxiosError>(getKey(), fetcher(), {
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
+    suspense: false,
+    ...options,
+  });
 };
 
-useGetPostsByQueries.fetcher =
+const getKey = () => ['GetPostsByQueries'];
+const fetcher =
   () =>
   ({ pageParam }: any) =>
     PostAPI.getPostsByQueries({ cursor: pageParam });
-useGetPostsByQueries.getKey = () => ['GetPostsByQueries'];
+
+useGetPostsByQueries.getKey = getKey;
+useGetPostsByQueries.fetcher = fetcher;
 
 export default useGetPostsByQueries;

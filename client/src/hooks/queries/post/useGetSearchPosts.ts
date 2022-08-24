@@ -7,14 +7,13 @@ const useGetSearchPosts = (
   keyword: string,
   options?: UseQueryOptions<PostList, CustomAxiosError>,
 ) => {
-  return useQuery<PostList, CustomAxiosError>(
-    ['GetSearchPosts', keyword],
-    () => PostAPI.getSearchPosts(keyword),
-    options,
-  );
+  return useQuery<PostList, CustomAxiosError>(getKey(keyword), fetcher(keyword), options);
 };
 
-useGetSearchPosts.fetcher = (keyword: string) => () => PostAPI.getSearchPosts(keyword);
-useGetSearchPosts.getKey = (keyword: string) => ['GetSearchPosts', keyword];
+const getKey = (keyword: string) => ['GetSearchPosts', keyword];
+const fetcher = (keyword: string) => () => PostAPI.getSearchPosts(keyword);
+
+useGetSearchPosts.getKey = getKey;
+useGetSearchPosts.fetcher = fetcher;
 
 export default useGetSearchPosts;
