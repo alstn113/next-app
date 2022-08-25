@@ -11,37 +11,75 @@ export default {
 const Template: ComponentStory<typeof Button> = (args: Props) => (
   <FlexColumn>
     <Button {...args} />
-    <Spacer y={2} />
-    <Button shadow color="primary">
-      버튼
-    </Button>
-    <Spacer />
-    <Button shadow color="error">
-      버튼
-    </Button>
-    <Spacer />
-    <Button shadow color="secondary">
-      버튼
-    </Button>
-    <Spacer />
-    <Button shadow color="success">
-      버튼
-    </Button>
-    <Spacer />
-    <Button shadow color="warning">
-      버튼
-    </Button>
   </FlexColumn>
 );
-
-const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
 
 export const Default = Template.bind({});
 
 Default.args = {
   children: 'Default',
 };
+
+export const Size = () => {
+  return (
+    <FlexColumn>
+      <Button shadow size="sm">
+        sm
+      </Button>
+      <Spacer />
+      <Button shadow size="md">
+        md
+      </Button>
+      <Spacer />
+      <Button shadow size="lg">
+        lg
+      </Button>
+      <Spacer />
+      <Button shadow size="auto">
+        auto
+      </Button>
+    </FlexColumn>
+  );
+};
+
+export const Color = () => {
+  return (
+    <FlexColumn>
+      <Button shadow color="primary">
+        primary
+      </Button>
+      <Spacer />
+      <Button shadow color="error">
+        error
+      </Button>
+      <Spacer />
+      <Button shadow color="secondary">
+        secondary
+      </Button>
+      <Spacer />
+      <Button shadow color="success">
+        success
+      </Button>
+      <Spacer />
+      <Button shadow color="warning">
+        warning
+      </Button>
+    </FlexColumn>
+  );
+};
+
+export const Shadow = () => {
+  return (
+    <FlexColumn>
+      <Button>default</Button>
+      <Spacer />
+      <Button shadow>shadow</Button>
+    </FlexColumn>
+  );
+};
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
