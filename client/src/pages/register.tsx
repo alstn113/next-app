@@ -36,8 +36,8 @@ const Register: NextPage = () => {
       alert(e.response?.data.message);
     },
   });
-  const onSubmit = (input: IFormInput) => {
-    mutate(input);
+  const onSubmit = ({ username, password }: IFormInput) => {
+    mutate({ username, password });
   };
 
   const {

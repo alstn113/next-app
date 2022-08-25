@@ -34,8 +34,8 @@ const Write: NextPage = () => {
       Router.push('/');
     },
   });
-  const onSubmit = (input: IFormInput) => {
-    mutate(input);
+  const onSubmit = ({ title, body }: IFormInput) => {
+    mutate({ title, body });
   };
 
   const {

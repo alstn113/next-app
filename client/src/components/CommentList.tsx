@@ -1,5 +1,4 @@
 import useCreateComment from '@/hooks/queries/comment/useCreateComment';
-import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
 import type { Comment } from '@/lib/types';
 import formatDate from '@/lib/utils/formatDate';
 import { flexCenter } from '@/lib/styles/shared';
@@ -12,6 +11,7 @@ import Button from './common/@Components/Button/Button';
 import Card from './common/@Components/Card/Card';
 import ErrorMessage from './common/@Components/ErrorMessage/ErrorMessage';
 import TextInput from './common/@Components/TextInput/TextInput';
+import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 
 interface Props {
   comments: Comment[];
@@ -31,7 +31,7 @@ const CommentList = ({ comments, postId, slug }: Props) => {
   const queryClient = useQueryClient();
   const { mutate } = useCreateComment({
     onSuccess: async () => {
-      await queryClient.refetchQueries(useGetPostBySlug.getKey(slug));
+      await queryClient.refetchQueries(useGetCommentsBySlug.getKey(slug));
       reset({ text: '' });
     },
   });
@@ -46,8 +46,8 @@ const CommentList = ({ comments, postId, slug }: Props) => {
     mode: 'onChange',
   });
 
-  const onSubmit = (input: IFormInput) => {
-    mutate({ ...input, postId });
+  const onSubmit = ({ text }: IFormInput) => {
+    mutate({ text, postId });
   };
 
   return (
