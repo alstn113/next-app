@@ -68,7 +68,6 @@ const PostDetail: NextPage = () => {
 const Container = styled.div`
   ${flexCenter}
   flex-direction: column;
-  margin-top: 2rem;
   div ~ div {
     margin-top: 1rem;
   }

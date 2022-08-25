@@ -20,8 +20,7 @@ const TabLayout = ({ children }: Props) => {
 };
 
 const Container = styled.div`
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin: 80px 0;
   height: 100%;
   ${flexCenter};
 `;

@@ -54,16 +54,16 @@ const Home: NextPage = () => {
   );
 };
 
+const CardBox = styled.div``;
+
 const Container = styled.div`
-  margin-top: 1rem;
   width: 500px;
   ${mediaQuery.xs} {
     width: 250px;
   }
-`;
-
-const CardBox = styled.div`
-  margin: 1rem 0;
+  ${CardBox} + ${CardBox} {
+    margin-top: 1rem;
+  }
 `;
 
 const InfiniteScrollTarget = styled.div`

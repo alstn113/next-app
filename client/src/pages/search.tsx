@@ -48,7 +48,6 @@ const Search = () => {
 };
 
 const Container = styled.div`
-  margin-top: 2rem;
   width: 500px;
   ${mediaQuery.xs} {
     width: 250px;
