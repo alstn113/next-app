@@ -71,9 +71,9 @@ const Container = styled.div`
   div ~ div {
     margin-top: 1rem;
   }
-  width: 500px;
+  min-width: 620px;
   ${mediaQuery.xs} {
-    width: 250px;
+    min-width: 250px;
   }
 `;
 

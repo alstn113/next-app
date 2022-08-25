@@ -48,9 +48,9 @@ const Search = () => {
 };
 
 const Container = styled.div`
-  width: 500px;
+  min-width: 620px;
   ${mediaQuery.xs} {
-    width: 250px;
+    min-width: 250px;
   }
 `;
 
