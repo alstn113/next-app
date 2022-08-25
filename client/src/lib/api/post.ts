@@ -18,7 +18,9 @@ const PostAPI = {
     return data;
   },
   getSearchPosts: async (keyword: string) => {
-    const { data } = await apiClient.get<GetSearchPostsResult>(`/post/search?keyword=${keyword}`);
+    const { data } = await apiClient.get<GetSearchPostsResult>(
+      `/post/search?keyword=${keyword}`,
+    );
     return data;
   },
   getPostBySlug: async (slug: string) => {
@@ -33,7 +35,13 @@ const PostAPI = {
     const { data } = await apiClient.delete<Post>(`/post/${postId}`);
     return data;
   },
-  updatePost: async ({ postId, params }: { postId: string; params: UpdatePostParams }) => {
+  updatePost: async ({
+    postId,
+    params,
+  }: {
+    postId: string;
+    params: UpdatePostParams;
+  }) => {
     const { data } = await apiClient.patch<unknown>(`/post/${postId}`, params);
     return data;
   },

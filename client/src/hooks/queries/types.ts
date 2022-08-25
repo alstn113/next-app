@@ -10,7 +10,12 @@ import {
 export type UseQueryOptionsOf<
   T extends (...args: any) => any,
   E = CustomAxiosError,
-> = UseQueryOptions<Awaited<ReturnType<T>>, E, Awaited<ReturnType<T>>, string[]>;
+> = UseQueryOptions<
+  Awaited<ReturnType<T>>,
+  E,
+  Awaited<ReturnType<T>>,
+  string[]
+>;
 
 export type UseInfiniteQueryOptionsOf<
   T extends (...args: any) => any,
