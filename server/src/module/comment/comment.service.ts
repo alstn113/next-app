@@ -12,10 +12,16 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findComments(postId: string) {
+  async findComments(slug: string) {
+    const post = await this.prisma.post.findUnique({
+      where: {
+        slug,
+      },
+    });
+    if (!post) throw new NotFoundException();
     const comments = await this.prisma.comment.findMany({
       where: {
-        postId,
+        postId: post.id,
       },
       orderBy: [{ createdAt: 'asc' }, { level: 'asc' }],
       include: {

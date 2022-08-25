@@ -11,9 +11,9 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Public()
-  @Get('/post/:postId')
-  async getComments(@Param('postId') postId: string) {
-    return await this.commentService.findComments(postId);
+  @Get('/post/:slug')
+  async getComments(@Param('slug') slug: string) {
+    return await this.commentService.findComments(slug);
   }
 
   @Public()
