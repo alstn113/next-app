@@ -15,12 +15,14 @@ import {
   NextPage,
 } from 'next';
 import { useRouter } from 'next/router';
+import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
   const slug = encodeURIComponent(router.query?.slug as string);
   const { data: user } = useGetME();
-  const { data } = useGetPostBySlug(slug);
+  const { data: post } = useGetPostBySlug(slug);
+  const { data: comments } = useGetCommentsBySlug(slug);
   const { mutate } = useDeletePost({
     onSuccess: () => {
       router.push('/');
@@ -33,14 +35,14 @@ const PostDetail: NextPage = () => {
     <>
       <Container>
         <Card variant="bordered">
-          <span>Title : {data?.title}</span>
-          <span>Body : {data?.body}</span>
-          <span>PostLikes : {data?.postStats.likes}</span>
-          <span>Comment Counts : {data?.postStats.commentsCount}</span>
-          <span>Slug : {data?.slug}</span>
-          <span>CreatedAt : {formatDate(data?.createdAt)}</span>
+          <span>Title : {post?.title}</span>
+          <span>Body : {post?.body}</span>
+          <span>PostLikes : {post?.postStats.likes}</span>
+          <span>Comment Counts : {post?.postStats.commentsCount}</span>
+          <span>Slug : {post?.slug}</span>
+          <span>CreatedAt : {formatDate(post?.createdAt)}</span>
           <ButtonBlock>
-            {user?.username === data?.user.username && (
+            {user?.username === post?.user.username && (
               <Button shadow color="error" onClick={onOpen}>
                 삭제
               </Button>
@@ -48,7 +50,7 @@ const PostDetail: NextPage = () => {
           </ButtonBlock>
         </Card>
         <Card variant="bordered">
-          <CommentList comments={data?.comments || []} slug={slug} postId={data?.id as string} />
+          <CommentList comments={comments!} slug={slug} postId={post?.id!} />
         </Card>
       </Container>
       <Modal
@@ -56,7 +58,7 @@ const PostDetail: NextPage = () => {
         message="되돌릴 수 없습니다!!"
         visible={isOpen}
         onCancel={onClose}
-        onConfirm={() => mutate(data?.id as string)}
+        onConfirm={() => mutate(post?.id!)}
       />
     </>
   );
@@ -91,6 +93,10 @@ export const getServerSideProps: GetServerSideProps = async ({
     useGetPostBySlug.fetcher(slug),
   );
 
+  await queryClient.prefetchQuery(
+    useGetCommentsBySlug.getKey(slug),
+    useGetCommentsBySlug.fetcher(slug),
+  );
   await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
 
   if (!post) {
