@@ -115,8 +115,7 @@ export class PostService {
       },
     });
     if (!post) throw new NotFoundException();
-    const comments = await this.commentService.findComments(post.id);
-    return { ...post, comments };
+    return post;
   }
 
   async createPost(userId: string, { title, body }: CreatePostDto) {
