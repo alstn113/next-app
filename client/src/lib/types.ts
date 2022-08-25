@@ -1,5 +1,3 @@
-import { type } from 'os';
-
 export interface AuthParams {
   username: string;
   password: string;
@@ -38,7 +36,6 @@ export interface Post {
   userId: string;
   user: User;
   postStats: PostStats;
-  comments: Comment[];
   createdAt: string;
   updatedAt: string;
 }
@@ -55,7 +52,6 @@ export interface PostStats {
 export interface GetPostResult extends Post {
   postStats: PostStats;
   user: User;
-  comments: Comment[];
 }
 
 export interface GetPostsByQueriesResult {
