@@ -31,11 +31,11 @@ Default.args = {
 export const Bordered = () => {
   return (
     <FlexColumn>
-      <TextInput placeholder="TextInput" color="primary" variant="bordered" />
-      <TextInput placeholder="TextInput" color="error" variant="bordered" />
-      <TextInput placeholder="TextInput" color="secondary" variant="bordered" />
-      <TextInput placeholder="TextInput" color="success" variant="bordered" />
-      <TextInput placeholder="TextInput" color="warning" variant="bordered" />
+      <TextInput placeholder="primary" color="primary" variant="bordered" />
+      <TextInput placeholder="error" color="error" variant="bordered" />
+      <TextInput placeholder="secondary" color="secondary" variant="bordered" />
+      <TextInput placeholder="success" color="success" variant="bordered" />
+      <TextInput placeholder="warning" color="warning" variant="bordered" />
     </FlexColumn>
   );
 };
@@ -43,15 +43,15 @@ export const Bordered = () => {
 export const Underlined = () => {
   return (
     <FlexColumn>
-      <TextInput placeholder="TextInput" color="primary" variant="underlined" />
-      <TextInput placeholder="TextInput" color="error" variant="underlined" />
+      <TextInput placeholder="primary" color="primary" variant="underlined" />
+      <TextInput placeholder="error" color="error" variant="underlined" />
       <TextInput
-        placeholder="TextInput"
+        placeholder="secondary"
         color="secondary"
         variant="underlined"
       />
-      <TextInput placeholder="TextInput" color="success" variant="underlined" />
-      <TextInput placeholder="TextInput" color="warning" variant="underlined" />
+      <TextInput placeholder="success" color="success" variant="underlined" />
+      <TextInput placeholder="warning" color="warning" variant="underlined" />
     </FlexColumn>
   );
 };
