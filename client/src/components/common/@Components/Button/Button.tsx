@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 import * as S from './Button.styles';
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'auto';
   children: React.ReactNode;
   color?: NormalColorType;
   shadow?: boolean;

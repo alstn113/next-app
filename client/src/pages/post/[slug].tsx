@@ -43,7 +43,7 @@ const PostDetail: NextPage = () => {
           <span>CreatedAt : {formatDate(post?.createdAt)}</span>
           <ButtonBlock>
             {user?.username === post?.user.username && (
-              <Button shadow color="error" onClick={onOpen}>
+              <Button shadow size="auto" color="error" onClick={onOpen}>
                 삭제
               </Button>
             )}

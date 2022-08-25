@@ -58,12 +58,12 @@ const Login: NextPage = () => {
           variant="underlined"
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button shadow size="lg" type="submit">
+        <Button shadow size="auto" type="submit">
           LOGIN
         </Button>
         <Button
           shadow
-          size="lg"
+          size="auto"
           type="button"
           color="success"
           onClick={() => Router.push('/register')}
@@ -95,7 +95,10 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  const user = await queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher());
+  const user = await queryClient.fetchQuery(
+    useGetME.getKey(),
+    useGetME.fetcher(),
+  );
   if (user)
     return {
       redirect: {

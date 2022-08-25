@@ -78,7 +78,8 @@ const CommentList = ({ comments, postId, slug }: Props) => {
                         <div>---- 삭제된 댓글</div>
                       ) : (
                         <div>
-                          ---- {subSubComment.text} {formatDate(subSubComment.createdAt)}
+                          ---- {subSubComment.text}{' '}
+                          {formatDate(subSubComment.createdAt)}
                         </div>
                       )}
                     </div>
@@ -92,7 +93,7 @@ const CommentList = ({ comments, postId, slug }: Props) => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <TextInput {...register('text')} type="text" placeholder="Comment" />
         <ErrorMessage>{errors.text?.message}</ErrorMessage>
-        <Button size="lg" type="submit">
+        <Button shadow size="auto" type="submit">
           Submit
         </Button>
       </Form>

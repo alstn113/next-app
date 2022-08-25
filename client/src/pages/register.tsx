@@ -65,7 +65,7 @@ const Register: NextPage = () => {
           variant="underlined"
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button shadow size="lg" color="success" type="submit">
+        <Button shadow size="auto" color="success" type="submit">
           REGISTER
         </Button>
       </Form>
