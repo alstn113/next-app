@@ -1,4 +1,5 @@
 import mediaQuery from '@/lib/styles/mediaQuery';
+import zIndexes from '@/lib/styles/zIndexes';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
@@ -16,6 +17,7 @@ export const Positioner = styled.div`
   left: 50%;
   top: 45%;
   transform: translate(-50%, -50%);
+  z-index: ${zIndexes.Modal};
 `;
 
 export const ModalBlock = styled(motion.div)`

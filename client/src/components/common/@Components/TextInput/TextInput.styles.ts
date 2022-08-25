@@ -28,7 +28,6 @@ export const Underline = styled.div<{ color: NormalColorType }>`
   bottom: 0px;
   height: 2px;
   width: 100%;
-  z-index: 2;
   &::before {
     position: absolute;
     content: '';
@@ -62,7 +61,7 @@ export const Input = styled.input<{
       color: ${({ color }) => palette[color]};
       font-size: 1rem;
       font-weight: 500;
-      z-index: 10;
+      z-index: 1;
     }
   }
 
@@ -71,7 +70,7 @@ export const Input = styled.input<{
     left: 0.8rem;
     font-size: 1rem;
     font-weight: 500;
-    z-index: 10;
+    z-index: 1;
   }
 
   ${({ variant, color }) =>
