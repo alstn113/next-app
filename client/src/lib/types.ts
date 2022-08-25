@@ -16,7 +16,7 @@ export interface Comment {
   user: User;
   createdAt: string;
   updatedAt: string;
-  deletedAt: string;
+  deletedAt?: string;
 }
 
 export type CommentList = Comment[];
