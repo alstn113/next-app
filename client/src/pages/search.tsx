@@ -8,6 +8,7 @@ import { TextInput, Card } from '@/components/common';
 import useGetSearchPosts from '@/hooks/queries/post/useGetSearchPosts';
 import formatDate from '@/lib/utils/formatDate';
 import Link from 'next/link';
+import mediaQuery from '@/lib/styles/mediaQuery';
 
 const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
@@ -48,7 +49,10 @@ const Search = () => {
 
 const Container = styled.div`
   margin-top: 2rem;
-  width: 250px;
+  width: 500px;
+  ${mediaQuery.xs} {
+    width: 250px;
+  }
 `;
 
 const CardBox = styled.div`

@@ -9,7 +9,7 @@ export const Root = styled.div<{
   padding: 20px 12px;
   border-radius: 14px;
   color: #000;
-  width: 250px;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;

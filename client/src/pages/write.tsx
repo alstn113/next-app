@@ -63,7 +63,7 @@ const Write: NextPage = () => {
           placeholder="BODY"
         />
         <ErrorMessage>{errors.body?.message}</ErrorMessage>
-        <Button size="lg" shadow type="submit">
+        <Button size="auto" shadow type="submit">
           POST
         </Button>
       </Form>

@@ -41,6 +41,7 @@ const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 250px;
 `;
 
 export const Default = Template.bind({});

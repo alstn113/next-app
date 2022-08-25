@@ -5,12 +5,23 @@ import useGetME from '@/hooks/queries/user/useGetMe';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import formatDate from '@/lib/utils/formatDate';
 import styled from '@emotion/styled';
-import { dehydrate, DehydratedState, InfiniteData, QueryClient } from '@tanstack/react-query';
-import type { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
+import {
+  dehydrate,
+  DehydratedState,
+  InfiniteData,
+  QueryClient,
+} from '@tanstack/react-query';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsResult,
+  NextPage,
+} from 'next';
 import Link from 'next/link';
+import mediaQuery from '@/lib/styles/mediaQuery';
 
 const Home: NextPage = () => {
-  const { data, hasNextPage, fetchNextPage, isFetching } = useGetPostsByQueries();
+  const { data, hasNextPage, fetchNextPage, isFetching } =
+    useGetPostsByQueries();
 
   const loadMore = () => {
     if (hasNextPage) fetchNextPage();
@@ -45,6 +56,10 @@ const Home: NextPage = () => {
 
 const Container = styled.div`
   margin-top: 1rem;
+  width: 500px;
+  ${mediaQuery.xs} {
+    width: 250px;
+  }
 `;
 
 const CardBox = styled.div`

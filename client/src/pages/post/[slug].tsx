@@ -16,6 +16,7 @@ import {
 } from 'next';
 import { useRouter } from 'next/router';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
+import mediaQuery from '@/lib/styles/mediaQuery';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
@@ -70,6 +71,10 @@ const Container = styled.div`
   margin-top: 2rem;
   div ~ div {
     margin-top: 1rem;
+  }
+  width: 500px;
+  ${mediaQuery.xs} {
+    width: 250px;
   }
 `;
 
