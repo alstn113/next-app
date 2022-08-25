@@ -4,10 +4,10 @@ export const customMediaQuery = (maxWidth: number) => `
 
 export const mediaQuery = {
   custom: customMediaQuery,
-  xs: customMediaQuery(650),
-  sm: customMediaQuery(960),
-  md: customMediaQuery(1280),
-  lg: customMediaQuery(1400),
+  xs: customMediaQuery(375),
+  sm: customMediaQuery(768),
+  md: customMediaQuery(1024),
+  lg: customMediaQuery(1440),
   xl: customMediaQuery(1920),
 };
 

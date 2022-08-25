@@ -48,8 +48,8 @@ const Search = () => {
 };
 
 const Container = styled.div`
-  min-width: 620px;
-  ${mediaQuery.xs} {
+  min-width: 768px;
+  ${mediaQuery.sm} {
     min-width: 250px;
   }
 `;

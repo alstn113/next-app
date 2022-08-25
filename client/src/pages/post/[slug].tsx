@@ -1,4 +1,4 @@
-import CommentList from '@/components/CommentList';
+import CommentList from '@/components/Post/Comment/CommentList';
 import { Button, Card, Modal } from '@/components/common';
 import useDisclosure from '@/hooks/useDisclosure';
 import useDeletePost from '@/hooks/queries/post/useDeletePost';
@@ -71,8 +71,8 @@ const Container = styled.div`
   div ~ div {
     margin-top: 1rem;
   }
-  min-width: 620px;
-  ${mediaQuery.xs} {
+  min-width: 768px;
+  ${mediaQuery.sm} {
     min-width: 250px;
   }
 `;

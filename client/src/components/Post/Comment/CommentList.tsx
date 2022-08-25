@@ -7,10 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import Button from './common/@Components/Button/Button';
-import Card from './common/@Components/Card/Card';
-import ErrorMessage from './common/@Components/ErrorMessage/ErrorMessage';
-import TextInput from './common/@Components/TextInput/TextInput';
+import Button from '../../common/@Components/Button/Button';
+import Card from '../../common/@Components/Card/Card';
+import ErrorMessage from '../../common/@Components/ErrorMessage/ErrorMessage';
+import TextInput from '../../common/@Components/TextInput/TextInput';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 
 interface Props {
