@@ -74,7 +74,9 @@ export class CommentService {
   }
 
   groupSubComments(comments: Comment[]) {
-    const rootComments = comments.filter((comment) => comment.parentCommentId === null);
+    const rootComments = comments.filter(
+      (comment) => comment.parentCommentId === null,
+    );
     const subCommentsMap = new Map<string, Comment[]>();
 
     comments.forEach((comment) => {
@@ -101,10 +103,18 @@ export class CommentService {
     return groupedComments;
   }
 
-  async createComment(userId: string, { text, postId, parentCommentId }: CreateCommentDto) {
-    const parentComment = parentCommentId ? await this.findComment(parentCommentId) : null;
+  async createComment(
+    userId: string,
+    { text, postId, parentCommentId }: CreateCommentDto,
+  ) {
+    const parentComment = parentCommentId
+      ? await this.findComment(parentCommentId)
+      : null;
 
-    const comment: Prisma.XOR<Prisma.CommentCreateInput, Prisma.CommentUncheckedCreateInput> = {
+    const comment: Prisma.XOR<
+      Prisma.CommentCreateInput,
+      Prisma.CommentUncheckedCreateInput
+    > = {
       text,
       userId,
       postId,

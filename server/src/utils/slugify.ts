@@ -8,4 +8,7 @@ export const slugify = (text: string): string => {
     .replace(/--+/g, '-');
 };
 
-export const generateId = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 8);
+export const generateId = customAlphabet(
+  '0123456789abcdefghijklmnopqrstuvwxyz',
+  8,
+);

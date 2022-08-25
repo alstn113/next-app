@@ -22,7 +22,8 @@ export class AuthService {
     });
     if (!user) throw new HttpException('존재하지 않는 User입니다.', 404);
     const passwordMatches = await argon2.verify(user.password, dto.password);
-    if (!passwordMatches) throw new HttpException('password가 일치하지 않습니다.', 404);
+    if (!passwordMatches)
+      throw new HttpException('password가 일치하지 않습니다.', 404);
     const access_token = await this.getAccessToken(user.id);
     const refresh_token = await this.getRefreshToken(user.id);
     await this.updateRtHash(user.id, refresh_token);
@@ -65,10 +66,14 @@ export class AuthService {
       },
     });
     if (!user || !user.hashedRt)
-      throw new HttpException('존재하지 않는 user이거나 로그인 상태가 아닙니다', 404);
+      throw new HttpException(
+        '존재하지 않는 user이거나 로그인 상태가 아닙니다',
+        404,
+      );
 
     const rtmatches = await argon2.verify(user.hashedRt, refresh_token);
-    if (!rtmatches) throw new HttpException('올바르지 않은 refresh token입니다', 404);
+    if (!rtmatches)
+      throw new HttpException('올바르지 않은 refresh token입니다', 404);
 
     const now = new Date().getTime();
     const diff = refreshTokenData.exp * 1000 - now;
@@ -122,7 +127,10 @@ export class AuthService {
     });
   }
 
-  setTokenCookie(res: Response, token: { access_token: string; refresh_token: string }) {
+  setTokenCookie(
+    res: Response,
+    token: { access_token: string; refresh_token: string },
+  ) {
     res.cookie('access_token', token.access_token, {
       maxAge: 1000 * 60 * 60 * 1, // 1h
       httpOnly: true,
