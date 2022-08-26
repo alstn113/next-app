@@ -10,6 +10,7 @@ export const Overlay = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
+  z-index: ${zIndexes.Modal};
 `;
 
 export const Positioner = styled.div`

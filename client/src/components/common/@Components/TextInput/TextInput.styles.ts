@@ -28,6 +28,7 @@ export const Underline = styled.div<{ color: NormalColorType }>`
   bottom: 0px;
   height: 2px;
   width: 100%;
+  z-index: 2;
   &::before {
     position: absolute;
     content: '';
@@ -53,7 +54,6 @@ export const Input = styled.input<{
   background: none;
   z-index: 1;
   transition: 0.25s;
-
   &:focus {
     & ~ ${Label} {
       top: -0.5rem;
@@ -64,7 +64,6 @@ export const Input = styled.input<{
       z-index: 1;
     }
   }
-
   &:not(:placeholder-shown):not(:focus) ~ ${Label} {
     top: -0.5rem;
     left: 0.8rem;
@@ -72,7 +71,6 @@ export const Input = styled.input<{
     font-weight: 500;
     z-index: 1;
   }
-
   ${({ variant, color }) =>
     variant === 'bordered' &&
     css`
@@ -82,7 +80,6 @@ export const Input = styled.input<{
         border: 2px solid ${palette[color]};
       }
     `}
-
   ${({ variant }) =>
     variant === 'underlined' &&
     css`
