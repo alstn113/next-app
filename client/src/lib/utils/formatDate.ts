@@ -2,7 +2,7 @@ import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import format from 'date-fns/format';
 import koLocale from 'date-fns/locale/ko';
 
-//TODO: 이거 ssr 날짜 다른 문제점 해결해야함...
+//TODO: 이거 ssr 날짜 다른 문제점 해결해야함.
 const formatDate = (date: string | undefined): string => {
   if (date === undefined) return '';
   const d = new Date(date);

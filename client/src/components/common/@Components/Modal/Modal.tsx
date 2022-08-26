@@ -12,7 +12,6 @@ export interface Props {
   onCancel: () => void;
 }
 
-//TODO: Modal 상태관리 추가하기
 const Modal = ({
   visible,
   title,

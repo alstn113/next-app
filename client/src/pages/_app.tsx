@@ -36,14 +36,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <ErrorBoundary
-            fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
-          >
-            <TabLayout>
-              <Component {...pageProps} />
-            </TabLayout>
-            <ModalProvider />
-          </ErrorBoundary>
+          <TabLayout>
+            <Component {...pageProps} />
+          </TabLayout>
+          <ModalProvider />
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
