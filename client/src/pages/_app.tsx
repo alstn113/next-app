@@ -14,7 +14,6 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppContext, AppProps } from 'next/app';
 import { useState } from 'react';
-import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -30,23 +29,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} position={'top-right'} />
-        <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <ErrorBoundary
-              fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
-            >
-              <TabLayout>
-                <Component {...pageProps} />
-              </TabLayout>
-            </ErrorBoundary>
-          </ThemeProvider>
-        </Hydrate>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} position={'top-right'} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <ErrorBoundary
+            fallback={<ErrorFallback message={MESSAGE.ERROR.UNKNOWN} />}
+          >
+            <TabLayout>
+              <Component {...pageProps} />
+            </TabLayout>
+          </ErrorBoundary>
+        </ThemeProvider>
+      </Hydrate>
+    </QueryClientProvider>
   );
 }
 
