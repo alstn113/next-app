@@ -17,6 +17,7 @@ import {
 import { useRouter } from 'next/router';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 import mediaQuery from '@/lib/styles/mediaQuery';
+import useModalStore from '@/lib/store/useModalStore';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
@@ -29,8 +30,7 @@ const PostDetail: NextPage = () => {
       router.push('/');
     },
   });
-
-  const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false });
+  const { open } = useModalStore();
 
   return (
     <>
@@ -44,7 +44,18 @@ const PostDetail: NextPage = () => {
           <span>CreatedAt : {formatDate(post?.createdAt)}</span>
           <ButtonBlock>
             {user?.username === post?.user.username && (
-              <Button shadow size="auto" color="error" onClick={onOpen}>
+              <Button
+                shadow
+                size="auto"
+                color="error"
+                onClick={() =>
+                  open({
+                    title: '지우시겠습니까?',
+                    message: '되돌릴 수 없습니다.',
+                    onConfirm: () => mutate(post?.id!),
+                  })
+                }
+              >
                 삭제
               </Button>
             )}
@@ -54,13 +65,6 @@ const PostDetail: NextPage = () => {
           <CommentList comments={comments!} slug={slug} postId={post?.id!} />
         </Card>
       </Container>
-      <Modal
-        title="지우시겠습니까?"
-        message="되돌릴 수 없습니다!!"
-        visible={isOpen}
-        onCancel={onClose}
-        onConfirm={() => mutate(post?.id!)}
-      />
     </>
   );
 };

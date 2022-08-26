@@ -1,6 +1,8 @@
+import { Modal } from '@/components/common';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import ErrorFallback from '@/components/ErrorFallback';
 import TabLayout from '@/components/Layouts/TabLayout';
+import ModalProvider from '@/components/ModalProvider';
 import { MESSAGE } from '@/constants/messages';
 import apiClient from '@/lib/api/apiClient';
 import GlobalStyle from '@/styles/GlobalStyle';
@@ -40,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <TabLayout>
               <Component {...pageProps} />
             </TabLayout>
+            <ModalProvider />
           </ErrorBoundary>
         </ThemeProvider>
       </Hydrate>
