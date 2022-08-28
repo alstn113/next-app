@@ -78,13 +78,16 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchInfiniteQuery(
-    useGetPostsByQueries.getKey(),
-    useGetPostsByQueries.fetcher(),
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
-    },
-  );
+  await Promise.all([
+    queryClient.prefetchInfiniteQuery(
+      useGetPostsByQueries.getKey(),
+      useGetPostsByQueries.fetcher(),
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
+      },
+    ),
+    queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher()),
+  ]);
   const pages = queryClient.getQueryData<InfiniteData<GetPostsByQueriesResult>>(
     useGetPostsByQueries.getKey(),
   )?.pages;
@@ -92,7 +95,6 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
     pages,
     pageParams: [null],
   });
-  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

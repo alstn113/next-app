@@ -24,7 +24,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         defaultOptions: {
           queries: {
             retry: false,
-            staleTime: 1000 * 60 * 3,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+            refetchOnWindowFocus: false,
+            refetchInterval: false,
+            staleTime: 1000 * 60 * 3, // 3m
           },
         },
       }),

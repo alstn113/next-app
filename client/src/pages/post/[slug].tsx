@@ -96,16 +96,17 @@ export const getServerSideProps: GetServerSideProps = async ({
   const slug = encodeURIComponent(params?.slug as string);
 
   const queryClient = new QueryClient();
-  const post = await queryClient.fetchQuery(
-    useGetPostBySlug.getKey(slug),
-    useGetPostBySlug.fetcher(slug),
-  );
-
-  await queryClient.prefetchQuery(
-    useGetCommentsBySlug.getKey(slug),
-    useGetCommentsBySlug.fetcher(slug),
-  );
-  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
+  const [post, ,] = await Promise.all([
+    queryClient.fetchQuery(
+      useGetPostBySlug.getKey(slug),
+      useGetPostBySlug.fetcher(slug),
+    ),
+    queryClient.prefetchQuery(
+      useGetCommentsBySlug.getKey(slug),
+      useGetCommentsBySlug.fetcher(slug),
+    ),
+    queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher()),
+  ]);
 
   if (!post) {
     return {
