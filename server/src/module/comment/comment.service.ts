@@ -1,9 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Comment, Prisma } from '@prisma/client';
 import { AppErrorException } from 'src/common/exception/error.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
