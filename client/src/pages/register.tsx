@@ -100,10 +100,10 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
       useGetME.getKey(),
       useGetME.fetcher(),
     );
-    if (!user)
+    if (user)
       return {
         redirect: {
-          destination: '/login',
+          destination: '/',
           permanent: false,
         },
       };

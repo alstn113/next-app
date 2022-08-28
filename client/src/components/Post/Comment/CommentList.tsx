@@ -12,6 +12,7 @@ import Card from '../../common/@Components/Card/Card';
 import ErrorMessage from '../../common/@Components/ErrorMessage/ErrorMessage';
 import TextInput from '../../common/@Components/TextInput/TextInput';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
+import { extractError } from '@/lib/error';
 
 interface Props {
   comments: Comment[];
@@ -33,6 +34,10 @@ const CommentList = ({ comments, postId, slug }: Props) => {
     onSuccess: async () => {
       await queryClient.refetchQueries(useGetCommentsBySlug.getKey(slug));
       reset({ text: '' });
+    },
+    onError: (e) => {
+      const error = extractError(e);
+      alert(error.message);
     },
   });
 
