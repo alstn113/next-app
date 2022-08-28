@@ -9,6 +9,10 @@ export const errors = {
     statusCode: 401,
     message: 'Invalid username or password',
   },
+  AuthenticationError: {
+    message: 'Invalid username or password',
+    statusCode: 401,
+  },
   Unknown: {
     statusCode: 500,
     message: 'Unknown error',
@@ -32,10 +36,6 @@ export const errors = {
   Forbidden: {
     statusCode: 403,
     message: 'Forbidden',
-  },
-  InvalidURL: {
-    statusCode: 422,
-    message: 'Invalid URL',
   },
 };
 

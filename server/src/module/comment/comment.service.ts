@@ -5,6 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Comment, Prisma } from '@prisma/client';
+import { AppErrorException } from 'src/common/exception/error.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
@@ -18,7 +19,7 @@ export class CommentService {
         slug,
       },
     });
-    if (!post) throw new NotFoundException();
+    if (!post) throw new AppErrorException('NotFound');
     const comments = await this.prisma.comment.findMany({
       where: {
         postId: post.id,
@@ -53,7 +54,7 @@ export class CommentService {
       },
     });
     if (!comment || comment.deletedAt) {
-      throw new NotFoundException();
+      throw new AppErrorException('NotFound');
     }
     return comment;
   }
@@ -124,7 +125,7 @@ export class CommentService {
     if (parentComment) {
       comment.level = parentComment.level + 1;
       if (comment.level >= 3) {
-        throw new HttpException('댓글은 3계층까지만 가능합니다.', 400);
+        throw new AppErrorException('BadRequest');
       }
     }
 
@@ -185,7 +186,7 @@ export class CommentService {
 
   async deleteComment({ userId, commentId }: CommentActionParams) {
     const comment = await this.findComment(commentId);
-    if (comment.userId !== userId) throw new UnauthorizedException();
+    if (comment.userId !== userId) throw new AppErrorException('Unauthorized');
 
     const deletedComment = await this.prisma.comment.update({
       data: {

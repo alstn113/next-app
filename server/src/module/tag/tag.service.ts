@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { AppErrorException } from 'src/common/exception/error.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -20,7 +21,7 @@ export class TagService {
         name,
       },
     });
-    if (!tag) throw new NotFoundException();
+    if (!tag) throw new AppErrorException('NotFound');
     return tag;
   }
 }

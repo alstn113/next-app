@@ -1,7 +1,8 @@
-import { HttpException, Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response, NextFunction } from 'express';
+import { AppErrorException } from 'src/common/exception/error.exception';
 import { AuthService } from '../module/auth/auth.service';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class AuthMiddleware implements NestMiddleware {
     const accessToken = req.cookies.access_token;
     const refreshToken = req.cookies.refresh_token;
     try {
-      if (!accessToken) throw new HttpException('액세스 토큰 없음', 401);
+      if (!accessToken) throw new AppErrorException('Unauthorized');
 
       const accessTokenData = await this.jwtService.verify(accessToken, {
         secret: this.configService.get<string>('auth.access_token_secret'),

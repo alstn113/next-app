@@ -20,7 +20,7 @@ export class PostService {
         id: postId,
       },
     });
-    if (!post) throw new NotFoundException();
+    if (!post) throw new AppErrorException('NotFound');
     return post;
   }
 
@@ -191,7 +191,7 @@ export class PostService {
 
   async deletePost({ userId, postId }: PostActionParams) {
     const post = await this.findPostById(postId);
-    if (post.userId !== userId) throw new UnauthorizedException();
+    if (post.userId !== userId) throw new AppErrorException('Unauthorized');
     return await this.prisma.post.delete({
       where: {
         id: postId,

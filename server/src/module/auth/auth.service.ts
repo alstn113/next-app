@@ -1,8 +1,9 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 import { Response } from 'express';
+import { AppErrorException } from 'src/common/exception/error.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginRequestDto, RegisterRequestDto } from './dto';
 
@@ -20,10 +21,9 @@ export class AuthService {
         username: dto.username,
       },
     });
-    if (!user) throw new HttpException('존재하지 않는 User입니다.', 404);
+    if (!user) throw new AppErrorException('AuthenticationError');
     const passwordMatches = await argon2.verify(user.password, dto.password);
-    if (!passwordMatches)
-      throw new HttpException('password가 일치하지 않습니다.', 404);
+    if (!passwordMatches) throw new AppErrorException('AuthenticationError');
     const access_token = await this.getAccessToken(user.id);
     const refresh_token = await this.getRefreshToken(user.id);
     await this.updateRtHash(user.id, refresh_token);
@@ -36,7 +36,7 @@ export class AuthService {
         username: dto.username,
       },
     });
-    if (exUser) throw new HttpException('존재하는 Username입니다.', 401);
+    if (exUser) throw new AppErrorException('UserExists');
     dto.password = await argon2.hash(dto.password);
     await this.prisma.user.create({ data: dto });
     return;
@@ -65,15 +65,10 @@ export class AuthService {
         id: refreshTokenData.userId,
       },
     });
-    if (!user || !user.hashedRt)
-      throw new HttpException(
-        '존재하지 않는 user이거나 로그인 상태가 아닙니다',
-        404,
-      );
+    if (!user || !user.hashedRt) throw new AppErrorException('RefreshFailure');
 
     const rtmatches = await argon2.verify(user.hashedRt, refresh_token);
-    if (!rtmatches)
-      throw new HttpException('올바르지 않은 refresh token입니다', 404);
+    if (!rtmatches) throw new AppErrorException('RefreshFailure');
 
     const now = new Date().getTime();
     const diff = refreshTokenData.exp * 1000 - now;

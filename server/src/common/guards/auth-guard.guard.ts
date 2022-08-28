@@ -1,10 +1,6 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  HttpException,
-  Injectable,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { AppErrorException } from '../exception/error.exception';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -17,7 +13,7 @@ export class AuthGuard implements CanActivate {
     if (isPublic) return true;
 
     const req = context.switchToHttp().getRequest();
-    if (!req.userId) throw new HttpException('권한이 없습니다', 401);
+    if (!req.userId) throw new AppErrorException('Unauthorized');
     return true;
   }
 }
