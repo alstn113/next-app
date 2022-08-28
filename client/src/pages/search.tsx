@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 > => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher());
+  await queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher());
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

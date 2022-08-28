@@ -79,14 +79,14 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 > => {
   const queryClient = new QueryClient();
   await Promise.all([
-    queryClient.prefetchInfiniteQuery(
+    queryClient.fetchInfiniteQuery(
       useGetPostsByQueries.getKey(),
       useGetPostsByQueries.fetcher(),
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
       },
     ),
-    queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher()),
+    queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher()),
   ]);
   const pages = queryClient.getQueryData<InfiniteData<GetPostsByQueriesResult>>(
     useGetPostsByQueries.getKey(),

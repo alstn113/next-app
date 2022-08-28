@@ -96,24 +96,29 @@ export const getServerSideProps: GetServerSideProps = async ({
   const slug = encodeURIComponent(params?.slug as string);
 
   const queryClient = new QueryClient();
-  const [post, ,] = await Promise.all([
-    queryClient.fetchQuery(
-      useGetPostBySlug.getKey(slug),
-      useGetPostBySlug.fetcher(slug),
-    ),
-    queryClient.prefetchQuery(
-      useGetCommentsBySlug.getKey(slug),
-      useGetCommentsBySlug.fetcher(slug),
-    ),
-    queryClient.prefetchQuery(useGetME.getKey(), useGetME.fetcher()),
-  ]);
 
-  if (!post) {
+  try {
+    await Promise.all([
+      queryClient.fetchQuery(
+        useGetPostBySlug.getKey(slug),
+        useGetPostBySlug.fetcher(slug),
+      ),
+      queryClient.fetchQuery(
+        useGetCommentsBySlug.getKey(slug),
+        useGetCommentsBySlug.fetcher(slug),
+      ),
+      queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher()),
+    ]);
+
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } catch (e) {
+    console.log(e);
     return {
       notFound: true,
     };
+  } finally {
+    queryClient.clear();
   }
-  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
 export default PostDetail;
