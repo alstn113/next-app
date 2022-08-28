@@ -4,18 +4,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { PostStats } from '@prisma/client';
+import { AppErrorException } from 'src/common/exception/error.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId, slugify } from 'src/utils/slugify';
-import { CommentService } from '../comment/comment.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { FindPostQueryDto } from './dto/find-post-query.dto';
 
 @Injectable()
 export class PostService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly commentService: CommentService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async findPostById(postId: string) {
     const post = await this.prisma.post.findUnique({
@@ -118,7 +115,7 @@ export class PostService {
         postStats: true,
       },
     });
-    if (!post) throw new NotFoundException();
+    if (!post) throw new AppErrorException('NotFound');
     return post;
   }
 

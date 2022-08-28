@@ -26,7 +26,7 @@ const Login: NextPage = () => {
       Router.push('/');
     },
     onError: (e) => {
-      alert(e.response?.data.message);
+      alert(e?.message);
     },
   });
   const onSubmit = ({ username, password }: IFormInput) => {

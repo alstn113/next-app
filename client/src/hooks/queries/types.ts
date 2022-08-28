@@ -1,15 +1,13 @@
-import { CustomAxiosError } from '@/lib/error';
+import { AppError } from '@/lib/error';
 import {
   UseInfiniteQueryOptions,
   UseMutationOptions,
   UseQueryOptions,
 } from '@tanstack/react-query';
 
-// velopert님꺼 참고했음 굳굳!
-
 export type UseQueryOptionsOf<
   T extends (...args: any) => any,
-  E = CustomAxiosError,
+  E = AppError,
 > = UseQueryOptions<
   Awaited<ReturnType<T>>,
   E,
@@ -19,7 +17,7 @@ export type UseQueryOptionsOf<
 
 export type UseInfiniteQueryOptionsOf<
   T extends (...args: any) => any,
-  E = CustomAxiosError,
+  E = AppError,
 > = UseInfiniteQueryOptions<
   Awaited<ReturnType<T>>,
   E,
@@ -30,5 +28,5 @@ export type UseInfiniteQueryOptionsOf<
 
 export type UseMutationOptionsOf<
   T extends (...args: any) => any,
-  E = CustomAxiosError,
+  E = AppError,
 > = UseMutationOptions<Awaited<ReturnType<T>>, E, Parameters<T>[0]>;

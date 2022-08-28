@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 import mediaQuery from '@/lib/styles/mediaQuery';
 import useModalStore from '@/lib/store/useModalStore';
+import { isAppError } from '@/lib/error';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
@@ -113,6 +114,17 @@ export const getServerSideProps: GetServerSideProps = async ({
     return { props: { dehydratedState: dehydrate(queryClient) } };
   } catch (e) {
     console.log(e);
+    if (isAppError(e) && e.name === 'AuthenticationError')
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    if (isAppError(e) && e.name === 'NotFoundError')
+      return {
+        notFound: true,
+      };
     return {
       notFound: true,
     };

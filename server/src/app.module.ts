@@ -5,8 +5,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
+import { AppErrorExceptionFilter } from './common/filter/exception.filter';
 import { AuthGuard } from './common/guards/auth-guard.guard';
 import configuration from './config/configuration';
 import { AuthMiddleware } from './middlewares/jwt-auth.middleware';
@@ -39,6 +40,10 @@ import { PrismaModule } from './prisma/prisma.module';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AppErrorExceptionFilter,
     },
   ],
 })
