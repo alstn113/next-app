@@ -1,9 +1,13 @@
 import { HttpException } from '@nestjs/common';
 
 export const errors = {
-  UserExists: {
-    statusCode: 409,
-    message: 'User already exists',
+  BadRequest: {
+    statusCode: 400,
+    message: 'Bad Request',
+  },
+  RefreshFailure: {
+    statusCode: 401,
+    message: 'Failed to refresh token',
   },
   WrongCredentials: {
     statusCode: 401,
@@ -13,29 +17,25 @@ export const errors = {
     message: 'Invalid username or password',
     statusCode: 401,
   },
-  Unknown: {
-    statusCode: 500,
-    message: 'Unknown error',
-  },
   Unauthorized: {
     statusCode: 401,
     message: 'Unauthorized',
   },
-  BadRequest: {
-    statusCode: 400,
-    message: 'Bad Request',
-  },
-  RefreshFailure: {
-    statusCode: 401,
-    message: 'Failed to refresh token',
+  Forbidden: {
+    statusCode: 403,
+    message: 'Forbidden',
   },
   NotFound: {
     statusCode: 404,
     message: 'Not Found',
   },
-  Forbidden: {
-    statusCode: 403,
-    message: 'Forbidden',
+  UserExists: {
+    statusCode: 409,
+    message: 'User already exists',
+  },
+  Unknown: {
+    statusCode: 500,
+    message: 'Unknown error',
   },
 };
 

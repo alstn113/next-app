@@ -25,18 +25,22 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  const user = await queryClient.fetchQuery(
-    useGetME.getKey(),
-    useGetME.fetcher(),
-  );
-  if (!user)
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  return { props: { dehydratedState: dehydrate(queryClient) } };
+  try {
+    const user = await queryClient.fetchQuery(
+      useGetME.getKey(),
+      useGetME.fetcher(),
+    );
+    if (!user)
+      return {
+        redirect: {
+          destination: '/login',
+          permanent: false,
+        },
+      };
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } finally {
+    queryClient.clear();
+  }
 };
 
 const Container = styled.div`

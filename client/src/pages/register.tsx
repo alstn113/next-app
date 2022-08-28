@@ -10,6 +10,7 @@ import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 import { isValidPassword, isValidUsername } from '@/lib/regexp';
+import { extractError } from '@/lib/error';
 
 interface IFormInput {
   username: string;
@@ -33,7 +34,8 @@ const Register: NextPage = () => {
       Router.push('/login');
     },
     onError: (e) => {
-      alert(e.response?.data.message);
+      const error = extractError(e);
+      alert(error.message);
     },
   });
   const onSubmit = ({ username, password }: IFormInput) => {
@@ -93,18 +95,22 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  const user = await queryClient.fetchQuery(
-    useGetME.getKey(),
-    useGetME.fetcher(),
-  );
-  if (user)
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  return { props: { dehydratedState: dehydrate(queryClient) } };
+  try {
+    const user = await queryClient.fetchQuery(
+      useGetME.getKey(),
+      useGetME.fetcher(),
+    );
+    if (!user)
+      return {
+        redirect: {
+          destination: '/login',
+          permanent: false,
+        },
+      };
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } finally {
+    queryClient.clear();
+  }
 };
 
 export default Register;

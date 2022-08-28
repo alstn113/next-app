@@ -78,24 +78,31 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   }>
 > => {
   const queryClient = new QueryClient();
-  await Promise.all([
-    queryClient.fetchInfiniteQuery(
-      useGetPostsByQueries.getKey(),
-      useGetPostsByQueries.fetcher(),
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
-      },
-    ),
-    queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher()),
-  ]);
-  const pages = queryClient.getQueryData<InfiniteData<GetPostsByQueriesResult>>(
-    useGetPostsByQueries.getKey(),
-  )?.pages;
-  queryClient.setQueryData(useGetPostsByQueries.getKey(), {
-    pages,
-    pageParams: [null],
-  });
-  return { props: { dehydratedState: dehydrate(queryClient) } };
+  try {
+    await Promise.all([
+      queryClient.fetchInfiniteQuery(
+        useGetPostsByQueries.getKey(),
+        useGetPostsByQueries.fetcher(),
+        {
+          getNextPageParam: (lastPage) => lastPage.nextCursor ?? false,
+        },
+      ),
+      queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher()),
+    ]);
+    const pages = queryClient.getQueryData<
+      InfiniteData<GetPostsByQueriesResult>
+    >(useGetPostsByQueries.getKey())?.pages;
+    queryClient.setQueryData(useGetPostsByQueries.getKey(), {
+      pages,
+      pageParams: [null],
+    });
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } catch (e) {
+    queryClient.resetQueries({ queryKey: useGetPostsByQueries.getKey() });
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } finally {
+    queryClient.clear();
+  }
 };
 
 export default Home;

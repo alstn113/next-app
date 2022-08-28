@@ -1,16 +1,26 @@
 import axios from 'axios';
 
 type ErrorName =
-  | 'UnknownError'
-  | 'UserExistsError'
+  | 'BadRequest'
+  | 'RefreshFailure'
+  | 'WrongCredentials'
   | 'AuthenticationError'
-  | 'NotFoundError';
+  | 'Unauthorized'
+  | 'Forbidden'
+  | 'NotFound'
+  | 'UserExists'
+  | 'Unknown';
 
 interface ErrorPayloads {
-  UnknownError: undefined;
-  UserExistsError: undefined;
+  BadRequest: undefined;
+  RefreshFailure: undefined;
+  WrongCredentials: undefined;
   AuthenticationError: undefined;
-  NotFoundError: undefined;
+  Unauthorized: undefined;
+  Forbidden: undefined;
+  UserExists: undefined;
+  NotFound: undefined;
+  Unknown: undefined;
 }
 
 export interface AppError {
@@ -40,6 +50,6 @@ export const extractError = (error: any): AppError => {
   return {
     statusCode: 500,
     message: 'Unknown Error',
-    name: 'UnknownError',
+    name: 'Unknown',
   };
 };

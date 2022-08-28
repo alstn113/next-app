@@ -65,8 +65,13 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 > => {
   const queryClient = new QueryClient();
 
-  await queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher());
-  return { props: { dehydratedState: dehydrate(queryClient) } };
+  try {
+    await queryClient.fetchQuery(useGetME.getKey(), useGetME.fetcher());
+
+    return { props: { dehydratedState: dehydrate(queryClient) } };
+  } finally {
+    queryClient.clear();
+  }
 };
 
 export default Search;

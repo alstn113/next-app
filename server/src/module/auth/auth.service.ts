@@ -21,9 +21,9 @@ export class AuthService {
         username: dto.username,
       },
     });
-    if (!user) throw new AppErrorException('AuthenticationError');
+    if (!user) throw new AppErrorException('WrongCredentials');
     const passwordMatches = await argon2.verify(user.password, dto.password);
-    if (!passwordMatches) throw new AppErrorException('AuthenticationError');
+    if (!passwordMatches) throw new AppErrorException('WrongCredentials');
     const access_token = await this.getAccessToken(user.id);
     const refresh_token = await this.getRefreshToken(user.id);
     await this.updateRtHash(user.id, refresh_token);

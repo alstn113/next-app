@@ -1,6 +1,5 @@
 import CommentList from '@/components/Post/Comment/CommentList';
-import { Button, Card, Modal } from '@/components/common';
-import useDisclosure from '@/hooks/useDisclosure';
+import { Button, Card } from '@/components/common';
 import useDeletePost from '@/hooks/queries/post/useDeletePost';
 import useGetPostBySlug from '@/hooks/queries/post/useGetPostBySlug';
 import useGetME from '@/hooks/queries/user/useGetMe';
@@ -18,7 +17,7 @@ import { useRouter } from 'next/router';
 import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 import mediaQuery from '@/lib/styles/mediaQuery';
 import useModalStore from '@/lib/store/useModalStore';
-import { isAppError } from '@/lib/error';
+import { extractError, isAppError } from '@/lib/error';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
@@ -29,6 +28,10 @@ const PostDetail: NextPage = () => {
   const { mutate } = useDeletePost({
     onSuccess: () => {
       router.push('/');
+    },
+    onError: (e) => {
+      const error = extractError(e);
+      alert(error.message);
     },
   });
   const { open } = useModalStore();
@@ -113,15 +116,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
     return { props: { dehydratedState: dehydrate(queryClient) } };
   } catch (e) {
-    console.log(e);
-    if (isAppError(e) && e.name === 'AuthenticationError')
+    if (isAppError(e) && e.name === 'Unauthorized') {
       return {
         redirect: {
           destination: '/',
           permanent: false,
         },
       };
-    if (isAppError(e) && e.name === 'NotFoundError')
+    }
+    if (isAppError(e) && e.name === 'NotFound')
       return {
         notFound: true,
       };
