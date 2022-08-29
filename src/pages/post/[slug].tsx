@@ -116,15 +116,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 
     return { props: { dehydratedState: dehydrate(queryClient) } };
   } catch (e) {
-    if (isAppError(e) && e.name === 'Unauthorized') {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      };
-    }
-    if (isAppError(e) && e.name === 'NotFound')
+    const error = extractError(e);
+    if (error.name === 'NotFound')
       return {
         notFound: true,
       };
