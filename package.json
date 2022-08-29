@@ -1,11 +1,65 @@
 {
-  "name": "next-app",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/neko113/next-app.git",
-  "author": "neko113 <alstn113@gmail.com>",
-  "license": "MIT",
+  "name": "next",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"cd server && yarn start:dev\" \"cd client && yarn dev\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write --config ./.prettierrc './src/**/*.{ts, tsx}'",
+    "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "prepare": "husky install husky"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "next lint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@hookform/resolvers": "^2.9.7",
+    "@tanstack/react-query": "^4.2.1",
+    "@tanstack/react-query-devtools": "^4.0.10",
+    "axios": "^0.27.2",
+    "date-fns": "^2.29.1",
+    "framer-motion": "^7.2.1",
+    "immer": "^9.0.15",
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.34.0",
+    "yup": "^0.32.11",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@emotion/babel-plugin": "^11.10.0",
+    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-essentials": "^6.5.10",
+    "@storybook/addon-interactions": "^6.5.10",
+    "@storybook/addon-links": "^6.5.10",
+    "@storybook/builder-webpack5": "^6.5.10",
+    "@storybook/manager-webpack5": "^6.5.10",
+    "@storybook/react": "^6.5.10",
+    "@storybook/testing-library": "^0.0.13",
+    "@svgr/cli": "^6.3.1",
+    "@types/axios": "^0.14.0",
+    "@types/node": "18.6.1",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "babel-loader": "^8.2.5",
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.3",
+    "eslint-plugin-storybook": "^0.6.3",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^2.7.1",
+    "typescript": "4.7.4"
   }
 }
