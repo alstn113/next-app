@@ -29,4 +29,5 @@ export type UseInfiniteQueryOptionsOf<
 export type UseMutationOptionsOf<
   T extends (...args: any) => any,
   E = AppError,
-> = UseMutationOptions<Awaited<ReturnType<T>>, E, Parameters<T>[0]>;
+  P = Parameters<T>[0],
+> = UseMutationOptions<Awaited<ReturnType<T>>, E, P>;
