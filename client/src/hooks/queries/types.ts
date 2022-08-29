@@ -5,29 +5,26 @@ import {
   UseQueryOptions,
 } from '@tanstack/react-query';
 
-export type UseQueryOptionsOf<
-  T extends (...args: any) => any,
-  E = AppError,
-> = UseQueryOptions<
-  Awaited<ReturnType<T>>,
-  E,
-  Awaited<ReturnType<T>>,
-  string[]
->;
+export type UseMutationOptionsOf<TAPI extends (...args: any) => any> =
+  UseMutationOptions<
+    Awaited<ReturnType<TAPI>>,
+    AppError,
+    Parameters<TAPI>[0] extends undefined ? void : Parameters<TAPI>[0]
+  >;
 
-export type UseInfiniteQueryOptionsOf<
-  T extends (...args: any) => any,
-  E = AppError,
-> = UseInfiniteQueryOptions<
-  Awaited<ReturnType<T>>,
-  E,
-  Awaited<ReturnType<T>>,
-  Awaited<ReturnType<T>>,
-  string[]
->;
+export type UseQueryOptionsOf<TAPI extends (...args: any) => any> =
+  UseQueryOptions<
+    Awaited<ReturnType<TAPI>>,
+    AppError,
+    Awaited<ReturnType<TAPI>>,
+    string[]
+  >;
 
-export type UseMutationOptionsOf<
-  T extends (...args: any) => any,
-  E = AppError,
-  P = Parameters<T>[0],
-> = UseMutationOptions<Awaited<ReturnType<T>>, E, P>;
+export type UseInfiniteQueryOptionsOf<TAPI extends (...args: any) => any> =
+  UseInfiniteQueryOptions<
+    Awaited<ReturnType<TAPI>>,
+    AppError,
+    Awaited<ReturnType<TAPI>>,
+    Awaited<ReturnType<TAPI>>,
+    string[]
+  >;
