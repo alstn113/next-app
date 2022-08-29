@@ -10,7 +10,8 @@
     "format": "prettier --write --config ./.prettierrc './src/**/*.{ts, tsx}'",
     "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -49,7 +50,15 @@
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "eslint-plugin-storybook": "^0.6.3",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
