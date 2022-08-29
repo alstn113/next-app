@@ -1,10 +1,6 @@
-import { Modal } from '@/components/common';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import ErrorFallback from '@/components/ErrorFallback';
 import TabLayout from '@/components/Layouts/TabLayout';
 import ModalProvider from '@/components/ModalProvider';
-import { MESSAGE } from '@/constants/messages';
-import apiClient from '@/lib/api/apiClient';
+import apiClient, { setClientCookie } from '@/lib/api/apiClient';
 import GlobalStyle from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from '@emotion/react';
@@ -54,9 +50,9 @@ MyApp.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context; // next에서 넣어주는 context
   let pageProps = {};
   const cookie = ctx.req ? ctx.req.headers.cookie : '';
-  apiClient.defaults.headers.common['Cookie'] = '';
+  setClientCookie('');
   if (ctx.req && cookie) {
-    apiClient.defaults.headers.common['Cookie'] = cookie;
+    setClientCookie(cookie);
   }
 
   if (Component.getInitialProps) {

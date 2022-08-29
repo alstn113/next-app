@@ -9,7 +9,7 @@ import { DehydratedState, QueryClient, dehydrate } from '@tanstack/react-query';
 import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
-import { extractError, isAppError } from '@/lib/error';
+import { extractError } from '@/lib/error';
 
 interface IFormInput {
   username: string;
@@ -27,6 +27,7 @@ const Login: NextPage = () => {
       Router.push('/');
     },
     onError: (e) => {
+      console.log(e);
       const error = extractError(e);
       alert(error.message);
     },
