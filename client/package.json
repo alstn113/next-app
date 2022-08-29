@@ -11,7 +11,7 @@
     "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install client/.husky"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -57,8 +57,9 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "next lint --fix",
+      "prettier --write",
+      "git add"
     ]
   }
 }
