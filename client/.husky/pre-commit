@@ -3,4 +3,4 @@
 
 echo "[⭐️ Running pre-commit hook ⭐️]"
 
-cd client && yarn lint-staged
+cd client && npx lint-staged

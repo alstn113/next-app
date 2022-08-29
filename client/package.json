@@ -11,7 +11,7 @@
     "transform:svg": "yarn svgr --typescript --out-dir src/components/vectors src/assets/vectors",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "cd .. && husky install client/.husky"
+    "prepare": "cd && husky install .husky"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
