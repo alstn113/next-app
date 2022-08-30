@@ -3,8 +3,12 @@ import apiClient from './apiClient';
 
 const UserAPI = {
   me: async () => {
-    const { data } = await apiClient.get<User>('/user/me');
-    return data;
+    try {
+      const { data } = await apiClient.get<User | null>('/user/me');
+      return data;
+    } catch (e) {
+      return null;
+    }
   },
 };
 
