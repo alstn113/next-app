@@ -2,9 +2,9 @@ import { User } from '../types';
 import apiClient from './apiClient';
 
 const UserAPI = {
-  me: async () => {
+  me: async (): Promise<User | null> => {
     try {
-      const { data } = await apiClient.get<User | null>('/user/me');
+      const { data } = await apiClient.get<User>('/user/me');
       return data;
     } catch (e) {
       return null;
