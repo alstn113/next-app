@@ -36,6 +36,7 @@ export interface Post {
   userId: string;
   user: User;
   postStats: PostStats;
+  isLiked: boolean;
   createdAt: string;
   updatedAt: string;
 }
