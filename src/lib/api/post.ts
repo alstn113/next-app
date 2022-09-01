@@ -12,27 +12,27 @@ import apiClient from './apiClient';
 
 const PostAPI = {
   getPostsByQueries: async ({ cursor }: FindPostQuery) => {
-    const { data } = await apiClient.get<GetPostsByQueriesResult>('/post', {
+    const { data } = await apiClient.get<GetPostsByQueriesResult>('/api/post', {
       params: { cursor },
     });
     return data;
   },
   getSearchPosts: async (keyword: string) => {
     const { data } = await apiClient.get<GetSearchPostsResult>(
-      `/post/search?keyword=${keyword}`,
+      `/api/post/search?keyword=${keyword}`,
     );
     return data;
   },
   getPostBySlug: async (slug: string) => {
-    const { data } = await apiClient.get<GetPostResult>(`/post/${slug}`);
+    const { data } = await apiClient.get<GetPostResult>(`/api/post/${slug}`);
     return data;
   },
   createPost: async (params: CreatePostParams) => {
-    const { data } = await apiClient.post<Post>('/post', params);
+    const { data } = await apiClient.post<Post>('/api/post', params);
     return data;
   },
   deletePost: async (postId: string) => {
-    const { data } = await apiClient.delete<Post>(`/post/${postId}`);
+    const { data } = await apiClient.delete<Post>(`/api/post/${postId}`);
     return data;
   },
   updatePost: async ({
@@ -42,15 +42,22 @@ const PostAPI = {
     postId: string;
     params: UpdatePostParams;
   }) => {
-    const { data } = await apiClient.patch<unknown>(`/post/${postId}`, params);
+    const { data } = await apiClient.patch<unknown>(
+      `/api/post/${postId}`,
+      params,
+    );
     return data;
   },
   likePost: async (postId: string) => {
-    const { data } = await apiClient.post<PostStats>(`/post/${postId}/likes`);
+    const { data } = await apiClient.post<PostStats>(
+      `/api/post/${postId}/likes`,
+    );
     return data;
   },
   unlikePost: async (postId: string) => {
-    const { data } = await apiClient.delete<PostStats>(`/post/${postId}/likes`);
+    const { data } = await apiClient.delete<PostStats>(
+      `/api/post/${postId}/likes`,
+    );
     return data;
   },
 };
