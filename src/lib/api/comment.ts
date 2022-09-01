@@ -4,29 +4,27 @@ import apiClient from '@/lib/api/apiClient';
 const CommentAPI = {
   getCommentsBySlug: async (postSlug: string) => {
     const { data } = await apiClient.get<Comment[]>(
-      `/api/comment/post/${postSlug}`,
+      `/comment/post/${postSlug}`,
     );
     return data;
   },
   createComment: async (params: CreateCommentParams) => {
-    const { data } = await apiClient.post<Comment>('/api/comment', params);
+    const { data } = await apiClient.post<Comment>('/comment', params);
     return data;
   },
   deleteComment: async (commentId: string) => {
-    const { data } = await apiClient.delete<Comment>(
-      `/api/comment/${commentId}`,
-    );
+    const { data } = await apiClient.delete<Comment>(`/comment/${commentId}`);
     return data;
   },
   likeComment: async (commentId: string) => {
     const { data } = await apiClient.post<number>(
-      `/api/comment/${commentId}/likes`,
+      `/comment/${commentId}/likes`,
     );
     return data;
   },
   unlikeComment: async (commentId: string) => {
     const { data } = await apiClient.delete<number>(
-      `/api/comment/${commentId}/likes`,
+      `/comment/${commentId}/likes`,
     );
     return data;
   },
