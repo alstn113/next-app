@@ -8,7 +8,7 @@ export interface Comment {
   text: string;
   likes: number;
   level: number;
-  parentCommentId?: string;
+  parentCommentId: string | null;
   subCommentsCount: number;
   subComments?: Comment[];
   postId: string;
@@ -16,7 +16,8 @@ export interface Comment {
   user: User;
   createdAt: string;
   updatedAt: string;
-  deletedAt?: string;
+  deletedAt: string | null;
+  isDeletd: boolean;
 }
 
 export type CommentList = Comment[];
