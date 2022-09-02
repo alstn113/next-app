@@ -45,12 +45,27 @@ const PostAPI = {
     const { data } = await apiClient.patch<unknown>(`/post/${postId}`, params);
     return data;
   },
-  likePost: async (postId: string) => {
-    const { data } = await apiClient.post<PostStats>(`/post/${postId}/likes`);
+
+  /** AbortedController fetch 요청 중단 */
+  /** likePost로 signal 보내고, unlikePost로 signal 중단?? */
+  /** @todo 일단 AbortedController 써보면서 사용 이유 파악해보기 */
+  likePost: async (postId: string, controller?: AbortController) => {
+    const { data } = await apiClient.post<PostStats>(
+      `/post/${postId}/likes`,
+      {},
+      {
+        signal: controller?.signal,
+      },
+    );
     return data;
   },
-  unlikePost: async (postId: string) => {
-    const { data } = await apiClient.delete<PostStats>(`/post/${postId}/likes`);
+
+  /** @todo 일단 AbortedController 써보면서 사용 이유 파악해보기 */
+  unlikePost: async (postId: string, controller?: AbortController) => {
+    const { data } = await apiClient.delete<PostStats>(
+      `/post/${postId}/likes`,
+      { signal: controller?.signal },
+    );
     return data;
   },
 };
