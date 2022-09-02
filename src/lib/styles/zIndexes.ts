@@ -1,7 +1,7 @@
 const zIndexes = {
-  Header: 10,
-  Footer: 10,
-  Modal: 9,
+  Header: 9,
+  Footer: 9,
+  Modal: 10,
 };
 
 export default zIndexes;

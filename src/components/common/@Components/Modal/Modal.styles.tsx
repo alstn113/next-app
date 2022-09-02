@@ -37,6 +37,9 @@ export const Title = styled.h3`
   margin-top: 0;
   margin-bottom: 8px;
   font-size: 1.5rem;
+  ${mediaQuery.sm} {
+    font-size: 1rem;
+  }
   line-height: 1.5;
   font-weight: 700;
 `;

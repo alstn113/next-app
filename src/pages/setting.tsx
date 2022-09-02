@@ -11,7 +11,7 @@ const Setting = () => {
   return (
     <Container>
       <Box />
-      <Button onClick={() => openLoginDialog()}>좋아요</Button>;
+      <Button onClick={() => openLoginDialog()}>좋아요</Button>
       <Box />
     </Container>
   );
