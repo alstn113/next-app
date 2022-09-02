@@ -10,7 +10,7 @@ export interface Comment {
   level: number;
   parentCommentId?: string;
   subCommentsCount: number;
-  subComments: Comment[];
+  subComments?: Comment[];
   postId: string;
   userId: string;
   user: User;
