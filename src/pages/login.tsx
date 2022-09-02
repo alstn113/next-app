@@ -1,5 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsResult, NextPage } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -22,9 +22,12 @@ const schema = yup.object().shape({
 });
 
 const Login: NextPage = () => {
+  const router = useRouter();
+  const next = (router.query.next as string) ?? '/';
+  console.log(next);
   const { mutate } = useLogin({
     onSuccess: async () => {
-      Router.push('/');
+      router.push(next);
     },
     onError: (e) => {
       console.log(e);
@@ -69,7 +72,7 @@ const Login: NextPage = () => {
           size="auto"
           type="button"
           color="success"
-          onClick={() => Router.push('/register')}
+          onClick={() => router.push('/register')}
         >
           REGISTER
         </Button>
