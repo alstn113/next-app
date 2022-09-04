@@ -18,6 +18,7 @@ import type {
 } from 'next';
 import Link from 'next/link';
 import mediaQuery from '@/lib/styles/mediaQuery';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 const Home: NextPage = () => {
   const { data, hasNextPage, fetchNextPage, isFetching } =
@@ -30,27 +31,29 @@ const Home: NextPage = () => {
   const targetElement = useIntersectionObserver({ onIntersect: loadMore });
 
   return (
-    <Container>
-      {data?.pages?.map((page) =>
-        page.posts.map((post) => (
-          <CardBox key={post.id}>
-            <Card variant="bordered" isPressable>
-              <Link href={`/post/${encodeURIComponent(post.slug)}`}>
-                <a>
-                  <div>
-                    <div>제목 : {post.title}</div>
-                    <div>좋아요 : {post.postStats.likes}</div>
-                    <div>{formatDate(post.createdAt)}</div>
-                  </div>
-                </a>
-              </Link>
-            </Card>
-          </CardBox>
-        )),
-      )}
-      {isFetching && <Skeleton />}
-      <InfiniteScrollTarget ref={targetElement} />
-    </Container>
+    <TabLayout>
+      <Container>
+        {data?.pages?.map((page) =>
+          page.posts.map((post) => (
+            <CardBox key={post.id}>
+              <Card variant="bordered" isPressable>
+                <Link href={`/post/${encodeURIComponent(post.slug)}`}>
+                  <a>
+                    <div>
+                      <div>제목 : {post.title}</div>
+                      <div>좋아요 : {post.postStats.likes}</div>
+                      <div>{formatDate(post.createdAt)}</div>
+                    </div>
+                  </a>
+                </Link>
+              </Card>
+            </CardBox>
+          )),
+        )}
+        {isFetching && <Skeleton />}
+        <InfiniteScrollTarget ref={targetElement} />
+      </Container>
+    </TabLayout>
   );
 };
 

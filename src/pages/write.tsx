@@ -16,6 +16,7 @@ import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 import useGetPostsByQueries from '@/hooks/queries/post/useGetPostsByQueries';
 import { extractError } from '@/lib/error';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 interface IFormInput {
   title: string;
@@ -52,27 +53,29 @@ const Write: NextPage = () => {
     mode: 'onChange',
   });
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          {...register('title')}
-          type="text"
-          color="secondary"
-          placeholder="TITLE"
-        />
-        <ErrorMessage>{errors.title?.message}</ErrorMessage>
-        <TextInput
-          {...register('body')}
-          type="text"
-          color="secondary"
-          placeholder="BODY"
-        />
-        <ErrorMessage>{errors.body?.message}</ErrorMessage>
-        <Button size="auto" shadow type="submit">
-          POST
-        </Button>
-      </Form>
-    </Container>
+    <TabLayout>
+      <Container>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            {...register('title')}
+            type="text"
+            color="secondary"
+            placeholder="TITLE"
+          />
+          <ErrorMessage>{errors.title?.message}</ErrorMessage>
+          <TextInput
+            {...register('body')}
+            type="text"
+            color="secondary"
+            placeholder="BODY"
+          />
+          <ErrorMessage>{errors.body?.message}</ErrorMessage>
+          <Button size="auto" shadow type="submit">
+            POST
+          </Button>
+        </Form>
+      </Container>
+    </TabLayout>
   );
 };
 

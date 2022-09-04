@@ -9,6 +9,7 @@ import useGetSearchPosts from '@/hooks/queries/post/useGetSearchPosts';
 import formatDate from '@/lib/utils/formatDate';
 import Link from 'next/link';
 import mediaQuery from '@/lib/styles/mediaQuery';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
@@ -20,30 +21,32 @@ const Search = () => {
     enabled: !!debouncedText,
   });
   return (
-    <Container>
-      <TextInput
-        placeholder="Search"
-        type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <div>
-        {data?.map((post) => (
-          <CardBox key={post.id}>
-            <Card variant="bordered" isPressable>
-              <Link href={`/post/${encodeURIComponent(post.slug)}`}>
-                <a>
-                  <div>
-                    <div>제목 : {post.title}</div>
-                    <div>{formatDate(post.createdAt)}</div>
-                  </div>
-                </a>
-              </Link>
-            </Card>
-          </CardBox>
-        ))}
-      </div>
-    </Container>
+    <TabLayout>
+      <Container>
+        <TextInput
+          placeholder="Search"
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <div>
+          {data?.map((post) => (
+            <CardBox key={post.id}>
+              <Card variant="bordered" isPressable>
+                <Link href={`/post/${encodeURIComponent(post.slug)}`}>
+                  <a>
+                    <div>
+                      <div>제목 : {post.title}</div>
+                      <div>{formatDate(post.createdAt)}</div>
+                    </div>
+                  </a>
+                </Link>
+              </Card>
+            </CardBox>
+          ))}
+        </div>
+      </Container>
+    </TabLayout>
   );
 };
 

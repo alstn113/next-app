@@ -1,3 +1,4 @@
+import TabLayout from '@/components/Layouts/TabLayout';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
@@ -6,16 +7,18 @@ import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 
 const Bookmarks = () => {
   return (
-    <Container>
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-      <Box />
-    </Container>
+    <TabLayout>
+      <Container>
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+        <Box />
+      </Container>
+    </TabLayout>
   );
 };
 

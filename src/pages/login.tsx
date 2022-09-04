@@ -10,6 +10,7 @@ import { TextInput, Button, ErrorMessage } from '@/components/common';
 import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 import { extractError } from '@/lib/error';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 interface IFormInput {
   username: string;
@@ -52,36 +53,38 @@ const Login: NextPage = () => {
     mode: 'onChange',
   });
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          {...register('username')}
-          type="text"
-          placeholder="username"
-          variant="underlined"
-        />
-        <ErrorMessage>{errors.username?.message}</ErrorMessage>
-        <TextInput
-          {...register('password')}
-          type="password"
-          placeholder="password"
-          variant="underlined"
-        />
-        <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button shadow size="auto" type="submit">
-          LOGIN
-        </Button>
-        <Button
-          shadow
-          size="auto"
-          type="button"
-          color="success"
-          onClick={() => router.push('/register')}
-        >
-          REGISTER
-        </Button>
-      </Form>
-    </Container>
+    <TabLayout>
+      <Container>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            {...register('username')}
+            type="text"
+            placeholder="username"
+            variant="underlined"
+          />
+          <ErrorMessage>{errors.username?.message}</ErrorMessage>
+          <TextInput
+            {...register('password')}
+            type="password"
+            placeholder="password"
+            variant="underlined"
+          />
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          <Button shadow size="auto" type="submit">
+            LOGIN
+          </Button>
+          <Button
+            shadow
+            size="auto"
+            type="button"
+            color="success"
+            onClick={() => router.push('/register')}
+          >
+            REGISTER
+          </Button>
+        </Form>
+      </Container>
+    </TabLayout>
   );
 };
 

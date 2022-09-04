@@ -11,6 +11,7 @@ import styled from '@emotion/styled';
 import { flexCenter } from '@/lib/styles/shared';
 import { isValidPassword, isValidUsername } from '@/lib/regexp';
 import { extractError } from '@/lib/error';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 interface IFormInput {
   username: string;
@@ -51,27 +52,29 @@ const Register: NextPage = () => {
     mode: 'onChange',
   });
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          {...register('username')}
-          type="text"
-          placeholder="username"
-          variant="underlined"
-        />
-        <ErrorMessage>{errors.username?.message}</ErrorMessage>
-        <TextInput
-          {...register('password')}
-          type="password"
-          placeholder="password"
-          variant="underlined"
-        />
-        <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button shadow size="auto" color="success" type="submit">
-          REGISTER
-        </Button>
-      </Form>
-    </Container>
+    <TabLayout>
+      <Container>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            {...register('username')}
+            type="text"
+            placeholder="username"
+            variant="underlined"
+          />
+          <ErrorMessage>{errors.username?.message}</ErrorMessage>
+          <TextInput
+            {...register('password')}
+            type="password"
+            placeholder="password"
+            variant="underlined"
+          />
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          <Button shadow size="auto" color="success" type="submit">
+            REGISTER
+          </Button>
+        </Form>
+      </Container>
+    </TabLayout>
   );
 };
 

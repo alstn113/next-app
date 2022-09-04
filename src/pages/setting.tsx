@@ -1,4 +1,5 @@
 import { Button } from '@/components/common';
+import TabLayout from '@/components/Layouts/TabLayout';
 import useGetME from '@/hooks/queries/user/useGetMe';
 import useOpenLoginDialog from '@/hooks/useOpenLoginDialog';
 import { flexCenter } from '@/lib/styles/shared';
@@ -9,11 +10,13 @@ import { GetServerSideProps, GetServerSidePropsResult } from 'next';
 const Setting = () => {
   const openLoginDialog = useOpenLoginDialog();
   return (
-    <Container>
-      <Box />
-      <Button onClick={() => openLoginDialog()}>좋아요</Button>
-      <Box />
-    </Container>
+    <TabLayout>
+      <Container>
+        <Box />
+        <Button onClick={() => openLoginDialog()}>좋아요</Button>
+        <Box />
+      </Container>
+    </TabLayout>
   );
 };
 const Container = styled.div`

@@ -18,6 +18,7 @@ import useGetCommentsBySlug from '@/hooks/queries/comment/useGetCommentsBySlug';
 import mediaQuery from '@/lib/styles/mediaQuery';
 import useModalStore from '@/lib/store/useModalStore';
 import { extractError } from '@/lib/error';
+import TabLayout from '@/components/Layouts/TabLayout';
 
 const PostDetail: NextPage = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const PostDetail: NextPage = () => {
   const { open } = useModalStore();
 
   return (
-    <>
+    <TabLayout>
       <Container>
         <Card variant="bordered">
           <span>Title : {post?.title}</span>
@@ -70,7 +71,7 @@ const PostDetail: NextPage = () => {
           <CommentList comments={comments!} slug={slug} postId={post?.id!} />
         </Card>
       </Container>
-    </>
+    </TabLayout>
   );
 };
 
