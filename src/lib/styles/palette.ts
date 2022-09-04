@@ -14,6 +14,6 @@ const palette = {
   success: '#17C964',
   warning: '#F5A524',
   error: '#F31260',
-};
+} as const;
 
 export default palette;

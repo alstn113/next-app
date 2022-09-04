@@ -26,7 +26,7 @@ const Login: NextPage = () => {
   const next =
     typeof router.query.next === 'string'
       ? router.query.next
-      : typeof router.query.next === 'object'
+      : Array.isArray(router.query.next)
       ? router.query.next[0]
       : '/';
   const { mutate } = useLogin({
