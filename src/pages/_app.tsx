@@ -1,6 +1,5 @@
-import TabLayout from '@/components/Layouts/TabLayout';
 import ModalProvider from '@/components/ModalProvider';
-import apiClient, { setClientCookie } from '@/lib/api/apiClient';
+import { setClientCookie } from '@/lib/api/apiClient';
 import GlobalStyle from '@/styles/GlobalStyle';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from '@emotion/react';
@@ -36,9 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <TabLayout>
-            <Component {...pageProps} />
-          </TabLayout>
+          <Component {...pageProps} />
           <ModalProvider />
         </ThemeProvider>
       </Hydrate>
