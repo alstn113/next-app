@@ -10,9 +10,11 @@ import zIndexes from '@/lib/styles/zIndexes';
 
 interface Props {
   title?: React.ReactNode;
+  headerLeft?: React.ReactNode;
+  headerRight?: React.ReactNode;
 }
 
-const Header = ({ title = 'ABYSS' }: Props) => {
+const Header = ({ title = 'ABYSS', headerLeft, headerRight }: Props) => {
   const { data } = useGetME();
   const { mutate } = useLogout({
     onSuccess: () => {
@@ -79,7 +81,10 @@ const Header = ({ title = 'ABYSS' }: Props) => {
       }}
       ref={blockRef}
     >
+      {headerLeft && <HeaderSide position="left">{headerLeft}</HeaderSide>}
       <Title>{title}</Title>
+      {headerRight && <HeaderSide position="right">{headerRight}</HeaderSide>}
+
       {data ? (
         <div>{data.username}</div>
       ) : (
@@ -123,6 +128,14 @@ const Title = styled.div`
   font-size: 30px;
   font-weight: 900;
   text-shadow: 0 2px 4px white;
+`;
+
+const HeaderSide = styled.div<{ position: 'left' | 'right' }>`
+  position: absolute;
+  top: 0;
+  ${({ position }) => position} : 16px;
+  height: 100%;
+  ${flexCenter}
 `;
 
 export default Header;
