@@ -17,7 +17,7 @@ export const decorators = [
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Story />
-      {/* <div id="modal"></div> */}
+      <div id="modal"></div>
     </ThemeProvider>
   ),
 ];
