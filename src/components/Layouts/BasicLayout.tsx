@@ -3,7 +3,7 @@ import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import React from 'react';
 import Header from '../base/Header';
-import { ArrowLeft } from '../vectors';
+import HeaderBackButton from '../base/HeaderBackButton';
 
 interface Props {
   title?: React.ReactNode;
@@ -24,7 +24,7 @@ const BasicLayout = ({
       <Header
         title={title}
         headerLeft={
-          hasBackButton ? <ArrowLeft onClick={onGoBack} /> : undefined
+          hasBackButton ? <HeaderBackButton onClick={onGoBack} /> : undefined
         }
         headerRight={headerRight}
       />
