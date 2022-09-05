@@ -84,7 +84,7 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-  margin-top: 8rem;
+  margin-top: 4rem;
   width: 250px;
   ${flexCenter}
   flex-direction: column;
