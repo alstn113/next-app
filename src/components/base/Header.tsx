@@ -1,10 +1,6 @@
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
-import useLogout from '@/hooks/queries/auth/useLogout';
-import useGetME from '@/hooks/queries/user/useGetMe';
-import Router from 'next/router';
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { Button } from '@/components/common';
 import getScrollTop from '@/lib/utils/getScrollTop';
 import zIndexes from '@/lib/styles/zIndexes';
 
@@ -15,13 +11,6 @@ interface Props {
 }
 
 const Header = ({ title = 'ABYSS', headerLeft, headerRight }: Props) => {
-  const { data } = useGetME();
-  const { mutate } = useLogout({
-    onSuccess: () => {
-      window.location.href = '/';
-    },
-  });
-
   const blockRef = useRef<HTMLDivElement>(null);
   const [marginTop, setMarginTop] = useState(0);
 
@@ -84,24 +73,6 @@ const Header = ({ title = 'ABYSS', headerLeft, headerRight }: Props) => {
       {headerLeft && <HeaderSide position="left">{headerLeft}</HeaderSide>}
       <Title>{title}</Title>
       {headerRight && <HeaderSide position="right">{headerRight}</HeaderSide>}
-
-      {data ? (
-        <div>{data.username}</div>
-      ) : (
-        <Button
-          size="sm"
-          color="warning"
-          shadow
-          onClick={() => Router.push('/login')}
-        >
-          로그인
-        </Button>
-      )}
-      {data && (
-        <Button size="sm" color="warning" shadow onClick={() => mutate()}>
-          로그아웃
-        </Button>
-      )}
     </Container>
   );
 };
@@ -113,10 +84,6 @@ const Container = styled.header`
   z-index: ${zIndexes.Header};
   height: 60px;
   ${flexCenter};
-  div + button,
-  div + div {
-    margin-left: 1rem;
-  }
   background-color: #000;
   color: white;
   button {
