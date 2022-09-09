@@ -26,12 +26,11 @@ const Modal = ({
     <Portal id="modal">
       <AnimatePresence>
         {visible && (
-          <>
-            <S.Overlay
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
+          <S.Overlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
             <S.Positioner>
               <S.ModalBlock
                 initial={{ y: '30vh', opacity: 0, scale: 0.5 }}
@@ -51,7 +50,7 @@ const Modal = ({
                 </S.Footer>
               </S.ModalBlock>
             </S.Positioner>
-          </>
+          </S.Overlay>
         )}
       </AnimatePresence>
     </Portal>
