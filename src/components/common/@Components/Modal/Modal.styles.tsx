@@ -16,7 +16,7 @@ export const Overlay = styled(motion.div)`
 export const Positioner = styled.div`
   position: absolute;
   left: 50%;
-  top: 45%;
+  top: 50%;
   transform: translate(-50%, -50%);
   z-index: ${zIndexes.Modal};
 `;
@@ -29,16 +29,16 @@ export const ModalBlock = styled(motion.div)`
   border-radius: 14px;
   box-shadow: rgb(0 0 0 / 9%) 0px 2px 12px 0px;
   ${mediaQuery.sm} {
-    width: 15rem;
+    width: 17rem;
   }
 `;
 
 export const Title = styled.h3`
   margin-top: 0;
   margin-bottom: 8px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   ${mediaQuery.sm} {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
   line-height: 1.5;
   font-weight: 700;
