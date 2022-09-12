@@ -1,6 +1,7 @@
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import Footer from '../base/Footer';
+import FullHeightPage from '../base/FullHeightPage';
 import Header from '../base/Header';
 
 interface Props {
@@ -9,26 +10,19 @@ interface Props {
 
 const TabLayout = ({ children }: Props) => {
   return (
-    <>
+    <FullHeightPage>
       <Header />
-      <Container>
-        <Content>{children}</Content>
-      </Container>
+      <Content>{children}</Content>
       <Footer />
-    </>
+    </FullHeightPage>
   );
 };
 
-const Container = styled.div`
-  margin: 80px 0;
-  height: 100%;
-  ${flexCenter};
-`;
-
 const Content = styled.div`
-  ${flexCenter};
-  height: 100%;
+  display: flex;
   flex-direction: column;
+  flex: 1;
+  overflow: scroll;
 `;
 
 export default TabLayout;

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import getScrollTop from '@/lib/utils/getScrollTop';
 import zIndexes from '@/lib/styles/zIndexes';
+import palette from '@/lib/styles/palette';
 
 interface Props {
   title?: React.ReactNode;
@@ -78,14 +79,13 @@ const Header = ({ title = 'ABYSS', headerLeft, headerRight }: Props) => {
 };
 
 const Container = styled.header`
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: ${zIndexes.Header};
+  position: relative;
   height: 60px;
-  ${flexCenter};
-  background-color: #000;
+  padding: 0 16px;
+  z-index: ${zIndexes.Header};
   color: white;
+  background-color: #000;
+  ${flexCenter}
   button {
     color: white;
   }

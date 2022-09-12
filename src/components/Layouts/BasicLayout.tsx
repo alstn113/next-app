@@ -2,6 +2,7 @@ import useGoBack from '@/hooks/useGoBack';
 import { flexCenter } from '@/lib/styles/shared';
 import styled from '@emotion/styled';
 import React from 'react';
+import FullHeightPage from '../base/FullHeightPage';
 import Header from '../base/Header';
 import HeaderBackButton from '../base/HeaderBackButton';
 
@@ -20,7 +21,7 @@ const BasicLayout = ({
 }: Props) => {
   const onGoBack = useGoBack();
   return (
-    <>
+    <FullHeightPage>
       <Header
         title={title}
         headerLeft={
@@ -31,7 +32,7 @@ const BasicLayout = ({
       <Container>
         <Content>{children}</Content>
       </Container>
-    </>
+    </FullHeightPage>
   );
 };
 
