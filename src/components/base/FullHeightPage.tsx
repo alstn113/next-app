@@ -11,7 +11,8 @@ const FullHeightPage = ({ children }: Props) => {
       <Global
         styles={css`
           html,
-          body {
+          body,
+          div#__next {
             height: 100%;
           }
         `}

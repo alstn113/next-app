@@ -81,10 +81,6 @@ const Container = styled.div`
   div ~ div {
     margin-top: 1rem;
   }
-  width: 768px;
-  ${mediaQuery.sm} {
-    width: 250px;
-  }
 `;
 
 const ButtonBlock = styled.div`

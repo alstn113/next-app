@@ -17,7 +17,6 @@ import type {
   NextPage,
 } from 'next';
 import Link from 'next/link';
-import mediaQuery from '@/lib/styles/mediaQuery';
 import TabLayout from '@/components/Layouts/TabLayout';
 
 const Home: NextPage = () => {
@@ -32,10 +31,10 @@ const Home: NextPage = () => {
 
   return (
     <TabLayout>
-      <Container>
+      <List>
         {data?.pages?.map((page) =>
           page.posts.map((post) => (
-            <CardBox key={post.id}>
+            <div key={post.id}>
               <Card variant="bordered" isPressable>
                 <Link href={`/post/${encodeURIComponent(post.slug)}`}>
                   <a>
@@ -47,32 +46,25 @@ const Home: NextPage = () => {
                   </a>
                 </Link>
               </Card>
-            </CardBox>
+            </div>
           )),
         )}
-        {isFetching && <Skeleton />}
-        <InfiniteScrollTarget ref={targetElement} />
-      </Container>
+      </List>
+      {isFetching && <Skeleton />}
+      <InfiniteScrollTarget ref={targetElement} />
     </TabLayout>
   );
 };
 
-const CardBox = styled.div``;
-
-const Container = styled.div`
-  width: 768px;
-  ${mediaQuery.sm} {
-    width: 250px;
-  }
-  ${CardBox} + ${CardBox} {
-    margin-top: 1rem;
-  }
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const InfiniteScrollTarget = styled.div`
   visibility: hidden;
   width: 100%;
-  height: 20px;
 `;
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<

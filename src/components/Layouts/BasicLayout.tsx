@@ -29,23 +29,17 @@ const BasicLayout = ({
         }
         headerRight={headerRight}
       />
-      <Container>
-        <Content>{children}</Content>
-      </Container>
+      <Content>{children}</Content>
     </FullHeightPage>
   );
 };
 
-const Container = styled.div`
-  margin: 80px 0;
-  height: 100%;
-  ${flexCenter};
-`;
-
 const Content = styled.div`
-  ${flexCenter};
-  height: 100%;
+  display: flex;
   flex-direction: column;
+  flex: 1;
+  overflow: scroll;
+  padding: 16px;
 `;
 
 export default BasicLayout;

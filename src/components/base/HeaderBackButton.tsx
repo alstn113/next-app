@@ -15,6 +15,7 @@ const HeaderBackButton = ({ onClick }: Props) => {
 };
 
 const ArrowLeftButton = styled.button`
+  color: white;
   ${flexCenter}
   padding: 8px;
   margin-left: -8px;

@@ -22,40 +22,31 @@ const Search = () => {
   });
   return (
     <TabLayout>
-      <Container>
-        <TextInput
-          placeholder="Search"
-          type="text"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <div>
-          {data?.map((post) => (
-            <CardBox key={post.id}>
-              <Card variant="bordered" isPressable>
-                <Link href={`/post/${encodeURIComponent(post.slug)}`}>
-                  <a>
-                    <div>
-                      <div>제목 : {post.title}</div>
-                      <div>{formatDate(post.createdAt)}</div>
-                    </div>
-                  </a>
-                </Link>
-              </Card>
-            </CardBox>
-          ))}
-        </div>
-      </Container>
+      <TextInput
+        placeholder="Search"
+        type="text"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <div>
+        {data?.map((post) => (
+          <CardBox key={post.id}>
+            <Card variant="bordered" isPressable>
+              <Link href={`/post/${encodeURIComponent(post.slug)}`}>
+                <a>
+                  <div>
+                    <div>제목 : {post.title}</div>
+                    <div>{formatDate(post.createdAt)}</div>
+                  </div>
+                </a>
+              </Link>
+            </Card>
+          </CardBox>
+        ))}
+      </div>
     </TabLayout>
   );
 };
-
-const Container = styled.div`
-  width: 768px;
-  ${mediaQuery.sm} {
-    width: 250px;
-  }
-`;
 
 const CardBox = styled.div`
   margin: 1rem 0;

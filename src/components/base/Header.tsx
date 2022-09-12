@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import getScrollTop from '@/lib/utils/getScrollTop';
 import zIndexes from '@/lib/styles/zIndexes';
+import palette from '@/lib/styles/palette';
 
 interface Props {
   title?: React.ReactNode;
@@ -25,12 +26,10 @@ const Container = styled.header`
   height: 60px;
   padding: 0 16px;
   z-index: ${zIndexes.Header};
-  color: white;
-  background-color: #000;
+  color: ${palette.white};
+  background-color: ${palette.black};
   ${flexCenter}
-  button {
-    color: white;
-  }
+  border-radius: 0 0 16px 16px;
 `;
 
 const Title = styled.div`
