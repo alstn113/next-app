@@ -78,9 +78,6 @@ const PostDetail: NextPage = () => {
 const Container = styled.div`
   ${flexCenter}
   flex-direction: column;
-  div ~ div {
-    margin-top: 1rem;
-  }
 `;
 
 const ButtonBlock = styled.div`

@@ -42,6 +42,7 @@ const CommentInput = ({ postId, slug }: Props) => {
       await queryClient.refetchQueries(useGetCommentsBySlug.getKey(slug));
       reset({ text: '' });
     },
+    /** 임시로 alert만 표시 */
     onError: (e) => {
       const error = extractError(e);
       alert(error.message);

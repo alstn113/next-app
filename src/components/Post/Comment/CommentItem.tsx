@@ -1,42 +1,48 @@
-import { Comment } from '@/lib/types';
+import type { Comment } from '@/lib/types';
+import formatDate from '@/lib/utils/formatDate';
 import styled from '@emotion/styled';
+import SubCommentList from './SubCommentList';
 
 interface Props {
   comment: Comment;
-  subComment: boolean;
 }
 
-const CommentItem = ({ comment, subComment }: Props) => {
+const CommentItem = ({ comment }: Props) => {
   const {
     text,
     user: { username },
-    isDeletd,
+    createdAt,
+    isDeleted,
+    subComments,
   } = comment;
-
   return (
-    <Container>
-      {isDeletd ? (
-        <div></div>
+    <Block>
+      {isDeleted ? (
+        <DeletedComment>( 삭제된 댓글 )</DeletedComment>
       ) : (
         <>
           <Profile>{username}</Profile>
-          <CommentBlock></CommentBlock>
+          <CommentBlock>{text}</CommentBlock>
+          <Time>{formatDate(createdAt)}</Time>
         </>
       )}
-    </Container>
+      {subComments && <SubCommentList subComments={subComments} />}
+    </Block>
   );
 };
 
-const Container = styled.div`
+const Block = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
-  height: 50px;
   width: 100%;
 `;
+
+const DeletedComment = styled.p``;
 
 const Profile = styled.div``;
 
 const CommentBlock = styled.div``;
+
+const Time = styled.div``;
 
 export default CommentItem;

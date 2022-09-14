@@ -17,7 +17,7 @@ export interface Comment {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
-  isDeletd: boolean;
+  isDeleted: boolean;
 }
 
 export type CommentList = Comment[];
