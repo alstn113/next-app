@@ -27,7 +27,7 @@ export const Container = styled.button<{
   ${({ size }) =>
     size === 'lg' &&
     css`
-      width: 150px;
+      min-width: 150px;
       line-height: 25px;
       font-size: 20px;
     `}
